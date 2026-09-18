@@ -33,9 +33,11 @@ theme_overrides/                       MkDocs theme custom_dir — CSS/JS assets
 - One `week-NN-<week-topic-slug>/` folder per course (zero-padded week number + short
   kebab-case slug of the week's topic, e.g. `week-01-introduction-to-machine-learning`).
   **No `index.md` inside it** — just the lesson files. The course `index.md` gives
-  each week a `###` heading (plain text, not a link — there's no page for it; no
+  each week a **bold plain-text label** (not a link — there's no page for it; no
   wrapping "Weeks" heading, no numbering), with its lessons as a plain bullet list
-  underneath.
+  underneath. Use bold text, not a real heading (`###`) — the ReadTheDocs theme nests
+  the *active page's own headings* as sidebar sub-links, so a real heading here would
+  duplicate the week name right next to the actual folder-based nav section for it.
 - One file per lesson: `lesson-NN-<topic-slug>.md` (zero-padded lesson number + short
   kebab-case topic slug).
 - `templates/lesson-template.md` is the canonical template — copy it for every new
