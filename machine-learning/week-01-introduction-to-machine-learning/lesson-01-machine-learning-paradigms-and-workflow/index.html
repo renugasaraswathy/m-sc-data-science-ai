@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Lesson 1: Machine Learning Paradigms and Workflow - Learning Notes</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Lesson 1: Machine Learning Paradigms and Workflow";
+        var mkdocs_page_input_path = "machine-learning/week-01-introduction-to-machine-learning/lesson-01-machine-learning-paradigms-and-workflow.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> Learning Notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Learning Notes</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Machine learning</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../">Overview</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Week 01 introduction to machine learning</a>
+    <ul class="current">
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Lesson 1: Machine Learning Paradigms and Workflow</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#key-concepts">Key Concepts</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1-foundations-of-machine-learning">1. Foundations of Machine Learning</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2-supervised-learning">2. Supervised Learning</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#worked-examples">Worked Examples</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#questions-confusions">Questions / Confusions</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#connections">Connections</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#glossary">Glossary</a>
+    </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">Learning Notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Machine learning</li>
+          <li class="breadcrumb-item">Week 01 introduction to machine learning</li>
+      <li class="breadcrumb-item active">Lesson 1: Machine Learning Paradigms and Workflow</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><a href="../../">Machine Learning</a> → <span class="week-crumb">Week 1: Introduction to Machine Learning</span> → Lesson 1: Machine Learning Paradigms and Workflow</p>
+<hr />
+<h1 id="machine-learning-paradigms-and-workflow">Machine Learning Paradigms and Workflow<a class="headerlink" href="#machine-learning-paradigms-and-workflow" title="Permanent link">&para;</a></h1>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<p>Machine Learning emerged because digitizing everyday physical experience generated
+huge volumes of data, creating a need to extract patterns and knowledge from it. This
+lecture traces that shift through four historical paradigms of discovery, defines ML,
+and introduces two standard workflows for turning raw data into knowledge (KDD and
+CRISP-DM), plus a business-intelligence view of the same journey. It then zooms into
+<strong>supervised learning</strong> — learning from labelled data — covering its two flavors
+(classification and regression) and the training/validation/test workflow used to
+build and evaluate a model.</p>
+<h2 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h2>
+<h3 id="1-foundations-of-machine-learning">1. Foundations of Machine Learning<a class="headerlink" href="#1-foundations-of-machine-learning" title="Permanent link">&para;</a></h3>
+<h4 id="why-machine-learning-emerged">Why Machine Learning emerged<a class="headerlink" href="#why-machine-learning-emerged" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Physical, real-world experiences are increasingly captured as digital data (sensors,
+  transactions, clicks, images, etc.).</li>
+<li>This digitization → massive volumes of generated data.</li>
+<li>Volume alone isn't useful — the value is in finding patterns and extracting
+  knowledge from that data, which is what ML/data science does.</li>
+</ul>
+<h4 id="the-four-paradigms-of-scientific-discovery">The four paradigms of scientific discovery<a class="headerlink" href="#the-four-paradigms-of-scientific-discovery" title="Permanent link">&para;</a></h4>
+<p>Each era added a new way of generating knowledge, building on the previous one rather
+than replacing it.</p>
+<pre class="mermaid-diagram"><code>timeline
+    title Paradigms of Discovery
+    Before 1600 : Empirical Science : knowledge from direct observation of the world
+    1600 - 1950 : Theoretical Science : knowledge from models and generalizing observations into laws/theories
+    1950 - 1990 : Computer Science : knowledge from running simulations of models too complex to solve analytically
+    1990 - Now : Data Science / ML : knowledge from uncovering patterns in massive, real-world datasets, often without a hand-built theoretical model first</code></pre>
+<h4 id="definition-of-machine-learning">Definition of Machine Learning<a class="headerlink" href="#definition-of-machine-learning" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>The field of study that gives computers the ability to learn without being
+explicitly programmed.</p>
+</blockquote>
+<ul>
+<li>Contrast with classical programming: instead of hand-coding rules, the system infers
+  rules/patterns from data.</li>
+</ul>
+<h4 id="kdd-knowledge-discovery-in-databases">KDD (Knowledge Discovery in Databases)<a class="headerlink" href="#kdd-knowledge-discovery-in-databases" title="Permanent link">&para;</a></h4>
+<p>The classic pipeline for going from raw data to actionable knowledge.</p>
+<pre class="mermaid-diagram"><code>flowchart LR
+    A[Databases&lt;br/&gt;raw data] --&gt; B[Data Integration]
+    B --&gt; C[Data Cleaning]
+    C --&gt; D[Data Warehouse]
+    D --&gt; E[Selection&lt;br/&gt;task-relevant data]
+    E --&gt; F[Data Mining]
+    F --&gt; G[Pattern Evaluation]
+    G --&gt; H[Knowledge]</code></pre>
+<ul>
+<li>Each stage narrows and refines the data until only task-relevant, validated patterns
+  remain as "knowledge."</li>
+<li><strong>Data Mining</strong> here is the pattern-extraction step, not the whole pipeline.</li>
+</ul>
+<h4 id="crisp-dm-cross-industry-standard-process-for-data-mining">CRISP-DM (Cross Industry Standard Process for Data Mining)<a class="headerlink" href="#crisp-dm-cross-industry-standard-process-for-data-mining" title="Permanent link">&para;</a></h4>
+<p>The most widely used industry framework for data mining/ML projects — organizes the
+same idea as KDD around 5 phases.</p>
+<pre class="mermaid-diagram"><code>flowchart TD
+    A[Business Understanding] --&gt; C[Prepare Data]
+    B[Data Understanding] --&gt; C
+    C --&gt; D[Building Model&lt;br/&gt;using Algorithms]
+    T[Training Data] --&gt; D
+    D --&gt; E["Applying Model &amp;&lt;br/&gt;Performance Evaluation"]
+    Te[Test Data] --&gt; E
+    E --&gt; F[Deployment]
+    F --&gt; G[Knowledge and Actions]</code></pre>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Stage(s)</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Prior Knowledge</td>
+<td>Business Understanding, Data Understanding</td>
+<td>Understand the problem and the data available before touching a model</td>
+</tr>
+<tr>
+<td>2. Preparation</td>
+<td>Prepare Data</td>
+<td>Clean/transform data into a usable form</td>
+</tr>
+<tr>
+<td>3. Modeling</td>
+<td>Building Model using Algorithms</td>
+<td>Train models using training data</td>
+</tr>
+<tr>
+<td>4. Application</td>
+<td>Applying Model and Performance Evaluation</td>
+<td>Evaluate the model against test data</td>
+</tr>
+<tr>
+<td>5. Knowledge</td>
+<td>Deployment → Knowledge and Actions</td>
+<td>Deploy the model and act on what it produces</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Why it matters: gives teams a repeatable, industry-standard checklist so an ML
+  project doesn't skip straight from data to model without understanding the business
+  problem first.</li>
+</ul>
+<h4 id="the-business-intelligence-bi-view">The Business Intelligence (BI) view<a class="headerlink" href="#the-business-intelligence-bi-view" title="Permanent link">&para;</a></h4>
+<p>Same overall journey (data → decisions) but framed by <em>who</em> does each step and <em>how
+much value</em> each layer adds — shown as a pyramid, increasing potential to support
+business decisions as you go up.</p>
+<pre class="mermaid-diagram"><code>flowchart TD
+    A["Data Sources (DBA)&lt;br/&gt;raw data from files, web, DBs"] --&gt; B["Data Exploration (Data Analyst)&lt;br/&gt;statistical summary, querying &amp; reporting"]
+    B --&gt; C["Data Mining (Data Analyst)&lt;br/&gt;information discovery / discovering new information"]
+    C --&gt; D["Data Presentation (Business Analyst)&lt;br/&gt;visualization techniques"]
+    D --&gt; E["Decision Making (End User)&lt;br/&gt;using insights to make business decisions"]</code></pre>
+<ul>
+<li>Why it matters: connects the technical pipeline (KDD/CRISP-DM) to organizational
+  roles — a DBA, data analyst, business analyst, and end user each own a layer, and
+  value/decision-support potential increases as data moves up the pyramid.</li>
+</ul>
+<h4 id="types-of-data-used-in-ml">Types of data used in ML<a class="headerlink" href="#types-of-data-used-in-ml" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Structured</strong> — fits a fixed schema (e.g. relational tables).</li>
+<li><strong>Unstructured</strong> — no fixed schema (e.g. free text, images).</li>
+<li><strong>Time-variant data</strong> — values change over time.</li>
+<li><strong>Advanced/specialized data types:</strong><ul>
+<li><strong>Data stream &amp; sensor data</strong> — continuous, high-velocity data from sensors/IoT.</li>
+<li><strong>Time series &amp; sequence data</strong> — ordered observations over time.</li>
+<li><strong>Spatial and spatio-temporal data</strong> — location-based, e.g. GPS tracking data.</li>
+<li><strong>WWW (web) data</strong> — data generated by/on the web.</li>
+</ul>
+</li>
+</ul>
+<h4 id="how-machines-learn-prediction-vs-description">How machines learn: prediction vs. description<a class="headerlink" href="#how-machines-learn-prediction-vs-description" title="Permanent link">&para;</a></h4>
+<p>Two fundamental approaches to machine learning, split by whether the "correct answer"
+is known in advance.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Prediction Methods (Supervised Learning)</th>
+<th>Description Methods (Unsupervised Learning)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Goal</td>
+<td>Predict an unknown value</td>
+<td>Find interesting, human-interpretable patterns that describe the data</td>
+</tr>
+<tr>
+<td>How</td>
+<td>Learns from examples where the "correct answer" is already known</td>
+<td>Explores the data on its own, without any "correct answers"</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="2-supervised-learning">2. Supervised Learning<a class="headerlink" href="#2-supervised-learning" title="Permanent link">&para;</a></h3>
+<h4 id="definition-and-types">Definition and types<a class="headerlink" href="#definition-and-types" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Definition:</strong> learning from labelled data — each training example has a known
+  correct answer, called a <strong>class label</strong>.</li>
+<li>Why it matters: this is the "prediction methods" branch above — the model's job is
+  to generalize from labelled examples to predict the label/value of unseen data.</li>
+<li>Two types: <strong>classification</strong> (predicts a category) and <strong>regression</strong> (predicts a
+  numerical value).</li>
+</ul>
+<p>A training set is a set of attributes plus the class label/target to predict; the
+goal in both cases is to predict that target for an unseen record (not part of the
+training set) as accurately as possible.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Classification</th>
+<th>Regression</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Predicts</td>
+<td>A category/class from a <strong>finite</strong> set of possible values</td>
+<td>A <strong>continuous</strong> numerical value</td>
+</tr>
+<tr>
+<td>Examples</td>
+<td>rain/no rain, churn/no churn, news article category, dog vs. cat in an image</td>
+<td>house price, petrol price, gold price, sales next year, stock price tomorrow, wind velocity and temperature</td>
+</tr>
+<tr>
+<td>Real-world use cases</td>
+<td>Credit card fraud detection, direct marketing, churn detection (stay or leave the platform)</td>
+<td>Sales forecasting, price prediction</td>
+</tr>
+<tr>
+<td>Evaluation metric(s)</td>
+<td>Accuracy, precision</td>
+<td>Mean Absolute Error (MAE)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="training-validation-test-workflow">Training / Validation / Test workflow<a class="headerlink" href="#training-validation-test-workflow" title="Permanent link">&para;</a></h4>
+<p>How a supervised model is built and evaluated without "cheating" by testing on data
+it was trained on.</p>
+<pre class="mermaid-diagram"><code>flowchart TD
+    A[Train Model on Training Set] --&gt; B[Evaluate Model on Validation Set]
+    B --&gt;|Tweak model according to results| A
+    B --&gt; C[Pick model that does best on Validation Set]
+    C --&gt; D[Confirm results on Test Set]</code></pre>
+<ul>
+<li><strong>Training set:</strong> used to fit the model.</li>
+<li><strong>Validation set:</strong> used to evaluate and tweak the model (e.g. choosing
+  hyperparameters or comparing candidate models) without touching the test set.</li>
+<li><strong>Test set:</strong> held out until the end, used once to confirm the chosen model's
+  real-world performance.</li>
+<li>Why it matters: prevents overfitting to a single dataset — tweaking decisions happen
+  on the validation set, so the test set gives an unbiased final performance estimate.</li>
+</ul>
+<h2 id="worked-examples">Worked Examples<a class="headerlink" href="#worked-examples" title="Permanent link">&para;</a></h2>
+<p>No worked numerical/algorithmic example in this lecture — it was conceptual/framework
+introduction. Worked examples begin from the next lecture applying CRISP-DM/KDD, and
+specific classification/regression algorithms, to actual datasets.</p>
+<h2 id="questions-confusions">Questions / Confusions<a class="headerlink" href="#questions-confusions" title="Permanent link">&para;</a></h2>
+<ul>
+<li>[x] What's the difference between KDD and CRISP-DM? — Resolved: KDD is the more
+  academic/general pipeline (Databases → ... → Knowledge); CRISP-DM is the industry
+  standard, restating the same flow with explicit "Prior Knowledge" and "Business
+  Understanding" phases up front, making it more project-management-friendly.</li>
+<li>[ ] How do the "advanced data types" (streams, spatio-temporal, WWW) map to specific
+  ML techniques covered later in the course?</li>
+<li>[ ] How exactly is the validation set chosen/split from the training set in practice
+  (e.g. k-fold cross-validation vs. a simple hold-out split)?</li>
+</ul>
+<h2 id="connections">Connections<a class="headerlink" href="#connections" title="Permanent link">&para;</a></h2>
+<ul>
+<li>CRISP-DM's "Modeling" and "Application" phases are exactly where the
+  training/validation/test workflow lives — training data feeds Modeling, test data
+  feeds Application (see the CRISP-DM diagram above).</li>
+<li>Supervised learning (prediction methods) and unsupervised learning (description
+  methods) are the two branches under "How machines learn" — this lecture covers the
+  supervised branch in depth.</li>
+</ul>
+<h2 id="glossary">Glossary<a class="headerlink" href="#glossary" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KDD</td>
+<td>Knowledge Discovery in Databases — pipeline from raw data to knowledge (Databases → Integration → Cleaning → Warehouse → Selection → Data Mining → Pattern Evaluation → Knowledge)</td>
+</tr>
+<tr>
+<td>CRISP-DM</td>
+<td>Cross Industry Standard Process for Data Mining — 5-phase industry-standard ML project framework (Prior Knowledge, Preparation, Modeling, Application, Knowledge)</td>
+</tr>
+<tr>
+<td>Data Mining</td>
+<td>The step of extracting patterns/information from prepared data</td>
+</tr>
+<tr>
+<td>Structured data</td>
+<td>Data with a fixed schema (e.g. tables)</td>
+</tr>
+<tr>
+<td>Unstructured data</td>
+<td>Data without a fixed schema (e.g. text, images)</td>
+</tr>
+<tr>
+<td>Spatio-temporal data</td>
+<td>Data with both location and time dimensions (e.g. GPS tracks)</td>
+</tr>
+<tr>
+<td>Supervised learning</td>
+<td>Learning from labelled data, where the correct answer (class label) is known during training</td>
+</tr>
+<tr>
+<td>Class label</td>
+<td>The known "correct answer" attached to a training example</td>
+</tr>
+<tr>
+<td>Classification</td>
+<td>Supervised learning task predicting a category from a finite set of classes</td>
+</tr>
+<tr>
+<td>Regression</td>
+<td>Supervised learning task predicting a continuous numerical value</td>
+</tr>
+<tr>
+<td>Training set</td>
+<td>Data used to fit/train the model</td>
+</tr>
+<tr>
+<td>Validation set</td>
+<td>Held-out data used to evaluate and tweak the model during development</td>
+</tr>
+<tr>
+<td>Test set</td>
+<td>Held-out data used once, at the end, to confirm final model performance</td>
+</tr>
+<tr>
+<td>MAE (Mean Absolute Error)</td>
+<td>Average of the absolute differences between predicted and actual values — a regression evaluation metric</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../" class="btn btn-neutral float-left" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+      <script src="../../../javascripts/mermaid-render.js"></script>
+      <script src="../../../javascripts/breadcrumb-nav.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
