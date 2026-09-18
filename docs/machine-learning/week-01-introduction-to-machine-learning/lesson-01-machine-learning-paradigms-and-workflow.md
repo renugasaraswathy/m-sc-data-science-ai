@@ -1,3 +1,7 @@
+---
+title: "Lesson 1: Machine Learning Paradigms and Workflow"
+---
+
 [Machine Learning](../index.md) → [Week 1: Introduction to Machine Learning](index.md) → Lesson 1: Machine Learning Paradigms and Workflow
 
 # Machine Learning Paradigms and Workflow

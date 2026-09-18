@@ -1,3 +1,7 @@
+---
+title: "Week 1: Introduction to Machine Learning"
+---
+
 [Machine Learning](../index.md) → Week 1: Introduction to Machine Learning
 
 # Week 1: Introduction to Machine Learning

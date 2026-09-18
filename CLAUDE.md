@@ -31,12 +31,24 @@ templates/lesson-template.md           not published — canonical template to c
   kebab-case topic slug).
 - `templates/lesson-template.md` is the canonical template — copy it for every new
   lesson rather than improvising structure.
+- Every page (`docs/index.md`, each course `index.md`, each week `index.md`, each
+  lesson file) starts with a YAML frontmatter block setting `title:` explicitly, e.g.
+  `title: "Lesson 1: Topic title"`. This is required — MkDocs' automatic title
+  detection reads the first line of the file, and since every page's first line is the
+  breadcrumb (not the H1), pages without an explicit `title:` show up mislabeled in the
+  sidebar (e.g. as "Index" or the raw filename). Always wrap the value in double quotes
+  — an unquoted title containing a colon (e.g. `title: Week 1: Introduction to ML`) is
+  invalid YAML and silently fails to set the title.
 
 ## Lesson template
 
 Every lesson file uses this structure (see `templates/lesson-template.md`):
 
 ```markdown
+---
+title: "Lesson N: Topic title"
+---
+
 [Course name](../../index.md) → [Week N: Week topic](../index.md) → Lesson N: Topic title
 
 # Topic title
@@ -86,8 +98,8 @@ Every lesson file uses this structure (see `templates/lesson-template.md`):
    conversation — never invent a real-world tie-in (e.g. to a job, project, or past
    conversation) that wasn't actually mentioned.
 2. If the user has photographed hand-drawn flowcharts, Claude converts them to Mermaid
-   syntax and embeds them in the relevant section (```mermaid fenced blocks — MkDocs
-   Material + pymdown-superfences render these directly).
+   syntax and embeds them in the relevant section (```mermaid fenced blocks, rendered
+   via `mermaid.js` — see Publishing below).
 3. Claude resolves open "?" questions directly using the lecture content as context,
    checking them off or leaving them open with a note on why.
 4. If anything referenced in the raw notes is missing or ambiguous (e.g. a formula, a
@@ -117,7 +129,14 @@ published MkDocs site.
 ## Publishing (MkDocs)
 
 - `mkdocs.yml` builds everything under `docs/` (`docs_dir: docs`) into `site/`.
+- Theme: built-in `readthedocs` theme (dark left sidebar nav, no right-hand table of
+  contents panel).
 - `mkdocs serve` locally to preview; `.github/workflows/deploy-docs.yml` runs
   `mkdocs gh-deploy` on every push to `main`.
 - No nav is hand-maintained in `mkdocs.yml` — MkDocs auto-generates navigation from the
-  folder structure, so new weeks/lessons show up without editing config.
+  folder structure, so new weeks/lessons show up without editing config. This is why
+  every page needs an explicit `title:` frontmatter (see above) — auto-nav labels come
+  from that, not the H1.
+- Mermaid diagrams: the `readthedocs` theme has no built-in Mermaid support, so
+  `docs/javascripts/mermaid-init.js` + the mermaid.js CDN script (both wired up via
+  `extra_javascript` in `mkdocs.yml`) render any ` ```mermaid ` fenced block client-side.

@@ -1,3 +1,7 @@
+---
+title: "Lesson N: Topic title"
+---
+
 [Course name](../../index.md) → [Week N: Week topic](../index.md) → Lesson N: Topic title
 
 # Topic title

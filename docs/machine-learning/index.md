@@ -1,3 +1,9 @@
+---
+title: Machine Learning
+---
+
+[Learning Notes](../index.md) → Machine Learning
+
 # Machine Learning
 
 Lecture notes for the Machine Learning course, organized by week.

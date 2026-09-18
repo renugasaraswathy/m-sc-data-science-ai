@@ -1,3 +1,7 @@
+---
+title: Learning Notes
+---
+
 # Learning Notes
 
 Organized lecture notes from video courses, restructured and visualized with Claude.
