@@ -6,6 +6,7 @@ site_dir: site
 theme:
   name: readthedocs
   highlightjs: true
+  custom_dir: theme_overrides
 
 markdown_extensions:
   - tables
@@ -14,10 +15,14 @@ markdown_extensions:
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
-          class: mermaid
+          class: mermaid-diagram
           format: !!python/name:pymdownx.superfences.fence_code_format
   - admonition
 
+extra_css:
+  - stylesheets/extra.css
+
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js
-  - javascripts/mermaid-init.js
+  - javascripts/mermaid-render.js
+  - javascripts/breadcrumb-nav.js

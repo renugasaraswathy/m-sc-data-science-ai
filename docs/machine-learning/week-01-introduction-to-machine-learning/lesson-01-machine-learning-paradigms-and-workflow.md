@@ -2,11 +2,13 @@
 title: "Lesson 1: Machine Learning Paradigms and Workflow"
 ---
 
-[Machine Learning](../index.md) → [Week 1: Introduction to Machine Learning](index.md) → Lesson 1: Machine Learning Paradigms and Workflow
+[Machine Learning](../index.md) → <span class="week-crumb">Week 1: Introduction to Machine Learning</span> → Lesson 1: Machine Learning Paradigms and Workflow
+
+---
 
 # Machine Learning Paradigms and Workflow
 
-## TL;DR
+## Summary
 Machine Learning emerged because digitizing everyday physical experience generated
 huge volumes of data, creating a need to extract patterns and knowledge from it. This
 lecture traces that shift through four historical paradigms of discovery, defines ML,
@@ -18,42 +20,36 @@ build and evaluate a model.
 
 ## Key Concepts
 
-### Why Machine Learning emerged
+### 1. Foundations of Machine Learning
+
+#### Why Machine Learning emerged
 - Physical, real-world experiences are increasingly captured as digital data (sensors,
   transactions, clicks, images, etc.).
 - This digitization → massive volumes of generated data.
 - Volume alone isn't useful — the value is in finding patterns and extracting
   knowledge from that data, which is what ML/data science does.
 
-### The four paradigms of scientific discovery
+#### The four paradigms of scientific discovery
 Each era added a new way of generating knowledge, building on the previous one rather
 than replacing it.
 
 ```mermaid
 timeline
     title Paradigms of Discovery
-    Before 1600 : Empirical Science : based on direct observation
-    1600 - 1950 : Theoretical Science : models and generalization
-    1950 - 1990 : Computer Science : simulations of complex models
-    1990 - Now : Data Science / ML : uncovering patterns from massive datasets
+    Before 1600 : Empirical Science : knowledge from direct observation of the world
+    1600 - 1950 : Theoretical Science : knowledge from models and generalizing observations into laws/theories
+    1950 - 1990 : Computer Science : knowledge from running simulations of models too complex to solve analytically
+    1990 - Now : Data Science / ML : knowledge from uncovering patterns in massive, real-world datasets, often without a hand-built theoretical model first
 ```
 
-- **Empirical Science (before 1600):** knowledge from direct observation of the world.
-- **Theoretical Science (1600-1950):** knowledge from models and generalizing
-  observations into laws/theories.
-- **Computer Science (1950-1990):** knowledge from running simulations of models too
-  complex to solve analytically.
-- **Data Science / Machine Learning (1990-now):** knowledge from uncovering patterns
-  in massive, real-world datasets — often without a hand-built theoretical model first.
-
-### Definition of Machine Learning
+#### Definition of Machine Learning
 > The field of study that gives computers the ability to learn without being
 > explicitly programmed.
 
 - Contrast with classical programming: instead of hand-coding rules, the system infers
   rules/patterns from data.
 
-### KDD (Knowledge Discovery in Databases)
+#### KDD (Knowledge Discovery in Databases)
 The classic pipeline for going from raw data to actionable knowledge.
 
 ```mermaid
@@ -71,7 +67,7 @@ flowchart LR
   remain as "knowledge."
 - **Data Mining** here is the pattern-extraction step, not the whole pipeline.
 
-### CRISP-DM (Cross Industry Standard Process for Data Mining)
+#### CRISP-DM (Cross Industry Standard Process for Data Mining)
 The most widely used industry framework for data mining/ML projects — organizes the
 same idea as KDD around 5 phases.
 
@@ -81,7 +77,7 @@ flowchart TD
     B[Data Understanding] --> C
     C --> D[Building Model<br/>using Algorithms]
     T[Training Data] --> D
-    D --> E[Applying Model &<br/>Performance Evaluation]
+    D --> E["Applying Model &<br/>Performance Evaluation"]
     Te[Test Data] --> E
     E --> F[Deployment]
     F --> G[Knowledge and Actions]
@@ -99,13 +95,13 @@ flowchart TD
   project doesn't skip straight from data to model without understanding the business
   problem first.
 
-### The Business Intelligence (BI) view
+#### The Business Intelligence (BI) view
 Same overall journey (data → decisions) but framed by *who* does each step and *how
 much value* each layer adds — shown as a pyramid, increasing potential to support
 business decisions as you go up.
 
 ```mermaid
-flowchart BT
+flowchart TD
     A["Data Sources (DBA)<br/>raw data from files, web, DBs"] --> B["Data Exploration (Data Analyst)<br/>statistical summary, querying & reporting"]
     B --> C["Data Mining (Data Analyst)<br/>information discovery / discovering new information"]
     C --> D["Data Presentation (Business Analyst)<br/>visualization techniques"]
@@ -116,18 +112,17 @@ flowchart BT
   roles — a DBA, data analyst, business analyst, and end user each own a layer, and
   value/decision-support potential increases as data moves up the pyramid.
 
-### Types of data used in ML
+#### Types of data used in ML
 - **Structured** — fits a fixed schema (e.g. relational tables).
 - **Unstructured** — no fixed schema (e.g. free text, images).
 - **Time-variant data** — values change over time.
+- **Advanced/specialized data types:**
+    - **Data stream & sensor data** — continuous, high-velocity data from sensors/IoT.
+    - **Time series & sequence data** — ordered observations over time.
+    - **Spatial and spatio-temporal data** — location-based, e.g. GPS tracking data.
+    - **WWW (web) data** — data generated by/on the web.
 
-**Advanced/specialized data types:**
-- **Data stream & sensor data** — continuous, high-velocity data from sensors/IoT.
-- **Time series & sequence data** — ordered observations over time.
-- **Spatial and spatio-temporal data** — location-based, e.g. GPS tracking data.
-- **WWW (web) data** — data generated by/on the web.
-
-### How machines learn: prediction vs. description
+#### How machines learn: prediction vs. description
 Two fundamental approaches to machine learning, split by whether the "correct answer"
 is known in advance.
 
@@ -136,7 +131,11 @@ is known in advance.
 | Goal | Predict an unknown value | Find interesting, human-interpretable patterns that describe the data |
 | How | Learns from examples where the "correct answer" is already known | Explores the data on its own, without any "correct answers" |
 
-### Supervised Learning
+---
+
+### 2. Supervised Learning
+
+#### Definition and types
 - **Definition:** learning from labelled data — each training example has a known
   correct answer, called a **class label**.
 - Why it matters: this is the "prediction methods" branch above — the model's job is
@@ -144,23 +143,18 @@ is known in advance.
 - Two types: **classification** (predicts a category) and **regression** (predicts a
   numerical value).
 
-#### Classification
-- Predicts a category/class from a **finite** set of possible values (e.g.
-  rain/no rain, churn/no churn, news article category, dog vs. cat in an image).
-- **Training set:** a set of attributes plus the class label/target to predict.
-- **Goal:** predict the class for an unseen record (not part of the training set) as
-  accurately as possible.
-- Real-world examples: credit card fraud detection, direct marketing, churn detection
-  (stay or leave the platform).
-- **Evaluation metrics:** accuracy, precision.
+A training set is a set of attributes plus the class label/target to predict; the
+goal in both cases is to predict that target for an unseen record (not part of the
+training set) as accurately as possible.
 
-#### Regression
-- Predicts a **continuous** numerical value rather than a category (e.g. house price,
-  petrol price, gold price, sales next year, stock price tomorrow, wind velocity and
-  temperature).
-- **Evaluation metric:** Mean Absolute Error (MAE).
+| | Classification | Regression |
+|---|---|---|
+| Predicts | A category/class from a **finite** set of possible values | A **continuous** numerical value |
+| Examples | rain/no rain, churn/no churn, news article category, dog vs. cat in an image | house price, petrol price, gold price, sales next year, stock price tomorrow, wind velocity and temperature |
+| Real-world use cases | Credit card fraud detection, direct marketing, churn detection (stay or leave the platform) | Sales forecasting, price prediction |
+| Evaluation metric(s) | Accuracy, precision | Mean Absolute Error (MAE) |
 
-### Training / Validation / Test workflow
+#### Training / Validation / Test workflow
 How a supervised model is built and evaluated without "cheating" by testing on data
 it was trained on.
 
