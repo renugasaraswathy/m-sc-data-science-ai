@@ -134,6 +134,13 @@ title: "Lesson N: Topic title"
 
 ## Diagrams
 
+Prefer a diagram over prose wherever one fits — any process, pipeline, algorithm,
+comparison, hierarchy, or set of relationships between concepts should become a
+Mermaid diagram (flowchart, table already covers simple two-thing comparisons — see
+the template) rather than a bullet list describing steps or connections in words.
+Keep the notes visual-first and text lean: use a diagram whenever it would let a
+reader see the structure at a glance instead of reconstructing it from paragraphs.
+
 Always use Mermaid for flowcharts/diagrams (`flowchart TD` / `graph LR` etc. in a
 ` ```mermaid ` fence in the markdown source — this renders correctly in GitHub's
 preview) so they render both there and in the published MkDocs site (see Publishing
