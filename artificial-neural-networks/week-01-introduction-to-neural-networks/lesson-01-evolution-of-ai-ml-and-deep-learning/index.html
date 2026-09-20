@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Lesson 1: Evolution of AI, ML and Deep Learning - Learning Notes</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Lesson 1: Evolution of AI, ML and Deep Learning";
+        var mkdocs_page_input_path = "artificial-neural-networks/week-01-introduction-to-neural-networks/lesson-01-evolution-of-ai-ml-and-deep-learning.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> Learning Notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Learning Notes</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Artificial neural networks</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../">Overview</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Week 01 introduction to neural networks</a>
+    <ul class="current">
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Lesson 1: Evolution of AI, ML and Deep Learning</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#key-concepts">Key Concepts</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1-ai-ml-and-deep-learning">1. AI, ML and Deep Learning</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2-why-deep-learning-works-today">2. Why Deep Learning Works Today</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#worked-examples">Worked Examples</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#glossary">Glossary</a>
+    </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Machine learning</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../machine-learning/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to machine learning</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../machine-learning/week-01-introduction-to-machine-learning/lesson-01-machine-learning-paradigms-and-workflow/">Lesson 1: Machine Learning Paradigms and Workflow</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">Learning Notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Artificial neural networks</li>
+          <li class="breadcrumb-item">Week 01 introduction to neural networks</li>
+      <li class="breadcrumb-item active">Lesson 1: Evolution of AI, ML and Deep Learning</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><a href="../../../">Artificial Neural Networks</a> → <span class="week-crumb">Week 1: Introduction to Neural Networks</span> → Lesson 1: Evolution of AI, ML and Deep Learning</p>
+<hr />
+<h1 id="evolution-of-ai-ml-and-deep-learning">Evolution of AI, ML and Deep Learning<a class="headerlink" href="#evolution-of-ai-ml-and-deep-learning" title="Permanent link">&para;</a></h1>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<p>This lecture traces how Artificial Intelligence evolved from hand-coded, rule-based
+systems into today's data-driven approach, and how Machine Learning and Deep Learning
+sit inside AI as increasingly specialized ways of achieving it. It covers the core
+components of a Machine Learning system, the limitations that motivated Deep Learning,
+and the capabilities deep neural networks add on top of classical ML. It then explains
+why deep neural networks — despite existing for decades — have only recently become
+state-of-the-art, driven by four pillars: data, compute, optimisation and architecture.</p>
+<h2 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h2>
+<h3 id="1-ai-ml-and-deep-learning">1. AI, ML and Deep Learning<a class="headerlink" href="#1-ai-ml-and-deep-learning" title="Permanent link">&para;</a></h3>
+<h4 id="what-is-artificial-intelligence">What is Artificial Intelligence<a class="headerlink" href="#what-is-artificial-intelligence" title="Permanent link">&para;</a></h4>
+<ul>
+<li>AI = goal-driven intelligent systems: a system that perceives its environment, makes
+  decisions, and takes actions to maximize a defined objective.</li>
+<li>Runs as a continuous core loop, not a one-off calculation:</li>
+</ul>
+<pre class="mermaid-diagram"><code>flowchart LR
+    A["Perception"] --&gt; B["Decision"]
+    B --&gt; C["Action"]
+    C --&gt; D["Feedback"]
+    D --&gt; A</code></pre>
+<ul>
+<li>Common applications: autonomous driving, recommendation systems, fraud detection.</li>
+</ul>
+<h4 id="two-paradigms-of-ai">Two paradigms of AI<a class="headerlink" href="#two-paradigms-of-ai" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Historically AI has been built two different ways — modern AI has shifted decisively
+  toward the data-driven paradigm.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Symbolic AI</th>
+<th>Data-driven AI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>How it works</td>
+<td>Logic and rules</td>
+<td>Statistics and optimization</td>
+</tr>
+<tr>
+<td>Knowledge source</td>
+<td>Encoded manually by humans</td>
+<td>Learned from data</td>
+</tr>
+<tr>
+<td>Modern relevance</td>
+<td>Earlier approach</td>
+<td>Basis of modern AI</td>
+</tr>
+</tbody>
+</table>
+<h4 id="machine-learning">Machine Learning<a class="headerlink" href="#machine-learning" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Machine Learning = data-driven AI: the machine learns a function <code>f(x, θ)</code> from data,
+  where <code>x</code> is the input data and <code>θ</code> are the model's parameters.</li>
+<li>Four key components work together as a pipeline:</li>
+</ul>
+<pre class="mermaid-diagram"><code>flowchart LR
+    A["Data"] --&gt; B["Model"]
+    B --&gt; C["Loss Function"]
+    C --&gt; D["Optimization (Gradient Descent)"]
+    D --&gt; B</code></pre>
+<h5 id="limitations-of-classical-machine-learning">Limitations of classical Machine Learning<a class="headerlink" href="#limitations-of-classical-machine-learning" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Features are hand-engineered rather than learned — a human decides what inputs to
+  extract from raw data.</li>
+<li>The model only learns parameters, not representations — it can't discover its own
+  way of representing the data.</li>
+</ul>
+<h4 id="deep-learning">Deep Learning<a class="headerlink" href="#deep-learning" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Deep Learning = Machine Learning with deep neural networks: networks built from
+  multiple layers.</li>
+<li>Unlike classical ML, features, representations, and parameters are all learnt
+  jointly by the network rather than engineered by hand.</li>
+<li>Neural networks add capabilities classical ML doesn't have:<ul>
+<li>Automatic feature learning</li>
+<li>High-dimensional representation learning</li>
+<li>End-to-end differentiable optimization</li>
+<li>Large-scale optimization with millions of parameters</li>
+</ul>
+</li>
+</ul>
+<h4 id="relationship-between-ai-ml-and-dl">Relationship between AI, ML and DL<a class="headerlink" href="#relationship-between-ai-ml-and-dl" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Each is nested inside the one before it — DL is a subset of ML, which is a subset
+  of AI.</li>
+</ul>
+<pre class="mermaid-diagram"><code>flowchart TD
+    subgraph AI["Artificial Intelligence — Intelligent behavior"]
+        subgraph ML["Machine Learning — Learning from data"]
+            DL["Deep Learning — Learning with deep neural networks"]
+        end
+    end</code></pre>
+<hr />
+<h3 id="2-why-deep-learning-works-today">2. Why Deep Learning Works Today<a class="headerlink" href="#2-why-deep-learning-works-today" title="Permanent link">&para;</a></h3>
+<h4 id="neural-networks-existed-for-decades-but-only-recently-became-state-of-the-art">Neural networks existed for decades, but only recently became state-of-the-art<a class="headerlink" href="#neural-networks-existed-for-decades-but-only-recently-became-state-of-the-art" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Their success today rests on four pillars: Data, Compute, Optimisation, and
+  Architecture.</li>
+</ul>
+<h4 id="data-compute-make-scale-possible">Data &amp; compute make scale possible<a class="headerlink" href="#data-compute-make-scale-possible" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Modern models train on massive datasets — billions of images, billions of text
+  samples, trillions of user interactions.</li>
+<li>Training cost scales as <code>O(n·p)</code>, where <code>n</code> = number of samples and <code>p</code> = number of
+  parameters.</li>
+<li>Modern compute (GPU/TPU) provides fast parallel processing and efficient
+  optimisation, making training at this scale practical.</li>
+</ul>
+<h4 id="optimisation">Optimisation<a class="headerlink" href="#optimisation" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Deep learning has historically suffered from vanishing and exploding gradients,
+  which made deep networks hard to train.</li>
+<li>These are largely solved today, enabling reliable training of much deeper networks.</li>
+</ul>
+<h4 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h4>
+<ul>
+<li>One of the four pillars behind deep learning's current success, alongside Data,
+  Compute, and Optimisation.</li>
+</ul>
+<h2 id="worked-examples">Worked Examples<a class="headerlink" href="#worked-examples" title="Permanent link">&para;</a></h2>
+<p>This was a conceptual overview lecture — no worked numerical examples were presented.</p>
+<h2 id="glossary">Glossary<a class="headerlink" href="#glossary" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Artificial Intelligence (AI)</td>
+<td>A goal-driven intelligent system that perceives its environment, decides, and acts to maximize a defined objective</td>
+</tr>
+<tr>
+<td>Symbolic AI</td>
+<td>AI built on manually encoded logic and rules</td>
+</tr>
+<tr>
+<td>Data-driven AI</td>
+<td>AI that learns behavior from data using statistics and optimization, rather than hand-coded rules</td>
+</tr>
+<tr>
+<td>Machine Learning (ML)</td>
+<td>Data-driven AI that learns a function <code>f(x, θ)</code> from data</td>
+</tr>
+<tr>
+<td>Loss function</td>
+<td>A measure of how far the model's predictions are from the desired output, used to guide learning</td>
+</tr>
+<tr>
+<td>Gradient descent</td>
+<td>The optimization method used to adjust model parameters to reduce the loss</td>
+</tr>
+<tr>
+<td>Feature engineering</td>
+<td>Manually deciding which inputs/features a classical ML model should learn from</td>
+</tr>
+<tr>
+<td>Representation learning</td>
+<td>A model learning its own useful way of representing raw data, rather than relying on hand-engineered features</td>
+</tr>
+<tr>
+<td>Deep Learning (DL)</td>
+<td>Machine Learning using deep (multi-layer) neural networks that jointly learn features, representations, and parameters</td>
+</tr>
+<tr>
+<td>Vanishing/exploding gradients</td>
+<td>A training problem in deep networks where gradients shrink toward zero or grow uncontrollably as they propagate through layers, making the network hard to train</td>
+</tr>
+<tr>
+<td>Training cost <code>O(n·p)</code></td>
+<td>Training cost scales with the number of samples (<code>n</code>) times the number of parameters (<code>p</code>)</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../" class="btn btn-neutral float-left" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../../machine-learning/" class="btn btn-neutral float-right" title="Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../../machine-learning/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+      <script src="../../../javascripts/mermaid-render.js"></script>
+      <script src="../../../javascripts/breadcrumb-nav.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
