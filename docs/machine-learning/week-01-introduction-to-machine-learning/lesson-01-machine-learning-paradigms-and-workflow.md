@@ -16,7 +16,11 @@ and introduces two standard workflows for turning raw data into knowledge (KDD a
 CRISP-DM), plus a business-intelligence view of the same journey. It then zooms into
 **supervised learning** — learning from labelled data — covering its two flavors
 (classification and regression) and the training/validation/test workflow used to
-build and evaluate a model.
+build and evaluate a model. It then covers **unsupervised learning** — finding hidden
+patterns in unlabelled data — through its two main tasks, clustering and association
+rule mining. Finally, it covers **practical considerations** — real-world challenges
+(scalability, dimensionality, data quality, and more) that a machine learning pipeline
+needs to handle beyond the core algorithms.
 
 ## Key Concepts
 
@@ -174,28 +178,55 @@ flowchart TD
 - Why it matters: prevents overfitting to a single dataset — tweaking decisions happen
   on the validation set, so the test set gives an unbiased final performance estimate.
 
+---
+
+### 3. Unsupervised Learning
+
+#### Definition
+- No labels and no correct answers in the data.
+- Goal isn't prediction — it's finding hidden patterns and structure in the data
+  (knowledge discovery).
+- This is the "description methods" branch from the prediction vs. description table
+  in Foundations of Machine Learning above.
+
+#### Clustering vs. association rule mining
+
+| | Clustering | Association rule mining |
+|---|---|---|
+| Goal | Group data points so points within one cluster are similar to each other, and points in different clusters are dissimilar | Find relationships between variables, producing dependency rules that predict an item's occurrence from other items occurring in the same transaction |
+| How | Minimize intra-cluster distance, maximize inter-cluster distance (distance is inversely proportional to similarity) | Mine transaction data for dependency patterns between items |
+| Real-world use cases | News grouping, stock market analysis (stocks that move up/down together), market segmentation | Marketing and sales promotion (e.g. if samosa is bought, coke is also likely to be bought), supermarket shelf management, inventory management |
+
+---
+
+### 4. Practical Considerations in Machine Learning
+
+#### Real-world challenges
+A machine learning pipeline needs to hold up against practical, real-world conditions
+beyond just picking a good algorithm.
+
+- **Scalability** — the pipeline should handle exponentially growing data, with
+  efficient processing and memory usage.
+- **Dimensionality** — a high number of features means the model has to cope with
+  more features; the data required to support them grows exponentially with the
+  number of features, and more features also lead to sparsity.
+- **Complex & heterogeneous data** — data arrives from various sources and mixed
+  types (audio, video, sensors); the pipeline should handle this complexity
+  effectively and efficiently.
+- **Data quality** — noise, inconsistencies, and missing values are common; the
+  pipeline should handle these data quality issues.
+- **Data ownership & distribution** — sharing and integrating data from different
+  sources raises both political and technical challenges that the pipeline should
+  handle.
+- **Privacy preservation** — PII must be stored ethically and legally in a protected
+  environment (e.g. in line with GDPR).
+- **Streaming data** — the pipeline should be able to handle continuous, streaming
+  data, not just static batches.
+
 ## Worked Examples
 No worked numerical/algorithmic example in this lecture — it was conceptual/framework
 introduction. Worked examples begin from the next lecture applying CRISP-DM/KDD, and
 specific classification/regression algorithms, to actual datasets.
-
-## Questions / Confusions
-- [x] What's the difference between KDD and CRISP-DM? — Resolved: KDD is the more
-  academic/general pipeline (Databases → ... → Knowledge); CRISP-DM is the industry
-  standard, restating the same flow with explicit "Prior Knowledge" and "Business
-  Understanding" phases up front, making it more project-management-friendly.
-- [ ] How do the "advanced data types" (streams, spatio-temporal, WWW) map to specific
-  ML techniques covered later in the course?
-- [ ] How exactly is the validation set chosen/split from the training set in practice
-  (e.g. k-fold cross-validation vs. a simple hold-out split)?
-
-## Connections
-- CRISP-DM's "Modeling" and "Application" phases are exactly where the
-  training/validation/test workflow lives — training data feeds Modeling, test data
-  feeds Application (see the CRISP-DM diagram above).
-- Supervised learning (prediction methods) and unsupervised learning (description
-  methods) are the two branches under "How machines learn" — this lecture covers the
-  supervised branch in depth.
 
 ## Glossary
 | Term | Definition |
@@ -214,3 +245,11 @@ specific classification/regression algorithms, to actual datasets.
 | Validation set | Held-out data used to evaluate and tweak the model during development |
 | Test set | Held-out data used once, at the end, to confirm final model performance |
 | MAE (Mean Absolute Error) | Average of the absolute differences between predicted and actual values — a regression evaluation metric |
+| Unsupervised learning | Learning from unlabelled data, with no correct answers given — finds hidden patterns/structure instead of predicting a known target |
+| Clustering | Grouping data points so points within a group are similar and points across groups are dissimilar |
+| Intra-cluster distance | Distance between points within the same cluster — minimized in clustering |
+| Inter-cluster distance | Distance between points in different clusters — maximized in clustering |
+| Association rule mining | Finding dependency rules that predict an item's occurrence based on other items occurring in the same transaction |
+| Dimensionality | The number of features in a dataset — high dimensionality requires exponentially more data and leads to sparsity |
+| Sparsity | A dataset having few non-zero/meaningful values relative to its (high-dimensional) feature space |
+| PII | Personally Identifiable Information — data requiring ethical/legal (e.g. GDPR) protection |

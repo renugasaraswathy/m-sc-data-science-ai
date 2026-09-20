@@ -84,14 +84,6 @@ title: "Lesson N: Topic title"
 ## Worked Examples
 [step-by-step, as given in lecture]
 
-## Questions / Confusions
-- [ ] Unresolved question 1
-- [ ] Unresolved question 2
-
-## Connections
-- Links to [other lecture/concept]
-- Real-world tie-in (e.g., how this applies to your A/B testing work)
-
 ## Glossary
 | Term | Definition |
 ```
@@ -110,32 +102,25 @@ title: "Lesson N: Topic title"
 
 **After watching — this is where Claude does most of the work**
 1. User pastes raw notes (ideally within 24 hours). Claude restructures them into the
-   template above: writes the Summary, organizes Key Concepts, cleans up Worked Examples,
-   carries forward open Questions, adds Connections, builds the Glossary. Connections
-   must only reference material actually in this lesson's notes, other lessons/weeks in
-   this repo, or things the user has explicitly told Claude about themselves in this
-   conversation — never invent a real-world tie-in (e.g. to a job, project, or past
-   conversation) that wasn't actually mentioned.
+   template above: writes the Summary, organizes Key Concepts, cleans up Worked
+   Examples, builds the Glossary.
 2. If the user has photographed hand-drawn flowcharts, Claude converts them to Mermaid
    syntax and embeds them in the relevant section (```mermaid fenced blocks, rendered
    via `mermaid.js` — see Publishing below).
-3. Claude resolves open "?" questions directly using the lecture content as context,
-   checking them off or leaving them open with a note on why.
-4. If anything referenced in the raw notes is missing or ambiguous (e.g. a formula, a
+3. If anything referenced in the raw notes is missing or ambiguous (e.g. a formula, a
    step in a worked example, which week/lesson this belongs to), **ask the user** rather
    than guessing.
-5. A lesson can span multiple videos. If the user says the new raw notes continue an
+4. A lesson can span multiple videos. If the user says the new raw notes continue an
    existing lesson (rather than starting a new one), merge them seamlessly into that
    lesson's existing file — treat it as one continuous lecture: rewrite the Summary to
-   cover the whole lesson, extend Key Concepts/Worked Examples/Connections/Glossary
-   in place, and fold in new Questions alongside existing ones. Don't create a new
-   lesson file or literally label a section "Video 2". Under **Key Concepts**
-   specifically, structure it as one `###` subsection per video's topic (e.g.
-   `### 1. Foundations of Machine Learning`, `### 2. Supervised Learning`), with each
-   video's individual concepts nested underneath as `####`, and a `---` divider
+   cover the whole lesson, extend Key Concepts/Worked Examples/Glossary in place. Don't
+   create a new lesson file or literally label a section "Video 2". Under **Key
+   Concepts** specifically, structure it as one `###` subsection per video's topic
+   (e.g. `### 1. Foundations of Machine Learning`, `### 2. Supervised Learning`), with
+   each video's individual concepts nested underneath as `####`, and a `---` divider
    between consecutive numbered topic subsections. For a single-video lesson, skip the
    numbered topic subsection and put concepts directly as `###` (as in the template).
-6. Otherwise, save the finished file at
+5. Otherwise, save the finished file at
    `docs/<course>/week-NN-<week-topic-slug>/lesson-NN-<topic-slug>.md` (no `index.md` in
    the week folder). Add a link to it from `docs/<course>/index.md`, under that week's
    bold heading (add the heading if it's the first lesson of the week). The breadcrumb
@@ -143,7 +128,7 @@ title: "Lesson N: Topic title"
    `<span class="week-crumb">...</span>` — there's no week page to link to, but that
    span is wired up (see Publishing) to scroll/highlight the week's section in the
    sidebar nav on click.
-7. Commit only when the user asks — this repo publishes to GitHub Pages via CI on push
+6. Commit only when the user asks — this repo publishes to GitHub Pages via CI on push
    to `main`, so a commit+push is a visible, shared action (see root-level agent
    guidance on confirming before push).
 

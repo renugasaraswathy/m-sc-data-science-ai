@@ -58,14 +58,6 @@ Never label a section "Video 2" literally — use the video's actual topic. -->
 ## Worked Examples
 [step-by-step, as given in lecture]
 
-## Questions / Confusions
-- [ ] Unresolved question 1
-- [ ] Unresolved question 2
-
-## Connections
-- Links to [other lecture/concept] — only within this repo's own lessons/weeks, or
-  things the user explicitly mentioned in conversation. Never invent an outside tie-in.
-
 ## Glossary
 | Term | Definition |
 |------|------------|
