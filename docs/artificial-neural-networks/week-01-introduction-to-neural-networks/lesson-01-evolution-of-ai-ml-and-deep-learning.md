@@ -8,15 +8,6 @@ title: "Lesson 1: Evolution of AI, ML and Deep Learning"
 
 # Evolution of AI, ML and Deep Learning
 
-## Summary
-This lecture traces how Artificial Intelligence evolved from hand-coded, rule-based
-systems into today's data-driven approach, and how Machine Learning and Deep Learning
-sit inside AI as increasingly specialized ways of achieving it. It covers the core
-components of a Machine Learning system, the limitations that motivated Deep Learning,
-and the capabilities deep neural networks add on top of classical ML. It then explains
-why deep neural networks — despite existing for decades — have only recently become
-state-of-the-art, driven by four pillars: data, compute, optimisation and architecture.
-
 ## Key Concepts
 
 ### 1. AI, ML and Deep Learning
@@ -113,21 +104,3 @@ flowchart TD
 #### Architecture
 - One of the four pillars behind deep learning's current success, alongside Data,
   Compute, and Optimisation.
-
-## Worked Examples
-This was a conceptual overview lecture — no worked numerical examples were presented.
-
-## Glossary
-| Term | Definition |
-|------|------------|
-| Artificial Intelligence (AI) | A goal-driven intelligent system that perceives its environment, decides, and acts to maximize a defined objective |
-| Symbolic AI | AI built on manually encoded logic and rules |
-| Data-driven AI | AI that learns behavior from data using statistics and optimization, rather than hand-coded rules |
-| Machine Learning (ML) | Data-driven AI that learns a function `f(x, θ)` from data |
-| Loss function | A measure of how far the model's predictions are from the desired output, used to guide learning |
-| Gradient descent | The optimization method used to adjust model parameters to reduce the loss |
-| Feature engineering | Manually deciding which inputs/features a classical ML model should learn from |
-| Representation learning | A model learning its own useful way of representing raw data, rather than relying on hand-engineered features |
-| Deep Learning (DL) | Machine Learning using deep (multi-layer) neural networks that jointly learn features, representations, and parameters |
-| Vanishing/exploding gradients | A training problem in deep networks where gradients shrink toward zero or grow uncontrollably as they propagate through layers, making the network hard to train |
-| Training cost `O(n·p)` | Training cost scales with the number of samples (`n`) times the number of parameters (`p`) |

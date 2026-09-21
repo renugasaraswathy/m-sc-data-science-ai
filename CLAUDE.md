@@ -72,20 +72,11 @@ title: "Lesson N: Topic title"
 
 # Topic title
 
-## Summary
-2-3 sentences — what this lecture was actually about
-
 ## Key Concepts
 ### Concept name
 - Definition (your words)
 - Why it matters / when you'd use it
 - Formula/code if relevant
-
-## Worked Examples
-[step-by-step, as given in lecture]
-
-## Glossary
-| Term | Definition |
 ```
 
 ## Workflow
@@ -102,8 +93,7 @@ title: "Lesson N: Topic title"
 
 **After watching — this is where Claude does most of the work**
 1. User pastes raw notes (ideally within 24 hours). Claude restructures them into the
-   template above: writes the Summary, organizes Key Concepts, cleans up Worked
-   Examples, builds the Glossary.
+   template above, organizing Key Concepts.
 2. If the user has photographed hand-drawn flowcharts, Claude converts them to Mermaid
    syntax and embeds them in the relevant section (```mermaid fenced blocks, rendered
    via `mermaid.js` — see Publishing below).
@@ -112,8 +102,8 @@ title: "Lesson N: Topic title"
    than guessing.
 4. A lesson can span multiple videos. If the user says the new raw notes continue an
    existing lesson (rather than starting a new one), merge them seamlessly into that
-   lesson's existing file — treat it as one continuous lecture: rewrite the Summary to
-   cover the whole lesson, extend Key Concepts/Worked Examples/Glossary in place. Don't
+   lesson's existing file — treat it as one continuous lecture: extend Key Concepts in
+   place. Don't
    create a new lesson file or literally label a section "Video 2". Under **Key
    Concepts** specifically, structure it as one `###` subsection per video's topic
    (e.g. `### 1. Foundations of Machine Learning`, `### 2. Supervised Learning`), with

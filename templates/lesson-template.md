@@ -8,9 +8,6 @@ title: "Lesson N: Topic title"
 
 # Topic title
 
-## Summary
-2-3 sentences — what this lecture was actually about
-
 ## Key Concepts
 
 <!-- Single-video lesson: concepts go directly as ### below.
@@ -54,11 +51,3 @@ Never label a section "Video 2" literally — use the video's actual topic. -->
 - Definition (your words)
 - Why it matters / when you'd use it
 - Formula/code if relevant
-
-## Worked Examples
-[step-by-step, as given in lecture]
-
-## Glossary
-| Term | Definition |
-|------|------------|
-| | |
