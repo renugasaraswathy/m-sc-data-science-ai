@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Lesson 3: Calculus for Neural Networks - Learning Notes</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Lesson 3: Calculus for Neural Networks";
+        var mkdocs_page_input_path = "artificial-neural-networks/week-02-mathematical-foundations-for-neural-networks/lesson-03-calculus-for-neural-networks.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> Learning Notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Learning Notes</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Artificial neural networks</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to neural networks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-neural-networks/lesson-01-evolution-of-ai-ml-and-deep-learning/">Lesson 1: Evolution of AI, ML and Deep Learning</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-neural-networks/lesson-02-biological-vs-artificial-neurons/">Lesson 2: Biological Neurons vs Artificial Neurons</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-neural-networks/lesson-03-components-and-feed-forward-networks/">Lesson 3: Components and Feed-forward Networks</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Week 02 mathematical foundations for neural networks</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-01-why-mathematical-foundations/">Lesson 1: Why We Need Mathematical Foundations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-02-linear-algebra-for-neural-networks/">Lesson 2: Linear Algebra for Neural Networks</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Lesson 3: Calculus for Neural Networks</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#key-concepts">Key Concepts</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1-derivatives-and-partial-derivatives">1. Derivatives and Partial Derivatives</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2-gradient-vector">2. Gradient Vector</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#3-chain-rule">3. Chain Rule</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-04-numerical-stability/">Lesson 4: Numerical Stability in Training</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 03 perceptron and logistic neuron</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-01-introduction-to-perceptron-and-logistic-neuron/">Lesson 1: Introduction to the Perceptron and Logistic Neuron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-02-the-perceptron/">Lesson 2: The Perceptron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-03-linear-separability-and-xor/">Lesson 3: Linear Separability and XOR</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-04-logistic-neuron/">Lesson 4: The Logistic Neuron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Machine learning</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../machine-learning/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to machine learning</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../machine-learning/week-01-introduction-to-machine-learning/lesson-01-machine-learning-paradigms-and-workflow/">Lesson 1: Machine Learning Paradigms and Workflow</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 02 data preprocessing</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../machine-learning/week-02-data-preprocessing/lesson-01-data-fundamentals-and-preprocessing/">Lesson 1: Data Fundamentals and Preprocessing</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">Learning Notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Artificial neural networks</li>
+          <li class="breadcrumb-item">Week 02 mathematical foundations for neural networks</li>
+      <li class="breadcrumb-item active">Lesson 3: Calculus for Neural Networks</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><a href="../../../">Artificial Neural Networks</a> → <span class="week-crumb">Week 2: Mathematical Foundations for Neural Networks</span> → Lesson 3: Calculus for Neural Networks</p>
+<hr />
+<h1 id="calculus-for-neural-networks">Calculus for Neural Networks<a class="headerlink" href="#calculus-for-neural-networks" title="Permanent link">&para;</a></h1>
+<h2 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h2>
+<h3 id="1-derivatives-and-partial-derivatives">1. Derivatives and Partial Derivatives<a class="headerlink" href="#1-derivatives-and-partial-derivatives" title="Permanent link">&para;</a></h3>
+<h4 id="why-derivatives">Why derivatives<a class="headerlink" href="#why-derivatives" title="Permanent link">&para;</a></h4>
+<ul>
+<li>A network learns by adjusting its weights. To adjust them, we must know <strong>how the
+  output changes when a weight changes</strong> — that sensitivity is the derivative.</li>
+</ul>
+<h4 id="derivative">Derivative<a class="headerlink" href="#derivative" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Measures how fast the output <code>y</code> changes when the input <code>x</code> changes; geometrically,
+  the <strong>slope of the tangent line</strong> at a point.</li>
+<li>In learning, the slope says whether increasing a parameter will raise the output,
+  lower it, or barely matter.</li>
+<li>Example: <code>y = 5x</code>. At <code>x = 2</code>, <code>y = 10</code>; at <code>x = 2.001</code>, <code>y = 10.005</code>.
+  Change in y / change in x = <code>0.005 / 0.001 = 5</code> → the slope is 5.</li>
+</ul>
+<h4 id="partial-derivative">Partial derivative<a class="headerlink" href="#partial-derivative" title="Permanent link">&para;</a></h4>
+<ul>
+<li>A network's output depends on many variables (inputs, weights, biases), so we need
+  the effect of each one separately.</li>
+<li><code>∂y/∂xᵢ</code> = how <code>y</code> changes when <strong>only <code>xᵢ</code> changes</strong> and all other variables are
+  held fixed ("turn one knob at a time").</li>
+<li>Geometric view: slice the surface along one direction and take the slope of that
+  slice. For <code>f(x, y) = x² + y²</code> with <code>y</code> fixed, the slice is a U-shaped curve <code>x²</code>;
+  <code>∂f/∂x = 2x</code>, so at <code>x = 1</code> the tangent slope is 2.</li>
+</ul>
+<hr />
+<h3 id="2-gradient-vector">2. Gradient Vector<a class="headerlink" href="#2-gradient-vector" title="Permanent link">&para;</a></h3>
+<h4 id="definition">Definition<a class="headerlink" href="#definition" title="Permanent link">&para;</a></h4>
+<ul>
+<li>A single partial derivative isn't enough, so collect them all in one vector:</li>
+</ul>
+<p><code>∇f = (∂f/∂x₁, ∂f/∂x₂, …, ∂f/∂xₙ)</code></p>
+<ul>
+<li>It has the same dimension <code>n</code> as the input and tells us how sensitive the function
+  is to every variable at once.</li>
+</ul>
+<h4 id="what-it-tells-us">What it tells us<a class="headerlink" href="#what-it-tells-us" title="Permanent link">&para;</a></h4>
+<ul>
+<li>★ The gradient points in the direction of <strong>steepest increase</strong>; its magnitude is
+  how fast the function rises that way.</li>
+<li>Large magnitude → changing rapidly. Near zero → locally flat.</li>
+<li>Gradient exactly 0 → <strong>stationary point</strong>: a minimum, maximum, or saddle point.</li>
+</ul>
+<h4 id="worked-example-fx-y-x2-y2">Worked example: <code>f(x, y) = x² + y²</code><a class="headerlink" href="#worked-example-fx-y-x2-y2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>∂f/∂x = 2x</code>, <code>∂f/∂y = 2y</code> → <code>∇f = (2x, 2y)</code>.</li>
+<li>At <code>(1, 1)</code>: <code>∇f = (2, 2)</code>, the direction to move for the steepest climb.</li>
+</ul>
+<h4 id="level-curves">Level curves<a class="headerlink" href="#level-curves" title="Permanent link">&para;</a></h4>
+<ul>
+<li>A level curve joins all points where the function has the same value. For
+  <code>x² + y²</code>, the points <code>(1,1)</code>, <code>(−1,1)</code>, <code>(1,−1)</code>, <code>(−1,−1)</code> all give <code>f = 2</code> and lie
+  on one circle.</li>
+<li>★ The gradient is always <strong>perpendicular to the level curves</strong>. Moving along a level
+  curve doesn't change <code>f</code>; moving across curves along the gradient changes it fastest.</li>
+</ul>
+<h4 id="role-in-training">Role in training<a class="headerlink" href="#role-in-training" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Training <strong>minimises a loss function</strong>, so we want the direction of steepest
+  <em>decrease</em> = the <strong>negative gradient</strong>.</li>
+<li>Every learning algorithm, from plain gradient descent to advanced optimisers, uses
+  the gradient to decide how to update parameters.</li>
+</ul>
+<pre class="mermaid-diagram"><code>flowchart LR
+    A["Compute gradient&lt;br/&gt;of loss"] --&gt; B["Move parameters along&lt;br/&gt;negative gradient"]
+    B --&gt; C["Loss decreases"]
+    C --&gt; A</code></pre>
+<hr />
+<h3 id="3-chain-rule">3. Chain Rule<a class="headerlink" href="#3-chain-rule" title="Permanent link">&para;</a></h3>
+<h4 id="why-its-needed">Why it's needed<a class="headerlink" href="#why-its-needed" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Many systems are <strong>compositions of simpler functions</strong>: input → intermediate
+  variable → output. The input affects the output only indirectly.</li>
+<li>Neural networks are deep compositions of simple functions, so the chain rule is the
+  mathematical backbone of multilayer learning.</li>
+</ul>
+<h4 id="the-rule">The rule<a class="headerlink" href="#the-rule" title="Permanent link">&para;</a></h4>
+<pre class="mermaid-diagram"><code>flowchart LR
+    X["x"] --&gt;|"du/dx"| U["u (intermediate)"]
+    U --&gt;|"dy/du"| Y["y"]</code></pre>
+<ul>
+<li><code>dy/dx = dy/du × du/dx</code> — sensitivity flows from <code>y</code> back through <code>u</code> to <code>x</code>.</li>
+<li>Simple case: <code>u = 3x</code>, <code>y = u²</code> → <code>dy/dx = 2u · 3</code>.</li>
+</ul>
+<h4 id="two-layer-example">Two-layer example<a class="headerlink" href="#two-layer-example" title="Permanent link">&para;</a></h4>
+<p><code>u = w₁x + b₁</code>, <code>y = u²</code> — <code>y</code> depends on <code>x</code>, <code>w₁</code> and <code>b₁</code> only through <code>u</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Sensitivity</th>
+<th>Chain rule</th>
+<th>Local derivatives</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dy/dx</code></td>
+<td><code>dy/du × du/dx</code></td>
+<td><code>du/dx = w₁</code></td>
+<td><code>2u · w₁</code></td>
+</tr>
+<tr>
+<td><code>dy/dw₁</code></td>
+<td><code>dy/du × du/dw₁</code></td>
+<td><code>du/dw₁ = x</code></td>
+<td><code>2u · x</code></td>
+</tr>
+<tr>
+<td><code>dy/db₁</code></td>
+<td><code>dy/du × du/db₁</code></td>
+<td><code>du/db₁ = 1</code></td>
+<td><code>2u</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>dy/du = 2u</code> in every row.</li>
+<li>★ Each total derivative is a <strong>product of local derivatives</strong>, and this extends
+  directly to much deeper networks.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../lesson-02-linear-algebra-for-neural-networks/" class="btn btn-neutral float-left" title="Lesson 2: Linear Algebra for Neural Networks"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../lesson-04-numerical-stability/" class="btn btn-neutral float-right" title="Lesson 4: Numerical Stability in Training">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../lesson-02-linear-algebra-for-neural-networks/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../lesson-04-numerical-stability/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+      <script src="../../../javascripts/mermaid-render.js"></script>
+      <script src="../../../javascripts/breadcrumb-nav.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

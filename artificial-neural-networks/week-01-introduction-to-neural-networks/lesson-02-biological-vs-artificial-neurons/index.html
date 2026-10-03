@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Lesson 2: Biological Neurons vs Artificial Neurons - Learning Notes</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Lesson 2: Biological Neurons vs Artificial Neurons";
+        var mkdocs_page_input_path = "artificial-neural-networks/week-01-introduction-to-neural-networks/lesson-02-biological-vs-artificial-neurons.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> Learning Notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Learning Notes</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Artificial neural networks</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../">Overview</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Week 01 introduction to neural networks</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-01-evolution-of-ai-ml-and-deep-learning/">Lesson 1: Evolution of AI, ML and Deep Learning</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Lesson 2: Biological Neurons vs Artificial Neurons</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#key-concepts">Key Concepts</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1-biological-neurons-vs-artificial-neurons">1. Biological Neurons vs Artificial Neurons</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2-the-neuron-as-a-simple-feature-detector">2. The Neuron as a Simple Feature Detector</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-03-components-and-feed-forward-networks/">Lesson 3: Components and Feed-forward Networks</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 02 mathematical foundations for neural networks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-01-why-mathematical-foundations/">Lesson 1: Why We Need Mathematical Foundations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-02-linear-algebra-for-neural-networks/">Lesson 2: Linear Algebra for Neural Networks</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-03-calculus-for-neural-networks/">Lesson 3: Calculus for Neural Networks</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-04-numerical-stability/">Lesson 4: Numerical Stability in Training</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 03 perceptron and logistic neuron</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-01-introduction-to-perceptron-and-logistic-neuron/">Lesson 1: Introduction to the Perceptron and Logistic Neuron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-02-the-perceptron/">Lesson 2: The Perceptron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-03-linear-separability-and-xor/">Lesson 3: Linear Separability and XOR</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-04-logistic-neuron/">Lesson 4: The Logistic Neuron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Machine learning</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../machine-learning/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to machine learning</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../machine-learning/week-01-introduction-to-machine-learning/lesson-01-machine-learning-paradigms-and-workflow/">Lesson 1: Machine Learning Paradigms and Workflow</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 02 data preprocessing</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../machine-learning/week-02-data-preprocessing/lesson-01-data-fundamentals-and-preprocessing/">Lesson 1: Data Fundamentals and Preprocessing</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">Learning Notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Artificial neural networks</li>
+          <li class="breadcrumb-item">Week 01 introduction to neural networks</li>
+      <li class="breadcrumb-item active">Lesson 2: Biological Neurons vs Artificial Neurons</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><a href="../../../">Artificial Neural Networks</a> → <span class="week-crumb">Week 1: Introduction to Neural Networks</span> → Lesson 2: Biological Neurons vs Artificial Neurons</p>
+<hr />
+<h1 id="biological-neurons-vs-artificial-neurons">Biological Neurons vs Artificial Neurons<a class="headerlink" href="#biological-neurons-vs-artificial-neurons" title="Permanent link">&para;</a></h1>
+<h2 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h2>
+<h3 id="1-biological-neurons-vs-artificial-neurons">1. Biological Neurons vs Artificial Neurons<a class="headerlink" href="#1-biological-neurons-vs-artificial-neurons" title="Permanent link">&para;</a></h3>
+<h4 id="biological-neuron">Biological neuron<a class="headerlink" href="#biological-neuron" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Works by signal aggregation followed by firing: dendrites collect input signals, the
+  soma aggregates them, and the neuron fires along the axon if the aggregated signal
+  is strong enough.</li>
+</ul>
+<h4 id="how-biology-is-abstracted-in-anns">How biology is abstracted in ANNs<a class="headerlink" href="#how-biology-is-abstracted-in-anns" title="Permanent link">&para;</a></h4>
+<p>Each part of a biological neuron maps to a specific piece of the artificial neuron.</p>
+<table>
+<thead>
+<tr>
+<th>Biological Neuron</th>
+<th>Artificial Neuron</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dendrites — input features <code>x1, x2, ..., xn</code></td>
+<td>Inputs</td>
+</tr>
+<tr>
+<td>Soma — weighted summation</td>
+<td>Linear function (<code>z = Σwᵢxᵢ + b</code>)</td>
+</tr>
+<tr>
+<td>Firing</td>
+<td>Activation function (<code>φ</code>)</td>
+</tr>
+<tr>
+<td>Axon</td>
+<td>Output (<code>y</code>)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="the-artificial-neuron">The artificial neuron<a class="headerlink" href="#the-artificial-neuron" title="Permanent link">&para;</a></h4>
+<ul>
+<li>A neuron is a <strong>parametric nonlinear function</strong>: it first combines inputs linearly,
+  then applies a non-linear function to the result.</li>
+</ul>
+<pre class="mermaid-diagram"><code>flowchart LR
+    X0["x0 = 1 (bias)"] --&gt;|b| Z(("z"))
+    X1["x1"] --&gt;|w1| Z
+    X2["x2"] --&gt;|w2| Z
+    Xn["xn"] --&gt;|wn| Z
+    Z --&gt;|"Linear function"| F["Activation function φ"]
+    F --&gt;|"Non-linear output"| Y["Output y"]</code></pre>
+<ul>
+<li><strong>Linear combination:</strong> <code>z = Σᵢ₌₁ⁿ wᵢxᵢ + b</code></li>
+<li><strong>Non-linear output:</strong> <code>y = φ(z)</code></li>
+<li>Where: <code>xᵢ</code> = inputs, <code>wᵢ</code> = weights, <code>b</code> = bias, <code>φ(.)</code> = activation function.</li>
+</ul>
+<h4 id="why-simple-artificial-neurons-are-sufficient">Why simple artificial neurons are sufficient<a class="headerlink" href="#why-simple-artificial-neurons-are-sufficient" title="Permanent link">&para;</a></h4>
+<ul>
+<li>A single artificial neuron is a weak learner on its own.</li>
+<li>Its power comes from three things working together:<ul>
+<li>A large number of neurons</li>
+<li>Layered composition</li>
+<li>End-to-end optimisation using data</li>
+</ul>
+</li>
+<li>This layered composition gives the deep network form:</li>
+</ul>
+<pre class="mermaid-diagram"><code>flowchart LR
+    X["Input x"] --&gt; F1["f1"]
+    F1 --&gt; F2["f2"]
+    F2 --&gt; Dots["..."]
+    Dots --&gt; FL["fL"]
+    FL --&gt; Y["Output f(x)"]</code></pre>
+<ul>
+<li><code>f(x) = f_L(f_{L-1}(...f_1(x)))</code></li>
+<li>Overall, deep learning combines: inspiration from biology + performance from
+  mathematics + optimisation.</li>
+</ul>
+<hr />
+<h3 id="2-the-neuron-as-a-simple-feature-detector">2. The Neuron as a Simple Feature Detector<a class="headerlink" href="#2-the-neuron-as-a-simple-feature-detector" title="Permanent link">&para;</a></h3>
+<h4 id="what-a-single-neuron-actually-does">What a single neuron actually does<a class="headerlink" href="#what-a-single-neuron-actually-does" title="Permanent link">&para;</a></h4>
+<ul>
+<li>A single artificial neuron performs weighted aggregation, which lets it detect a
+  pattern in its input — it isn't a decision-maker on its own.</li>
+<li>The neuron's weights are what define which pattern it detects.</li>
+<li>A single neuron can only detect simple patterns; real intelligence emerges from many
+  neurons organised in multiple layers.</li>
+</ul>
+<pre class="mermaid-diagram"><code>flowchart LR
+    A["Weighted aggregation"] --&gt; B["Detects a pattern&lt;br/&gt;(defined by its weights)"]
+    B --&gt; C["Single neuron: simple patterns only"]
+    C --&gt; D["Many neurons in multiple layers: real intelligence"]</code></pre>
+<h4 id="analogy-not-from-the-recorded-lecture-added-for-intuition">Analogy <em>(not from the recorded lecture — added for intuition)</em><a class="headerlink" href="#analogy-not-from-the-recorded-lecture-added-for-intuition" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>A single neuron</strong> = one voter with a very narrow opinion. They only care about one
+  specific question (e.g. "is there a vertical edge in the top-left corner?"), weigh
+  how much each piece of evidence (input) matters to <em>their</em> question, and cast a
+  single yes/no-ish signal. They can't tell you "this is a cat" — only whether their
+  one narrow pattern showed up.</li>
+<li><strong>A layer</strong> = a committee of such voters, each specializing in a different narrow
+  question, all looking at the same input in parallel.</li>
+<li><strong>The network (many layers)</strong> = committees stacked on committees — one committee's
+  votes become the input evidence for the next committee, which asks more complex
+  questions, until the final layer can answer the real question (e.g. "is this a
+  cat?").</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../lesson-01-evolution-of-ai-ml-and-deep-learning/" class="btn btn-neutral float-left" title="Lesson 1: Evolution of AI, ML and Deep Learning"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../lesson-03-components-and-feed-forward-networks/" class="btn btn-neutral float-right" title="Lesson 3: Components and Feed-forward Networks">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../lesson-01-evolution-of-ai-ml-and-deep-learning/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../lesson-03-components-and-feed-forward-networks/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+      <script src="../../../javascripts/mermaid-render.js"></script>
+      <script src="../../../javascripts/breadcrumb-nav.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

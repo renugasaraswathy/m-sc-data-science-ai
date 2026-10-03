@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Lesson 1: Data Fundamentals and Preprocessing - Learning Notes</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Lesson 1: Data Fundamentals and Preprocessing";
+        var mkdocs_page_input_path = "machine-learning/week-02-data-preprocessing/lesson-01-data-fundamentals-and-preprocessing.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> Learning Notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Learning Notes</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Artificial neural networks</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../artificial-neural-networks/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to neural networks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-01-introduction-to-neural-networks/lesson-01-evolution-of-ai-ml-and-deep-learning/">Lesson 1: Evolution of AI, ML and Deep Learning</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-01-introduction-to-neural-networks/lesson-02-biological-vs-artificial-neurons/">Lesson 2: Biological Neurons vs Artificial Neurons</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-01-introduction-to-neural-networks/lesson-03-components-and-feed-forward-networks/">Lesson 3: Components and Feed-forward Networks</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 02 mathematical foundations for neural networks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-02-mathematical-foundations-for-neural-networks/lesson-01-why-mathematical-foundations/">Lesson 1: Why We Need Mathematical Foundations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-02-mathematical-foundations-for-neural-networks/lesson-02-linear-algebra-for-neural-networks/">Lesson 2: Linear Algebra for Neural Networks</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-02-mathematical-foundations-for-neural-networks/lesson-03-calculus-for-neural-networks/">Lesson 3: Calculus for Neural Networks</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-02-mathematical-foundations-for-neural-networks/lesson-04-numerical-stability/">Lesson 4: Numerical Stability in Training</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-02-mathematical-foundations-for-neural-networks/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 03 perceptron and logistic neuron</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-03-perceptron-and-logistic-neuron/lesson-01-introduction-to-perceptron-and-logistic-neuron/">Lesson 1: Introduction to the Perceptron and Logistic Neuron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-03-perceptron-and-logistic-neuron/lesson-02-the-perceptron/">Lesson 2: The Perceptron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-03-perceptron-and-logistic-neuron/lesson-03-linear-separability-and-xor/">Lesson 3: Linear Separability and XOR</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-03-perceptron-and-logistic-neuron/lesson-04-logistic-neuron/">Lesson 4: The Logistic Neuron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-03-perceptron-and-logistic-neuron/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Machine learning</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to machine learning</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-machine-learning/lesson-01-machine-learning-paradigms-and-workflow/">Lesson 1: Machine Learning Paradigms and Workflow</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Week 02 data preprocessing</a>
+    <ul class="current">
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Lesson 1: Data Fundamentals and Preprocessing</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#key-concepts">Key Concepts</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1-data-objects-attributes-and-types">1. Data Objects, Attributes, and Types</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2-dataset-formats">2. Dataset Formats</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#3-data-quality-issues">3. Data Quality Issues</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#4-data-preprocessing-techniques">4. Data Preprocessing Techniques</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">Learning Notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Machine learning</li>
+          <li class="breadcrumb-item">Week 02 data preprocessing</li>
+      <li class="breadcrumb-item active">Lesson 1: Data Fundamentals and Preprocessing</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><a href="../../">Machine Learning</a> → <span class="week-crumb">Week 2: Data Preprocessing</span> → Lesson 1: Data Fundamentals and Preprocessing</p>
+<hr />
+<h1 id="data-fundamentals-and-preprocessing">Data Fundamentals and Preprocessing<a class="headerlink" href="#data-fundamentals-and-preprocessing" title="Permanent link">&para;</a></h1>
+<h2 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h2>
+<h3 id="1-data-objects-attributes-and-types">1. Data Objects, Attributes, and Types<a class="headerlink" href="#1-data-objects-attributes-and-types" title="Permanent link">&para;</a></h3>
+<h4 id="dataset-data-objects-and-attributes">Dataset, data objects, and attributes<a class="headerlink" href="#dataset-data-objects-and-attributes" title="Permanent link">&para;</a></h4>
+<ul>
+<li>A <strong>dataset</strong> is a structured collection of data objects (e.g. a bank passbook: one row
+  per transaction, with date, transaction ID, credit, debit, balance as columns).</li>
+<li>In a table, <strong>rows</strong> are data objects and <strong>columns</strong> are attributes.<ul>
+<li><strong>Data object</strong> — also called record, point, case, sample, entity, instance, tuple.</li>
+<li><strong>Attribute</strong> — a property/characteristic of an object; also called feature,
+  variable, field.</li>
+<li><strong>Attribute value</strong> — the specific number or symbol an attribute takes for one
+  object (e.g. <em>Marital Status</em> has values Single / Married / Divorced).</li>
+</ul>
+</li>
+<li>A collection of attribute values together describes one object.</li>
+</ul>
+<h4 id="attribute-types">Attribute types<a class="headerlink" href="#attribute-types" title="Permanent link">&para;</a></h4>
+<pre class="mermaid-diagram"><code>flowchart TD
+    A["Attributes"] --&gt; B["Qualitative&lt;br/&gt;(categorical) — measures a quality"]
+    A --&gt; C["Quantitative&lt;br/&gt;(numerical) — measures a quantity"]
+    B --&gt; D["Nominal"]
+    B --&gt; E["Ordinal"]
+    C --&gt; F["Interval"]
+    C --&gt; G["Ratio"]</code></pre>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Meaning</th>
+<th>Examples</th>
+<th>Operations that make sense</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Nominal</strong></td>
+<td>Labels that only distinguish one value from another</td>
+<td>ID number, eye colour, zip code</td>
+<td><code>=</code>, <code>≠</code> (distinctness)</td>
+</tr>
+<tr>
+<td><strong>Ordinal</strong></td>
+<td>Values can be ranked; distance between values has no meaning</td>
+<td>Grades (A &gt; B &gt; C), rank, height as tall/medium/short</td>
+<td>distinctness + order (<code>&lt;</code>, <code>&gt;</code>)</td>
+</tr>
+<tr>
+<td><strong>Interval</strong></td>
+<td>Differences are meaningful, fixed unit, <strong>no true zero</strong></td>
+<td>Calendar dates, temperature (°C)</td>
+<td>distinctness, order, <code>+</code>, <code>−</code></td>
+</tr>
+<tr>
+<td><strong>Ratio</strong></td>
+<td>Differences <strong>and ratios</strong> are meaningful, has a <strong>true zero</strong></td>
+<td>Length, time, count</td>
+<td>all of the above + <code>×</code>, <code>÷</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Each type adds one more allowed operation on top of the previous one — ★ this decides
+  which statistics/algorithms are valid for an attribute.</li>
+<li>Ratio makes sense because of the true zero: 10 km is twice 5 km. (20 °C is <em>not</em> twice
+  10 °C, since 0 °C isn't "no temperature".)</li>
+</ul>
+<h4 id="discrete-vs-continuous-attributes">Discrete vs continuous attributes<a class="headerlink" href="#discrete-vs-continuous-attributes" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Discrete</strong> — finite/countable set of values (zip code, binary 0/1 with cardinality 2).</li>
+<li><strong>Continuous</strong> — infinitely many possible values (temperature: 10, 10.1, 10.11, ...).</li>
+</ul>
+<hr />
+<h3 id="2-dataset-formats">2. Dataset Formats<a class="headerlink" href="#2-dataset-formats" title="Permanent link">&para;</a></h3>
+<h4 id="why-structure-matters">Why structure matters<a class="headerlink" href="#why-structure-matters" title="Permanent link">&para;</a></h4>
+<ul>
+<li>★ The structure of a dataset determines which questions you can ask and which analysis
+  tools you can apply. Choosing the right representation is a critical early step.</li>
+</ul>
+<pre class="mermaid-diagram"><code>flowchart TD
+    A["Dataset formats"] --&gt; B["Record data&lt;br/&gt;fixed set of attributes per record"]
+    A --&gt; C["Graph data&lt;br/&gt;objects + relationships"]
+    A --&gt; D["Ordered data&lt;br/&gt;order of objects matters"]
+    B --&gt; B1["Data matrix"]
+    B --&gt; B2["Document data"]
+    B --&gt; B3["Transactional data"]
+    C --&gt; C1["Web links / social networks"]
+    C --&gt; C2["Molecular structures"]
+    D --&gt; D1["Genome sequences"]
+    D --&gt; D2["Spatio-temporal data"]</code></pre>
+<h4 id="record-data">Record data<a class="headerlink" href="#record-data" title="Permanent link">&para;</a></h4>
+<ul>
+<li>A collection of records, each with a fixed set of attributes (tabular data).</li>
+<li>Three special cases:<ul>
+<li><strong>Data matrix</strong> — all attributes numerical, so each object is a point in
+  multi-dimensional space.</li>
+<li><strong>Document data</strong> — each document is a <em>term vector</em>: every distinct term in the
+  collection is an attribute, and the value is how often it appears (e.g. "team" 3
+  times, "coach" 0 times). Results in a very <strong>sparse</strong> matrix.</li>
+<li><strong>Transactional data</strong> — each record is a <em>set of items</em> bought together (e.g.
+  TID 1 → {bread, coke, milk}); attributes are not fixed per record.</li>
+</ul>
+</li>
+</ul>
+<h4 id="graph-data">Graph data<a class="headerlink" href="#graph-data" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Used when the <strong>relationships between objects</strong> matter more than their attributes.</li>
+<li>Web: nodes = pages, edges = hyperlinks. Analysing this graph powers Google's
+  PageRank (shows pages in descending order of importance).</li>
+<li>Chemistry: nodes = atoms, edges = chemical bonds.</li>
+</ul>
+<h4 id="ordered-data">Ordered data<a class="headerlink" href="#ordered-data" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Objects form a sequence where <strong>order matters</strong> (A, then B, then C...).</li>
+<li>Examples: genome sequences, transaction sequences; spatio-temporal data carries both
+  location and time.</li>
+</ul>
+<hr />
+<h3 id="3-data-quality-issues">3. Data Quality Issues<a class="headerlink" href="#3-data-quality-issues" title="Permanent link">&para;</a></h3>
+<h4 id="ideal-vs-real-world">Ideal vs real world<a class="headerlink" href="#ideal-vs-real-world" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Ideal assumption: data is perfect, complete, ready for modelling.</li>
+<li>Reality: raw data is <strong>messy, incomplete, and inconsistent</strong>.</li>
+<li>★ <strong>Garbage in, garbage out</strong> — poor-quality data → poor-quality model, whether
+  predictive or descriptive.</li>
+</ul>
+<h4 id="what-is-data-quality">What is data quality?<a class="headerlink" href="#what-is-data-quality" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Data quality = the overall utility of a dataset for its <strong>intended purpose</strong>.</li>
+<li>Data has quality if it satisfies the requirements of the intended user — it is
+  <strong>subjective</strong>. Same Amazon dataset can be good for an R&amp;D manager (questions about
+  product innovation) but poor for a delivery manager (questions about on-time delivery).</li>
+<li>Example: a credit-card fraud detector needs thousands of labelled transactions;
+  without labels the data is poor quality for that purpose.</li>
+</ul>
+<h4 id="dimensions-of-data-quality">Dimensions of data quality<a class="headerlink" href="#dimensions-of-data-quality" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Question it asks</th>
+<th>Example of failure</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Accuracy</strong></td>
+<td>Is the data correct?</td>
+<td>Customer name misspelled</td>
+</tr>
+<tr>
+<td><strong>Completeness</strong></td>
+<td>Is everything needed present?</td>
+<td>Address field half-empty</td>
+</tr>
+<tr>
+<td><strong>Consistency</strong></td>
+<td>Does the data contradict itself?</td>
+<td>Age doesn't match date of birth</td>
+</tr>
+<tr>
+<td><strong>Timeliness</strong></td>
+<td>Is it up to date?</td>
+<td>Outdated current address</td>
+</tr>
+<tr>
+<td><strong>Believability</strong></td>
+<td>How much can we trust it?</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Interpretability</strong></td>
+<td>Can people easily understand it?</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h4 id="common-data-quality-problems">Common data quality problems<a class="headerlink" href="#common-data-quality-problems" title="Permanent link">&para;</a></h4>
+<pre class="mermaid-diagram"><code>flowchart TD
+    A["Data quality problems"] --&gt; B["Noise"]
+    A --&gt; C["Outliers"]
+    A --&gt; D["Missing values"]
+    A --&gt; E["Duplicate data"]
+    A --&gt; F["Inconsistent values"]</code></pre>
+<ul>
+<li><strong>Noise</strong> — random error/variance added to the true value (like static on a phone
+  line). Causes: faulty sensors, transmission problems, data-entry mistakes (e.g. census
+  forms digitised by hand, or wrong answers given deliberately).</li>
+<li><strong>Outliers</strong> — ★ <em>legitimate</em> objects whose characteristics differ considerably from
+  most of the data. <strong>Noise is an error; an outlier is extreme but real.</strong><ul>
+<li><strong>As a nuisance:</strong> distorts statistics. For <code>1, 2, 3, 4, 100</code> the mean is <strong>22</strong>;
+  without the outlier it is <strong>2.5</strong>.</li>
+<li><strong>As the goal:</strong> the point of the analysis is to find them — credit-card fraud
+  detection, network intrusion detection.</li>
+</ul>
+</li>
+<li><strong>Missing values</strong> — information not collected, attribute not applicable, or
+  equipment malfunction.</li>
+<li><strong>Duplicate data</strong> — duplicate/near-duplicate objects or attributes, typically after
+  merging multiple sources.</li>
+<li><strong>Inconsistent values</strong> — contradictions within or across records.</li>
+</ul>
+<h4 id="data-preprocessing-as-the-solution">Data preprocessing as the solution<a class="headerlink" href="#data-preprocessing-as-the-solution" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Poor data → bad business decisions, reduced trust in the system, wasted time/resources.</li>
+<li><strong>Data preprocessing</strong> = steps applied to raw data to prepare it for later analysis.</li>
+<li>Two goals:<ol>
+<li><strong>Improve data quality</strong> — handle noise, missing values, inconsistencies.</li>
+<li><strong>Make data fit the model</strong> — structure it so the ML/mining algorithm works well.</li>
+</ol>
+</li>
+</ul>
+<hr />
+<h3 id="4-data-preprocessing-techniques">4. Data Preprocessing Techniques<a class="headerlink" href="#4-data-preprocessing-techniques" title="Permanent link">&para;</a></h3>
+<p>Preprocessing is a <em>set of tasks</em>, not a single action. Four major groups:</p>
+<pre class="mermaid-diagram"><code>flowchart LR
+    A["Raw, messy data"] --&gt; B["Data cleaning"]
+    B --&gt; C["Data integration"]
+    C --&gt; D["Data transformation"]
+    D --&gt; E["Data reduction"]
+    E --&gt; F["High-quality data&lt;br/&gt;ready for modelling"]</code></pre>
+<h4 id="data-cleaning">Data cleaning<a class="headerlink" href="#data-cleaning" title="Permanent link">&para;</a></h4>
+<p>Fixes the quality issues from the previous section.</p>
+<p><strong>Handling missing values</strong>
+<pre class="mermaid-diagram"><code>flowchart TD
+    A["Missing value"] --&gt; B["Ignore the tuple"]
+    A --&gt; C["Fill manually&lt;br/&gt;(tedious, infeasible at scale)"]
+    A --&gt; D["Fill with a global constant"]
+    A --&gt; E["Fill with a local constant&lt;br/&gt;(per group of tuples)"]
+    A --&gt; F["Fill with central tendency&lt;br/&gt;(mean / median)"]
+    A --&gt; G["Fill using a rule&lt;br/&gt;(if A = 1 then B = 2)"]
+    A --&gt; H["Predict with a model"]</code></pre></p>
+<p><strong>Handling noisy data</strong>
+- <strong>Binning</strong> (local smoothing) — sort values, partition into equal-size bins, then
+  replace each value in a bin with the bin's mean, median, or boundary value.
+- <strong>Regression</strong> — fit a regression function; the fitted line represents the smoothed
+  data.
+- <strong>Outlier analysis</strong> — cluster the data; points falling outside the clusters are
+  potential noise, to be handled separately.</p>
+<h4 id="data-integration">Data integration<a class="headerlink" href="#data-integration" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Merging data from multiple sources — must be done carefully.</li>
+<li>Typical problems:<ul>
+<li><strong>Entity identification</strong> — matching the same attribute/entity across sources.</li>
+<li><strong>Data value conflicts</strong> — same person recorded as "John Smith" in one table and
+  "J.D. Smith" in another.</li>
+<li><strong>Redundancy</strong> — blind merging duplicates attributes/tuples.</li>
+</ul>
+</li>
+<li>Example: India's voter ID, passport, driving licence, etc. were considered for merging
+  into one master table to identify every citizen uniquely. Entity-identification,
+  value-conflict and redundancy issues made it impractical, so Aadhaar was built from
+  scratch instead. ★ Integration is tedious and time-consuming.</li>
+</ul>
+<h4 id="data-transformation">Data transformation<a class="headerlink" href="#data-transformation" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Changes the <strong>scale and structure</strong> of data to suit the algorithm — it is not about
+  fixing errors.</li>
+</ul>
+<p><strong>Normalisation</strong> — stops attributes with large magnitudes from dominating
+distance-based calculations (e.g. income in lakhs swamps age 1–100 in Euclidean
+distance) and speeds up training.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Min-max normalisation</th>
+<th>Z-score normalisation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Based on</td>
+<td>minimum and maximum</td>
+<td>mean and standard deviation</td>
+</tr>
+<tr>
+<td>Result</td>
+<td>values mapped linearly to a new range</td>
+<td>values centred on 0, in units of std dev</td>
+</tr>
+<tr>
+<td>Formula</td>
+<td><code>v' = (v − min) / (max − min) × (new_max − new_min) + new_min</code></td>
+<td><code>v' = (v − mean) / std_dev</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Aggregation</strong> — roll data up to a coarser level (city → state → country, quarterly →
+yearly). Reduces data volume, changes scale, and gives more stable data with less
+variability.</p>
+<h4 id="data-reduction">Data reduction<a class="headerlink" href="#data-reduction" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Goal: a much smaller representation that keeps the <strong>integrity</strong> of the original, so
+  model building is faster and feasible.</li>
+<li>Reduce columns, rows, or both.</li>
+</ul>
+<pre class="mermaid-diagram"><code>flowchart TD
+    A["Data reduction"] --&gt; B["Dimensionality reduction&lt;br/&gt;(fewer attributes)"]
+    A --&gt; C["Numerosity reduction&lt;br/&gt;(fewer objects)"]
+    B --&gt; B1["Remove irrelevant attributes&lt;br/&gt;e.g. student ID for predicting GPA"]
+    B --&gt; B2["Remove redundant attributes&lt;br/&gt;carry the same information"]
+    B --&gt; B3["Attribute subset selection&lt;br/&gt;forward selection, backward elimination,&lt;br/&gt;decision-tree induction"]
+    C --&gt; C1["Histograms"]
+    C --&gt; C2["Clustering"]
+    C --&gt; C3["Sampling&lt;br/&gt;simple random with / without replacement,&lt;br/&gt;stratified"]</code></pre>
+<ul>
+<li><strong>Forward selection</strong> — start with an empty attribute set, add attributes one at a
+  time, tracking performance; keep the best subset. <strong>Backward elimination</strong> works the
+  other way, starting from all attributes.</li>
+<li><strong>Sampling</strong> — use a representative sample that behaves almost like the full dataset.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../week-01-introduction-to-machine-learning/lesson-01-machine-learning-paradigms-and-workflow/" class="btn btn-neutral float-left" title="Lesson 1: Machine Learning Paradigms and Workflow"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../week-01-introduction-to-machine-learning/lesson-01-machine-learning-paradigms-and-workflow/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+      <script src="../../../javascripts/mermaid-render.js"></script>
+      <script src="../../../javascripts/breadcrumb-nav.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

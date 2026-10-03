@@ -1,0 +1,84 @@
+/* Hide the ReadTheDocs theme's own auto-generated breadcrumb bar (including its
+   wrapping nav and divider) — we render our own breadcrumb (with the clickable
+   week-crumb) at the top of each page's content instead. */
+div[role="navigation"][aria-label="breadcrumbs navigation"] {
+  display: none;
+}
+
+/* Our own breadcrumb: first paragraph of the content, immediately followed by an
+   <hr> in the markdown source (see lesson template) for the divider the theme used
+   to provide. */
+.week-crumb {
+  color: #2980b9;
+  cursor: pointer;
+  text-decoration: underline dotted;
+}
+
+.sidebar-flash {
+  background-color: #ffe58f;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
+}
+
+/* Use the full page width instead of the theme's default centered/max-width column,
+   and give short pages (home, course overview) at least the full screen height so
+   they don't look cramped/empty. */
+.wy-nav-content {
+  max-width: none;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Stronger visual hierarchy between heading levels — the theme's defaults (h2 150%,
+   h3 125%, h4 115%) sit too close together, so a sub-heading like "Classification"
+   under "Supervised Learning" doesn't read as nested. */
+.rst-content h2 {
+  margin-top: 2.2em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #e1e4e5;
+  font-size: 1.75em;
+}
+
+.rst-content h3 {
+  margin-top: 1.8em;
+  font-size: 1.3em;
+  color: #2c3e50;
+}
+
+.rst-content h4 {
+  margin-top: 1.2em;
+  padding-left: 0.6em;
+  border-left: 3px solid #2980b9;
+  font-size: 1em;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #2980b9;
+}
+
+/* Tables: the theme's JS wraps every table in a `.wy-table-responsive` div with
+   overflow-x scroll, and forces EVERY cell (not just headers) to `white-space:
+   nowrap`, so wide tables get a horizontal scrollbar instead of just wrapping their
+   text. Undo both — text should wrap within the fixed table width instead. */
+.wy-table-responsive {
+  overflow: visible;
+}
+
+.wy-table-responsive table td,
+.wy-table-responsive table th,
+.rst-content table.docutils thead,
+.rst-content table.docutils td,
+.rst-content table.docutils th {
+  white-space: normal;
+}
+
+.rst-content table.docutils {
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* Week folders have no index.md (see CLAUDE.md), so MkDocs' auto-nav labels their
+   sidebar section from the raw folder slug (e.g. "week 01 introduction to machine
+   learning") instead of a proper title. These page-less nav links have no href. */
+.wy-menu-vertical a:not([href]) {
+  text-transform: capitalize;
+}
