@@ -29,6 +29,7 @@ flowchart LR
 #### Linear classifier
 - `wᵀx + b = 0` is a **line** in 2-D, a **plane** in 3-D, a **hyperplane** beyond that.
 - It splits the input space into two **half-spaces**: one side is `+1`, the other `−1`.
+- A single perceptron is exactly **one** line (or one plane / hyperplane) — never more.
 - ★ So it can only classify **linearly separable** data — where one straight line or
   hyperplane separates the classes. If not (e.g. one class ringed by the other), no
   choice of weights and bias works.
@@ -43,6 +44,21 @@ flowchart LR
   distance, probability or confidence yet.
 - Via the dot product: `wᵀx` measures alignment between input and weight vector;
   positive and large enough → `+1`.
+
+#### Many boundaries can work
+- If the classes are well separated, **infinitely many** lines separate them; there is no
+  single "correct" one. Training just converges on one of them.
+- Real data is never this clean: points sit near the boundary and classes overlap, so
+  the goal becomes the best **accuracy** (e.g. 2 wrong out of 8 points → 6/8 = 75%),
+  not a perfect split.
+
+#### Dot product intuition
+- `wᵀx` is the projection of one vector on the other (`|x|·cos θ`): it measures
+  **alignment**.
+- Small angle θ → vectors point the same way → large **positive** value (`+1`).
+  Large angle (opposite directions) → **negative** value (`−1`).
+- `wᵀ` is used instead of `w` only so dimensions line up: `w` is 2×1, `wᵀ` is 1×2,
+  and 1×2 times 2×1 works (inner dimensions match).
 
 #### Roles of weights and bias
 | | Weights `w` | Bias `b` |
@@ -101,9 +117,52 @@ flowchart TD
 
 - Each update slightly rotates/shifts the boundary until it fits the data.
 
+#### How the update behaves in practice
+- **Notation:** `←` means "replace the old value with the new one" (common in Andrew Ng's
+  courses); `w_new = w_old + η·y·x` says the same thing.
+- **Learning rate `η` is a fixed step size**, chosen up front. It does *not* scale with
+  how big a mistake was — the perceptron only sees the sign, not the size of the error.
+  Larger `η` = bigger correction per mistake; smaller `η` = gentler.
+- **`y` is a scalar (`+1`/`−1`), `x` is a vector**, so `y·x` flips the direction of the
+  update: that is how a boundary pushed the wrong way gets pulled back later.
+- **The whole `w` vector is updated** (all weights together). A wrong prediction can't
+  be blamed on a single feature, so `w₁` and `w₂` both change.
+- **Bias update has no `x`**: bias only shifts the boundary in parallel and never
+  rotates it, so the input isn't needed. `w` depends on `x` because rotating the
+  boundary depends on how `w` and `x` are aligned. Bias is a plain scalar (the score
+  when all inputs are 0).
+- **The mistake check uses the full `wᵀx + b`**, but the update uses only `y·x` / `y`.
+- **Example features:** for a housing dataset, `x₁` = number of rooms, `x₂` = size;
+  data point 1 = (3, 1200), data point 2 = (4, 2000), …
+
+```mermaid
+flowchart TD
+    A["Point 1: correct → no update"] --> B["Point 2: mistake → update w, b"]
+    B --> C["Point 3: checked with the<br/>already-updated w, b"]
+    C --> D["...continue to point N"]
+    D --> E["Start next pass at point 1<br/>with current w, b"]
+    E --> F{"Little change in w, b<br/>over recent steps?"}
+    F -->|"No"| A
+    F -->|"Yes"| G["Converged: stop"]
+```
+
+- Points are processed **one at a time, in order**, with no restart after an update;
+  one full sweep is followed by another.
+- ★ An update fixing point 3 can make an earlier point (e.g. point 1) wrong again; a
+  later pass corrects it, which is why several passes are needed.
+- **Stopping:** either a fixed number of iterations (hard to guess in advance) or
+  "converged" — `w`/`b` barely change (e.g. under 1%) over the next N steps.
+- **Noisy data:** start with a larger `η`, then reduce it in later iterations.
+
 #### Convergence and limitations
 - ★ If the data is **linearly separable**, the rule is **guaranteed to converge** in a
   finite number of updates.
 - If not separable, it **never converges** — weights keep updating forever.
 - It does **not**: minimise a smooth loss, use gradients, or give probabilistic outputs.
   These gaps motivate the logistic neuron.
+- Even after convergence, accuracy is rarely 100% — it depends on the data.
+- In practice the perceptron is **not used** directly; it is studied as the foundation
+  (perceptron → logistic neuron → multilayer networks). It is just an algorithm / tiny
+  model and can be coded in Python (see the lab).
+- Exam focus: intuition for how it works and being able to follow the code, not
+  numerical derivations.
