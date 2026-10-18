@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Lesson 3: RDBMS vs Columnar Databases - Learning Notes</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Lesson 3: RDBMS vs Columnar Databases";
+        var mkdocs_page_input_path = "data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-03-rdbms-vs-columnar-databases.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> Learning Notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Learning Notes</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Artificial neural networks</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../artificial-neural-networks/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to neural networks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-01-introduction-to-neural-networks/lesson-01-evolution-of-ai-ml-and-deep-learning/">Lesson 1: Evolution of AI, ML and Deep Learning</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-01-introduction-to-neural-networks/lesson-02-biological-vs-artificial-neurons/">Lesson 2: Biological Neurons vs Artificial Neurons</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-01-introduction-to-neural-networks/lesson-03-components-and-feed-forward-networks/">Lesson 3: Components and Feed-forward Networks</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 02 mathematical foundations for neural networks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-02-mathematical-foundations-for-neural-networks/lesson-01-why-mathematical-foundations/">Lesson 1: Why We Need Mathematical Foundations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-02-mathematical-foundations-for-neural-networks/lesson-02-linear-algebra-for-neural-networks/">Lesson 2: Linear Algebra for Neural Networks</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-02-mathematical-foundations-for-neural-networks/lesson-03-calculus-for-neural-networks/">Lesson 3: Calculus for Neural Networks</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-02-mathematical-foundations-for-neural-networks/lesson-04-numerical-stability/">Lesson 4: Numerical Stability in Training</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-02-mathematical-foundations-for-neural-networks/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 03 perceptron and logistic neuron</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-03-perceptron-and-logistic-neuron/lesson-01-introduction-to-perceptron-and-logistic-neuron/">Lesson 1: Introduction to the Perceptron and Logistic Neuron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-03-perceptron-and-logistic-neuron/lesson-02-the-perceptron/">Lesson 2: The Perceptron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-03-perceptron-and-logistic-neuron/lesson-03-linear-separability-and-xor/">Lesson 3: Linear Separability and XOR</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-03-perceptron-and-logistic-neuron/lesson-04-logistic-neuron/">Lesson 4: The Logistic Neuron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-03-perceptron-and-logistic-neuron/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Cloud services and platforms</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cloud-services-and-platforms/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to cloud computing</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../cloud-services-and-platforms/week-01-introduction-to-cloud-computing/lesson-01-cloud-evolution-and-fundamentals/">Lesson 1: Cloud Evolution & Fundamentals</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../cloud-services-and-platforms/week-01-introduction-to-cloud-computing/lesson-02-cloud-service-models/">Lesson 2: Cloud Service Models</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data stores and pipelines</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../">Overview</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Week 01 foundations of data storage paradigms</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-01-the-evolution-of-data-storage/">Lesson 1: The Evolution of Data Storage</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-02-oltp-vs-olap/">Lesson 2: OLTP vs OLAP</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Lesson 3: RDBMS vs Columnar Databases</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#key-concepts">Key Concepts</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#rdbms">RDBMS</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#columnar-database">Columnar Database</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#rdbms-vs-columnar-use-case-matrix">RDBMS vs Columnar — Use Case Matrix</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-04-acid-vs-base-models/">Lesson 4: ACID vs BASE Models</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Machine learning</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../machine-learning/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to machine learning</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../machine-learning/week-01-introduction-to-machine-learning/lesson-01-machine-learning-paradigms-and-workflow/">Lesson 1: Machine Learning Paradigms and Workflow</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 02 data preprocessing</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../machine-learning/week-02-data-preprocessing/lesson-01-data-fundamentals-and-preprocessing/">Lesson 1: Data Fundamentals and Preprocessing</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">Learning Notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Data stores and pipelines</li>
+          <li class="breadcrumb-item">Week 01 foundations of data storage paradigms</li>
+      <li class="breadcrumb-item active">Lesson 3: RDBMS vs Columnar Databases</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><a href="../../../">Data Stores &amp; Pipelines</a> → <span class="week-crumb">Week 1: Foundations of Data Storage Paradigms</span> → Lesson 3: RDBMS vs Columnar Databases</p>
+<hr />
+<h1 id="rdbms-vs-columnar-databases">RDBMS vs Columnar Databases<a class="headerlink" href="#rdbms-vs-columnar-databases" title="Permanent link">&para;</a></h1>
+<h2 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h2>
+<h3 id="rdbms">RDBMS<a class="headerlink" href="#rdbms" title="Permanent link">&para;</a></h3>
+<h4 id="key-features">Key Features<a class="headerlink" href="#key-features" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Tables</strong> — data is stored in tables with rows and columns</li>
+<li><strong>Relationships</strong> — maintained across different data sets</li>
+<li><strong>SQL</strong> — used for managing and querying the database</li>
+</ul>
+<h4 id="rdbms-internal-data-storage">RDBMS Internal Data Storage<a class="headerlink" href="#rdbms-internal-data-storage" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Data is stored sequentially, row by row</li>
+<li>All column values are stored together within each row</li>
+</ul>
+<h3 id="columnar-database">Columnar Database<a class="headerlink" href="#columnar-database" title="Permanent link">&para;</a></h3>
+<h4 id="what-is-a-columnar-database">What is a Columnar Database<a class="headerlink" href="#what-is-a-columnar-database" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Data storage method</strong> — stores data by columns instead of rows</li>
+<li><strong>File structure</strong> — each column is stored in a separate file or memory block</li>
+<li><strong>Optimisation</strong> — optimised for read-heavy analytical workloads</li>
+<li><strong>Applications</strong> — common in data warehousing and business intelligence</li>
+</ul>
+<h4 id="row-based-vs-column-based-storage">Row-based vs Column-based Storage<a class="headerlink" href="#row-based-vs-column-based-storage" title="Permanent link">&para;</a></h4>
+<pre class="mermaid-diagram"><code>flowchart TB
+    subgraph Row["Row-based Storage (RDBMS)"]
+        R1["Row 1: id, name, age"]
+        R2["Row 2: id, name, age"]
+    end
+    subgraph Col["Column-based Storage (Columnar DB)"]
+        C1["Column: id"]
+        C2["Column: name"]
+        C3["Column: age"]
+    end</code></pre>
+<ul>
+<li>Because each column is stored separately, a query only needs to scan the columns it actually needs, instead of reading whole rows — much faster for analytical queries that aggregate a few columns across many rows</li>
+</ul>
+<h3 id="rdbms-vs-columnar-use-case-matrix">RDBMS vs Columnar — Use Case Matrix<a class="headerlink" href="#rdbms-vs-columnar-use-case-matrix" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Use Case</th>
+<th>Preferred DB Type</th>
+<th>Reason</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Banking/Financial Transactions</td>
+<td>RDBMS</td>
+<td>Requires strong ACID compliance, fast inserts/updates, real-time consistency</td>
+<td>PostgreSQL, Oracle, MySQL</td>
+</tr>
+<tr>
+<td>E-commerce Order System</td>
+<td>RDBMS</td>
+<td>Handles many real-time transactions (orders, payments, users)</td>
+<td>Amazon uses Aurora</td>
+</tr>
+<tr>
+<td>Healthcare Records</td>
+<td>RDBMS</td>
+<td>Patient data requires ACID transactions and privacy regulations</td>
+<td>MS SQL Server, Oracle</td>
+</tr>
+<tr>
+<td>Sales Dashboard (Monthly/Quarterly)</td>
+<td>Columnar DB</td>
+<td>Summarises huge volumes of historical data; fast aggregations across time, regions, products</td>
+<td>Redshift, BigQuery</td>
+</tr>
+<tr>
+<td>Customer Segmentation &amp; Analytics</td>
+<td>Columnar DB</td>
+<td>Segmenting 10M+ customers based on age, region, behaviour — reads on a few columns across many rows</td>
+<td>Snowflake, ClickHouse</td>
+</tr>
+<tr>
+<td>Ride-sharing Data (e.g. Uber trip analysis)</td>
+<td>Columnar DB</td>
+<td>Trip history used for pricing models, regional insights, heatmaps</td>
+<td>Uber uses Hadoop, Hive</td>
+</tr>
+<tr>
+<td>Streaming Analytics (viewership, ad clicks)</td>
+<td>Columnar DB</td>
+<td>Analytics on millions of views: how long users watched, what was skipped</td>
+<td>Netflix (Presto, Redshift)</td>
+</tr>
+<tr>
+<td>Log Analysis/Application Monitoring</td>
+<td>Columnar DB</td>
+<td>Ingests logs from servers, enables time-series queries for DevOps</td>
+<td>Apache Druid, Amazon Redshift</td>
+</tr>
+<tr>
+<td>Business Intelligence Reports</td>
+<td>Columnar DB</td>
+<td>BI tools like Tableau or Power BI run queries for trends, KPIs</td>
+<td>BigQuery, Snowflake</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../lesson-02-oltp-vs-olap/" class="btn btn-neutral float-left" title="Lesson 2: OLTP vs OLAP"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../lesson-04-acid-vs-base-models/" class="btn btn-neutral float-right" title="Lesson 4: ACID vs BASE Models">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../lesson-02-oltp-vs-olap/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../lesson-04-acid-vs-base-models/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+      <script src="../../../javascripts/mermaid-render.js"></script>
+      <script src="../../../javascripts/breadcrumb-nav.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
