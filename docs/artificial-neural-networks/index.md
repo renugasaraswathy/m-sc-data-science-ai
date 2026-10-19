@@ -27,3 +27,11 @@ title: Overview
 - [Lesson 3: Linear Separability and XOR](week-03-perceptron-and-logistic-neuron/lesson-03-linear-separability-and-xor.md)
 - [Lesson 4: The Logistic Neuron](week-03-perceptron-and-logistic-neuron/lesson-04-logistic-neuron.md)
 - [Lesson 5: Module Summary](week-03-perceptron-and-logistic-neuron/lesson-05-module-summary.md)
+
+**Week 4: Multilayer Perceptrons and Activation Functions**
+
+- [Lesson 1: Introduction to MLPs and Activation Functions](week-04-multilayer-perceptrons-and-activation-functions/lesson-01-introduction-to-mlps-and-activation-functions.md)
+- [Lesson 2: The Multilayer Perceptron](week-04-multilayer-perceptrons-and-activation-functions/lesson-02-multilayer-perceptron.md)
+- [Lesson 3: Activation Functions](week-04-multilayer-perceptrons-and-activation-functions/lesson-03-activation-functions.md)
+- [Lesson 4: Activation Challenges and Practical Choices](week-04-multilayer-perceptrons-and-activation-functions/lesson-04-activation-challenges-and-practical-choices.md)
+- [Lesson 5: Module Summary](week-04-multilayer-perceptrons-and-activation-functions/lesson-05-module-summary.md)
