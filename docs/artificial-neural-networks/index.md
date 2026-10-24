@@ -35,3 +35,7 @@ title: Overview
 - [Lesson 3: Activation Functions](week-04-multilayer-perceptrons-and-activation-functions/lesson-03-activation-functions.md)
 - [Lesson 4: Activation Challenges and Practical Choices](week-04-multilayer-perceptrons-and-activation-functions/lesson-04-activation-challenges-and-practical-choices.md)
 - [Lesson 5: Module Summary](week-04-multilayer-perceptrons-and-activation-functions/lesson-05-module-summary.md)
+
+**Notes**
+
+- [From ANN to LLMs: Parameters, Layers, Activations and Training](notes/from-ann-to-llms.md)

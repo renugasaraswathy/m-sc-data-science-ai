@@ -154,6 +154,40 @@ flowchart TD
   "converged" — `w`/`b` barely change (e.g. under 1%) over the next N steps.
 - **Noisy data:** start with a larger `η`, then reduce it in later iterations.
 
+#### The perceptron as code
+- Not a package or a special file: it is an idea (weighted sum + sign) that takes about
+  10 lines of Python. `sklearn.linear_model.Perceptron` is just one ready-made
+  implementation of the same idea.
+
+```python
+import numpy as np
+
+def predict(x, w, b):
+    return 1 if np.dot(w, x) + b > 0 else -1          # ŷ = sign(wᵀx + b)
+
+def train(X, y, lr=1.0, max_passes=100):
+    w, b = np.zeros(X.shape[1]), 0.0                   # start with zeros (or random)
+    for _ in range(max_passes):                        # one pass = one sweep of all points
+        mistakes = 0
+        for xi, yi in zip(X, y):
+            if yi * (np.dot(w, xi) + b) <= 0:          # mistake condition
+                w += lr * yi * xi                      # w ← w + η·y·x
+                b += lr * yi                           # b ← b + η·y
+                mistakes += 1
+        if mistakes == 0:                              # converged: no mistakes in a full pass
+            break
+    return w, b
+
+# tiny linearly separable example: label +1 if x₁ + x₂ is large
+X = np.array([[2, 1], [3, 3], [-2, -1], [-1, -3]])
+y = np.array([1, 1, -1, -1])
+w, b = train(X, y)
+print(w, b, [predict(x, w, b) for x in X])             # predictions match y
+```
+
+- The code mirrors the flowchart above: loop over points, check `y(wᵀx + b) ≤ 0`, update
+  `w` and `b` only on a mistake, stop when a full pass has no mistakes.
+
 #### Convergence and limitations
 - ★ If the data is **linearly separable**, the rule is **guaranteed to converge** in a
   finite number of updates.

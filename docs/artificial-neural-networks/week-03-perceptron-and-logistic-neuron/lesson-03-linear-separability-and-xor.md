@@ -46,6 +46,41 @@ title: "Lesson 3: Linear Separability and XOR"
   patterns but noisier, and you only learn the true shape of the data once models are
   fitted.
 
+#### Real-world analogy: "good" vs "not bad"
+- The same XOR structure appears in language. Predict the next word after
+  *"The movie was ___, so I would ___"*:
+    - `x₁` = 1 if the phrase contains **"not"**, else 0
+    - `x₂` = 1 if the sentiment word is **"bad"** (0 for "good")
+    - output = 1 if the next word is **"avoid"**, 0 if it is **"recommend"**
+
+| Phrase | x₁ (not?) | x₂ (bad?) | Next word | Output |
+|---|---|---|---|---|
+| "good" | 0 | 0 | recommend | 0 |
+| "bad" | 0 | 1 | avoid | 1 |
+| "not good" | 1 | 0 | avoid | 1 |
+| "not bad" | 1 | 1 | recommend | 0 |
+
+- This is exactly the XOR table: the answer flips when **exactly one** of "not" / "bad"
+  is present. Neither feature alone predicts the word; only their **combination** does.
+- ★ A single perceptron (one line) fails here, just as on XOR. A hidden layer fixes it:
+    - Hidden neuron 1 detects **"bad without not"** → avoid.
+    - Hidden neuron 2 detects **"not without bad"** (i.e. "not good") → avoid.
+    - Output neuron: **avoid if either fires**, otherwise recommend.
+
+```mermaid
+flowchart LR
+    X["Features:<br/>'not', 'bad'"] --> H1["Hidden 1<br/>bad AND NOT not"]
+    X --> H2["Hidden 2<br/>not AND NOT bad"]
+    H1 --> O["Output: avoid<br/>if either fires"]
+    H2 --> O
+```
+
+- **Link to LLMs:** predicting the next word is this same problem at scale. Language
+  is full of feature combinations ("not good", "bank of a river" vs "bank account"), so
+  LLMs need many hidden layers with nonlinear activations, not a single line. The
+  output layer is a many-class version of the same decision (one score per word in the
+  vocabulary, then softmax).
+
 ---
 
 ### 2. Multi-Layer Networks and XOR

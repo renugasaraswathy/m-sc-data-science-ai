@@ -47,6 +47,11 @@ flowchart TD
 **Rule of thumb:** hidden layers → ReLU · output layer, yes/no → sigmoid · zero-centred /
 negative values needed → tanh. (See the free-delivery worked example in Lesson 3.)
 
+**Order of trying things:** start with plain ReLU → check for dead neurons while training
+→ if many, move to Leaky ReLU → use PReLU only if its gain justifies the extra parameter
+(rarely done). Tanh is mostly "of the past": only for very shallow networks (3–4 layers),
+otherwise use ReLU.
+
 #### Output layer
 Chosen by how you want to **interpret predictions**, not by training speed.
 
@@ -67,3 +72,14 @@ Chosen by how you want to **interpret predictions**, not by training speed.
 
 - ★ No single activation is perfect; each exists because of specific design goals and
   trade-offs. Good choices are a key reason deep networks are practical today.
+
+### Exam and assignment focus
+- ★ The **summary table above** (function → strength, weakness, where it is used) is very
+  important for the exam. The formulas themselves are not required, but a data scientist
+  should know **sigmoid and softmax** well, since both are used in classical analysis too.
+- Assignment: given a dataset, build and train a neural network, choosing each layer's
+  activation: **ReLU** in hidden layers, **sigmoid** at the output for binary
+  classification, **softmax** for multi-class. Activations are mandatory — without them
+  the model is just a linear model.
+- Next session: **backpropagation** and how training proceeds (pre-read it), followed by
+  a small demo of building a network on a dataset.

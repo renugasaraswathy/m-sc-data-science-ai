@@ -42,6 +42,10 @@ flowchart LR
 - ★ Without activations an MLP is just **linear regression**, however deep. With them,
   even a single hidden layer can approximate any continuous function on a compact
   domain (**Universal Approximation Theorem**).
+- The activation is applied **on top of** the linear step `z = Wa + b`, not instead of
+  it. Different layers may use different activations (e.g. tanh in a hidden layer,
+  sigmoid at the output), but once chosen for a layer it stays fixed.
+- Mandatory in practice: without activations it is a linear model, not a neural network.
 
 ---
 
@@ -55,10 +59,17 @@ flowchart LR
 - Large positive `z` → ≈ 1; large negative `z` → ≈ 0; changes fastest around `z = 0`.
 - Acts as a **soft yes/no** rather than a hard threshold, so the output reads as a
   probability. Closely tied to logistic regression.
+- Worth memorising the formula: sigmoid is used widely, in classical data analysis as
+  well as neural networks. At `z = 0` the output is 0.5.
+- Binary classification output layer: one neuron gives one probability of belonging to
+  the positive class — `sigmoid(w₁a₁ + w₂a₂ + w₃a₃ + b)`.
 
 #### Tanh
 - `tanh(z) = (eᶻ − e⁻ᶻ) / (eᶻ + e⁻ᶻ)` — S-shaped, output in **(−1, +1)**, **zero-centred**.
 - A rescaled and shifted version of sigmoid.
+- The (−1, +1) range works like normalisation, keeping hidden values from growing too
+  large or too small — the reason it was used in hidden layers.
+- Only suitable for **shallow** networks (about 3–4 layers); in deeper ones it saturates.
 
 | | Sigmoid | Tanh |
 |---|---|---|
@@ -81,6 +92,11 @@ flowchart LR
   flattens.
 - Gradients for such neurons become **very small** → a main contributor to the
   **vanishing gradient problem**.
+- Why this hurts: the network should respond when its input changes, but a saturated
+  neuron's output barely moves, so learning stalls. Gradients and the vanishing-gradient
+  problem are covered in the next session (backpropagation).
+- Sigmoid *can* be used in hidden layers, but tanh is better there; in practice sigmoid
+  stays at the output layer.
 - ★ Today both are used sparingly in hidden layers; sigmoid remains common at the
   output for binary classification.
 
@@ -96,6 +112,9 @@ flowchart LR
 #### ReLU
 - `f(z) = max(0, z)`: negative input → 0; positive input → `z`. Piecewise linear, very
   cheap to compute.
+- It has a kink at 0 but is still usable for training — differentiating it causes no
+  practical problems.
+- Applied **on top of** the linear combination `Wa + b`, to bring in non-linearity.
 
 | Why ReLU is the default | |
 |---|---|
@@ -107,6 +126,9 @@ flowchart LR
 #### Dying ReLU
 - If a neuron's parameters drift so its input is **always negative**, it outputs 0 for
   every input and effectively **stops participating — a dead ReLU**.
+- It can happen because of the data or the computation: some neurons keep getting a
+  negative signal and become useless neurons that contribute nothing to learning. ReLU
+  also ignores the whole negative side of its input, which motivated the variants below.
 
 #### Variants
 | | ReLU | Leaky ReLU | Parametric ReLU (PReLU) |
@@ -115,6 +137,9 @@ flowchart LR
 | Purpose | Simple, efficient default | Reduces dying-ReLU risk | Flexibility; small gains in some vision models |
 | Cost | — | — | Slightly more parameters |
 
+- PReLU costs one extra parameter `α` for every activation layer, learned on top of the
+  weights and biases. Leaky ReLU is therefore the most common variant; PReLU is rarely
+  used unless its gain justifies the added cost.
 - Intuition: ReLU is a **bouncer** — blocks negatives, passes positives as is.
   `z = −5` → 0 (neuron silent); `z = 7` → 7 (neuron fires).
 - All three keep the key benefits: nonlinearity, efficiency, stable deep training.
@@ -130,6 +155,10 @@ flowchart LR
 - Sigmoid suits **two** outcomes. With many classes (10 digits, many news topics,
   thousands of image categories) we need **one probability per class**, all
   non-negative and **summing to 1**. Softmax does this.
+- The output layer then has **one neuron per class** (e.g. 3 for dog / cat / bird, 10 for
+  handwritten digits 0–9), each giving that class's probability.
+- Softmax is only a conversion of logits into probabilities, so it belongs in the
+  **output layer only** — never in hidden layers.
 
 #### Logits
 - The raw outputs of the last linear layer. Can be positive or negative, small or
@@ -158,6 +187,10 @@ Logits `z = (2, 1, 0.1)`
 | 3 | 1.1 | 1.1 / 11.2 ≈ **0.10** |
 
 - Sum of exponentials ≈ 11.2. Class 1 wins, but every class keeps some probability.
+- **Close probabilities** (e.g. 0.41 vs 0.40): the model is effectively *confused*
+  between the two classes. There is no hard rule; options are to pick either, flag the
+  case as uncertain, or only act when the top class beats the runner-up by a chosen
+  margin (a confidence threshold).
 
 #### Intuition
 - Exponentiation makes values positive; normalisation forces total mass to 1.

@@ -37,6 +37,17 @@ flowchart LR
     g1 & g2 & g3 --> y["y"]
 ```
 
+#### Parameter count in a dense network
+- Parameters = **weights** (one per connection) + **biases** (one per neuron, *not* per
+  connection).
+- Example: 3 neurons → 2 neurons = 6 weights + 2 biases = 8 parameters; 3 → 3 = 9
+  weights + 3 biases = 12 parameters. (The lecturer first counted a bias per connection,
+  then corrected it: a neuron has one bias, `z = w₁x₁ + w₂x₂ + w₃x₃ + b`.)
+- Every added neuron or layer multiplies the count → dense networks have a **very high
+  parameter count**. The upside is the capacity to model **complex relationships**.
+- Each neuron emits **one value** as output. The weights belong to the *connections*; the
+  input-layer "neurons" do nothing — they just hold the feature values.
+
 #### What a layer computes
 - Every layer has a **weight matrix `W`** and a **bias vector `b`** — these parameters
   define the function the network computes.
@@ -45,6 +56,17 @@ flowchart LR
     2. **Nonlinear activation:** `a⁽ˡ⁾ = f(z⁽ˡ⁾)`
 - `a⁽ˡ⁻¹⁾` is the previous layer's output; `a⁽ˡ⁾` is a **new representation** of the
   data and becomes the input to the next layer.
+- **Notation:** the superscript `⁽ˡ⁾` only says *which layer* a quantity belongs to — it is
+  not a power. Everything is a vector or matrix: `z⁽ˡ⁾` is the vector `(z₁, z₂, z₃)` of
+  the layer's neurons, `W⁽ˡ⁾` is a matrix (one row per neuron in layer `l`).
+- `a⁽ˡ⁻¹⁾` is the **post-activation** output of the previous layer, so what flows into
+  layer `l+1` is `a⁽ˡ⁾`, not `z⁽ˡ⁾`.
+- **Where weights and biases come from:** they start as random values and are **learned
+  during training**. Hidden layers never see the target output; the flow is: forward
+  pass with current weights → compare the prediction with the actual value → go back
+  through the network (chain rule, **backpropagation** — next class) → update all
+  weights and biases, including the hidden ones. Training even a small network is
+  computationally heavy (hence GPUs).
 
 ```mermaid
 flowchart LR
@@ -108,6 +130,11 @@ flowchart LR
 | Captures | Little on their own | Combinations, interactions between inputs, structural patterns |
 
 - Each new layer works on features from the previous layer, not on the original input.
+  No extra input enters the hidden layers — the original features are fed only once, at
+  the input layer.
+- Each hidden neuron is one more combination `f(w₁x₁ + w₂x₂ + b)` of the same inputs, so
+  more neurons = more **latent representations** of the input (similar in spirit to the
+  components PCA extracts).
 
 #### Hierarchical representation learning
 ```mermaid
@@ -127,6 +154,12 @@ flowchart LR
   abstraction. Together: a much larger set of representable functions.
 - But also: more **parameters**, more **computational cost**, higher **risk of
   overfitting**. Managed later via training and regularisation.
+- **Overfitting** = the model starts learning noise or random patterns in the data
+  instead of the real ones.
+- **How many layers / neurons?** There is no right answer; it depends mainly on how much
+  data you have (more data supports more complex networks). In practice it is
+  **trial and error**: start small and simple, then grow while watching the training and
+  validation curves for overfitting.
 
 #### XOR revisited
 - XOR fails for a perceptron because no single line separates it.
@@ -163,6 +196,30 @@ flowchart LR
   transformed representation from the previous one.
 - All neurons within a layer compute **in parallel**.
 
+#### What a neuron is in memory (and in LLM training)
+- A "neuron" is **not a thread, process or object**. It is **one row of the layer's
+  weight matrix `W` plus one entry of the bias vector `b`**: just numbers stored in an
+  array (on a GPU). Its activation is one entry of the result array.
+- A whole layer is computed by **one matrix operation**, not a loop over neurons:
+
+```python
+z = W @ a_prev + b    # all neurons in the layer at once
+a = relu(z)           # activation applied to all of them
+```
+
+- The GPU splits that multiplication into many small tiles of multiply-add work, so
+  the parallelism is in the *arithmetic*, not "one thread per neuron". This is why GPUs
+  suit neural networks.
+- A saved model (e.g. an LLM's 70 GB file) is just these weight and bias arrays.
+- **Training step** = forward pass (matrix operations) → one loss number → backward pass
+  (more matrix operations, giving a gradient array shaped like each `W`) → the optimizer
+  adjusts every number in `W` slightly (`W ← W − lr · gradient`) → repeat.
+- Huge models don't fit on one GPU, so the arrays are split: **data parallelism** (each
+  GPU holds a full copy and sees different data), **tensor parallelism** (one matrix cut
+  across GPUs), **pipeline parallelism** (different layers on different GPUs).
+- "Neuron" is a way of **thinking** about one row of the table (take inputs, weigh them,
+  fire); the code never loops over neurons one at a time.
+
 #### What the output layer produces
 | Task | Output |
 |---|---|
@@ -176,6 +233,8 @@ flowchart LR
 - Training repeats the same forward computation, then adjusts weights using the errors
   observed; backpropagation (later module) changes parameters and affects the next
   forward pass.
+- ★ **Prediction (inference) is one-directional only** (feed-forward). Going backwards
+  through the network happens only during *training*, to update the weights.
 
 ---
 
@@ -209,3 +268,9 @@ flowchart LR
   (characters → words → phrases → meaning). Deep networks match this composition, which
   is why they're so effective for vision, speech and language.
 - Modern design favours **depth over extreme width**.
+- Example: one hidden layer of 100 neurons can do the same job as a few small stacked
+  layers, but needs far more parameters. That depth is more efficient is shown
+  **empirically** (experiments), not proven.
+- Analogy: it mirrors how people learn — basic concepts first, then build on them —
+  rather than learning everything in one step. Each layer re-composes the previous
+  layer's output instead of trying to fit everything with one huge set of weights.
