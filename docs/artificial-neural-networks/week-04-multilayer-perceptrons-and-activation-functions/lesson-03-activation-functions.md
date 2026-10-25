@@ -45,6 +45,9 @@ flowchart LR
 - The activation is applied **on top of** the linear step `z = Wa + b`, not instead of
   it. Different layers may use different activations (e.g. tanh in a hidden layer,
   sigmoid at the output), but once chosen for a layer it stays fixed.
+- Why fixed: the activation is part of the **architecture**, and the forward pass and
+  backpropagation formulas use it (its derivative appears in the chain rule), so it can't
+  be swapped between iterations.
 - Mandatory in practice: without activations it is a linear model, not a neural network.
 
 ---
