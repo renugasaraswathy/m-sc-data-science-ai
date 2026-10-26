@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Lesson 2: Gradient Descent and Momentum - Learning Notes</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Lesson 2: Gradient Descent and Momentum";
+        var mkdocs_page_input_path = "artificial-neural-networks/week-06-optimisation-algorithms/lesson-02-gradient-descent-and-momentum.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> Learning Notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Learning Notes</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Artificial neural networks</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Notes</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../notes/from-ann-to-llms/">From ANN to LLMs</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../notes/simple-story/">The Simple Story</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to neural networks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-neural-networks/lesson-01-evolution-of-ai-ml-and-deep-learning/">Lesson 1: Evolution of AI, ML and Deep Learning</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-neural-networks/lesson-02-biological-vs-artificial-neurons/">Lesson 2: Biological Neurons vs Artificial Neurons</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-neural-networks/lesson-03-components-and-feed-forward-networks/">Lesson 3: Components and Feed-forward Networks</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 02 mathematical foundations for neural networks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-01-why-mathematical-foundations/">Lesson 1: Why We Need Mathematical Foundations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-02-linear-algebra-for-neural-networks/">Lesson 2: Linear Algebra for Neural Networks</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-03-calculus-for-neural-networks/">Lesson 3: Calculus for Neural Networks</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-04-numerical-stability/">Lesson 4: Numerical Stability in Training</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 03 perceptron and logistic neuron</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-01-introduction-to-perceptron-and-logistic-neuron/">Lesson 1: Introduction to the Perceptron and Logistic Neuron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-02-the-perceptron/">Lesson 2: The Perceptron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-03-linear-separability-and-xor/">Lesson 3: Linear Separability and XOR</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-04-logistic-neuron/">Lesson 4: The Logistic Neuron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 04 multilayer perceptrons and activation functions</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-01-introduction-to-mlps-and-activation-functions/">Lesson 1: Introduction to MLPs and Activation Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-02-multilayer-perceptron/">Lesson 2: The Multilayer Perceptron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-03-activation-functions/">Lesson 3: Activation Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-04-activation-challenges-and-practical-choices/">Lesson 4: Activation Challenges and Practical Choices</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 05 backpropagation and training dynamics</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-01-introduction-to-backpropagation-and-training-dynamics/">Lesson 1: Introduction to Backpropagation and Training Dynamics</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-02-backpropagation/">Lesson 2: Backpropagation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-03-gradient-flow-and-initialisation/">Lesson 3: Gradient Flow and Initialisation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-04-loss-functions/">Lesson 4: Loss Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-05-vanishing-and-exploding-gradients/">Lesson 5: Vanishing and Exploding Gradients</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-06-module-summary/">Lesson 6: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Week 06 optimisation algorithms</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-01-introduction-to-optimisation-algorithms/">Lesson 1: Introduction to Optimisation Algorithms</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Lesson 2: Gradient Descent and Momentum</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#key-concepts">Key Concepts</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1-what-is-optimisation">1. What is Optimisation?</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2-gradient-descent">2. Gradient Descent</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#3-variants-of-gradient-descent">3. Variants of Gradient Descent</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#4-momentum">4. Momentum</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-03-adaptive-optimisers/">Lesson 3: Adaptive Optimisers</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-04-learning-rate-scheduling/">Lesson 4: Learning Rate Scheduling</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-05-stability-and-convergence/">Lesson 5: Stability and Convergence</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-06-module-summary/">Lesson 6: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Cloud services and platforms</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cloud-services-and-platforms/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to cloud computing</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../cloud-services-and-platforms/week-01-introduction-to-cloud-computing/lesson-01-cloud-evolution-and-fundamentals/">Lesson 1: Cloud Evolution & Fundamentals</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../cloud-services-and-platforms/week-01-introduction-to-cloud-computing/lesson-02-cloud-service-models/">Lesson 2: Cloud Service Models</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data stores and pipelines</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../data-stores-and-pipelines/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 foundations of data storage paradigms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-01-the-evolution-of-data-storage/">Lesson 1: The Evolution of Data Storage</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-02-oltp-vs-olap/">Lesson 2: OLTP vs OLAP</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-03-rdbms-vs-columnar-databases/">Lesson 3: RDBMS vs Columnar Databases</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-04-acid-vs-base-models/">Lesson 4: ACID vs BASE Models</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Machine learning</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../machine-learning/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to machine learning</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../machine-learning/week-01-introduction-to-machine-learning/lesson-01-machine-learning-paradigms-and-workflow/">Lesson 1: Machine Learning Paradigms and Workflow</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 02 data preprocessing</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../machine-learning/week-02-data-preprocessing/lesson-01-data-fundamentals-and-preprocessing/">Lesson 1: Data Fundamentals and Preprocessing</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">Learning Notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Artificial neural networks</li>
+          <li class="breadcrumb-item">Week 06 optimisation algorithms</li>
+      <li class="breadcrumb-item active">Lesson 2: Gradient Descent and Momentum</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><a href="../../../">Artificial Neural Networks</a> → <span class="week-crumb">Week 6: Optimisation Algorithms</span> → Lesson 2: Gradient Descent and Momentum</p>
+<hr />
+<h1 id="gradient-descent-and-momentum">Gradient Descent and Momentum<a class="headerlink" href="#gradient-descent-and-momentum" title="Permanent link">&para;</a></h1>
+<h2 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h2>
+<h3 id="1-what-is-optimisation">1. What is Optimisation?<a class="headerlink" href="#1-what-is-optimisation" title="Permanent link">&para;</a></h3>
+<h4 id="the-goal-of-training">The goal of training<a class="headerlink" href="#the-goal-of-training" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Training aims to <strong>minimise the loss</strong>. Optimisation = finding the <strong>weights and biases</strong>
+  that make the loss as small as possible. The optimiser explores combinations of
+  parameters, trying to move the model into a region where it performs well.</li>
+</ul>
+<h4 id="the-loss-landscape">The loss landscape<a class="headerlink" href="#the-loss-landscape" title="Permanent link">&para;</a></h4>
+<ul>
+<li>With thousands or millions of parameters, the loss is a <strong>high-dimensional surface</strong>
+  with valleys, hills, plateaus, ridges and <strong>saddle points</strong>.</li>
+<li>There can be several <strong>local minima</strong> and one <strong>global minimum</strong>; near a saddle point
+  the surface is almost flat.</li>
+<li>★ Optimisation finds a <strong>good enough valley</strong> and navigates the landscape efficiently,
+  avoiding the regions that slow learning.</li>
+<li>Why it's hard: the surface is high-dimensional, gradients can be noisy or inconsistent,
+  some regions are nearly flat and others very steep, and a poor learning rate can make
+  training slow or unstable.</li>
+</ul>
+<h4 id="what-the-optimiser-controls">What the optimiser controls<a class="headerlink" href="#what-the-optimiser-controls" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Tool</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Step size</td>
+<td><strong>Learning rate</strong></td>
+</tr>
+<tr>
+<td>Directional smoothing</td>
+<td><strong>Momentum</strong></td>
+</tr>
+<tr>
+<td>Per-parameter adjustment</td>
+<td><strong>Adaptive optimisers</strong> (RMSProp, Adam)</td>
+</tr>
+<tr>
+<td>Stability</td>
+<td><strong>Gradient clipping</strong>, normalisation</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>★ Together these decide convergence speed, final accuracy and training stability.
+  Optimisation is more than computing the gradients.</li>
+</ul>
+<hr />
+<h3 id="2-gradient-descent">2. Gradient Descent<a class="headerlink" href="#2-gradient-descent" title="Permanent link">&para;</a></h3>
+<h4 id="intuition">Intuition<a class="headerlink" href="#intuition" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Imagine standing on a curved landscape defined by the loss, with the parameter as a
+  ball. Gradient descent: <strong>look at the slope and step downhill</strong>.<ul>
+<li>Slope negative (loss rises to the left) → move <strong>right</strong>.</li>
+<li>Slope positive (loss rises to the right) → move <strong>left</strong>.</li>
+<li>Slope ≈ flat → near a minimum.</li>
+</ul>
+</li>
+<li>The gradient points in the direction the loss grows <strong>fastest</strong> (uphill), so the
+  optimiser moves in the <strong>opposite</strong> direction.</li>
+</ul>
+<h4 id="update-rule">Update rule<a class="headerlink" href="#update-rule" title="Permanent link">&para;</a></h4>
+<p><code>θ_new = θ_old − η · ∇L</code></p>
+<ul>
+<li><code>θ</code> = the weight being updated, <code>η</code> = <strong>learning rate</strong>, <code>∇L</code> = gradient (the slope at
+  the current point).</li>
+<li>The gradient gives the <strong>direction</strong>; the learning rate controls <strong>how big a step</strong>. Every
+  parameter follows the same rule.</li>
+</ul>
+<h4 id="learning-rate">Learning rate<a class="headerlink" href="#learning-rate" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Learning rate</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Too small</td>
+<td>Tiny steps, training extremely slow</td>
+</tr>
+<tr>
+<td>Too large</td>
+<td>Overshoots the minimum or <strong>diverges</strong> (loss increases)</td>
+</tr>
+<tr>
+<td>Well chosen</td>
+<td>Smooth, efficient progress downhill</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Real networks have millions of dimensions: the gradient is a <strong>vector</strong> with a slope for
+  every weight and bias, but the logic is unchanged: take a step that reduces the loss
+  the most.</li>
+</ul>
+<h4 id="worked-check-l-32">Worked check: <code>L(θ) = (θ − 3)²</code><a class="headerlink" href="#worked-check-l-32" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Gradient <code>∇L = 2(θ − 3)</code>, start at <code>θ = 0</code>.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th><code>η = 0.1</code></th>
+<th><code>η = 1.1</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start</td>
+<td>θ = 0, gradient −6</td>
+<td>θ = 0, gradient −6</td>
+</tr>
+<tr>
+<td>After 1 update</td>
+<td>θ = 0.6 (gradient −4.8)</td>
+<td>θ = 6.6 (gradient +7.2)</td>
+</tr>
+<tr>
+<td>After 2 updates</td>
+<td>θ = 1.08 (steadily approaching 3)</td>
+<td>θ = −1.32 (overshooting more each time)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>η = 0.1</code> creeps toward the minimum at 3; <code>η = 1.1</code> jumps past it and the distance from 3
+  keeps growing (3 → 3.6 → 4.3 → …): divergence.</li>
+</ul>
+<h4 id="practical-points-from-the-live-class">Practical points from the live class<a class="headerlink" href="#practical-points-from-the-live-class" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Where this sits:</strong> backpropagation gives the gradient of the loss for every weight and
+  bias; <strong>optimisation is the step that uses those gradients to update them</strong>. Then the
+  next batch uses the new weights, the loss and gradients are recomputed, and the loop
+  repeats.</li>
+<li><strong>The loss is one number, the gradients are per parameter.</strong> The loss is computed once
+  for the whole batch; each parameter then gets its own partial derivative (its share of
+  the blame), e.g. <code>W1 ← W1 − η · ∂E/∂W1</code>, <code>W2 ← W2 − η · ∂E/∂W2</code>. It is a <strong>joint
+  optimisation</strong>: all parameters are updated together and do not counter each other.</li>
+<li><strong>Only the sign matters for direction:</strong> positive gradient → decrease the parameter,
+  negative gradient → increase it. The actual weight value can be anything (−2, +10).</li>
+<li><strong><code>η</code> is a scaling factor</strong> on the gradient (typical values 0.1, 0.01, 10⁻³), not a
+  "rate" in the physics sense; it is the size of the change in <code>θ</code> per update.</li>
+<li><strong>Reaching a minimum:</strong> the slope is ≈ 0, so <code>θ_new ≈ θ_old</code> and updates stall. It is
+  normal to explore a little uphill to check it is a real minimum. You often end in a
+  <strong>good local minimum</strong>, and that is fine; you never see the true loss curve, only the
+  path your training traces.</li>
+<li><strong>When to stop (in practice):</strong> real loss surfaces are not smooth, and some weights may
+  want to move in opposite directions near the end. Teams stop when the loss stops
+  improving or when business metrics (precision, recall, ...) are good enough.</li>
+<li><strong>One data point is enough for a gradient:</strong> the loss has a fixed functional form (e.g.
+  <code>(y − ŷ)²</code> or <code>−log ŷ</code>), so you can differentiate it for a single sample. That is why
+  SGD (batch of 1) works.</li>
+</ul>
+<hr />
+<h3 id="3-variants-of-gradient-descent">3. Variants of Gradient Descent<a class="headerlink" href="#3-variants-of-gradient-descent" title="Permanent link">&para;</a></h3>
+<h4 id="why-variants-exist">Why variants exist<a class="headerlink" href="#why-variants-exist" title="Permanent link">&para;</a></h4>
+<ul>
+<li>With millions of samples, computing one gradient over the <strong>whole dataset</strong> is slow,
+  expensive, memory-heavy and hard to scale. The variants differ only in <strong>how much data
+  each update uses</strong>.</li>
+</ul>
+<pre class="mermaid-diagram"><code>flowchart LR
+    A["Batch GD&lt;br/&gt;entire dataset&lt;br/&gt;per update"] --&gt; D["Trade-off:&lt;br/&gt;stability vs speed"]
+    B["SGD&lt;br/&gt;1 sample&lt;br/&gt;per update"] --&gt; D
+    C["Mini-batch SGD&lt;br/&gt;small batch&lt;br/&gt;per update"] --&gt; D</code></pre>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Batch GD</th>
+<th>Stochastic GD (SGD)</th>
+<th>Mini-batch GD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data per update</td>
+<td>Entire dataset</td>
+<td>One sample</td>
+<td>Small batch (typically <strong>32–512</strong>)</td>
+</tr>
+<tr>
+<td>Update quality</td>
+<td>Stable, smooth, correct direction</td>
+<td><strong>Very noisy</strong>, loss bounces around</td>
+<td>Stable enough, with useful noise</td>
+</tr>
+<tr>
+<td>Speed / cost</td>
+<td>Very slow, memory-heavy, poor GPU use</td>
+<td>Very fast per update</td>
+<td>Fast; uses GPU parallelism well</td>
+</tr>
+<tr>
+<td>Typical use</td>
+<td>Small datasets or convex problems</td>
+<td>Online / streaming data; rarely used alone</td>
+<td><strong>Default</strong> for neural networks</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Noise from SGD isn't always bad: it can help escape <strong>saddle points</strong> or <strong>sharp
+  minima</strong>.</li>
+</ul>
+<h4 id="batch-size-matters">Batch size matters<a class="headerlink" href="#batch-size-matters" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Batch size</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Small (16, 32)</td>
+<td>Noisier gradients; can improve generalisation and escape bad regions</td>
+</tr>
+<tr>
+<td>Large (1024+)</td>
+<td>Very smooth gradients, but may converge to <strong>sharp minima</strong> and need learning-rate tuning or <strong>warm-up</strong></td>
+</tr>
+<tr>
+<td>32–256</td>
+<td>Works extremely well for most tasks</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>★ Batch size is one of the most important hyperparameters. Noise is sometimes exactly
+  what the optimiser needs to keep moving.</li>
+</ul>
+<h4 id="practical-points-from-the-live-class_1">Practical points from the live class<a class="headerlink" href="#practical-points-from-the-live-class_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Naming is confusing:</strong> "batch gradient descent" means the <strong>entire dataset</strong> per
+  update. "Mini-batch" means whatever batch size you train with (e.g. 32). When code or
+  slides say <strong>SGD</strong>, it almost always means <strong>mini-batch gradient descent</strong>.</li>
+<li>Mini-batches are formed by <strong>random sampling</strong>, so re-training can give a slightly
+  different loss curve (e.g. 45 vs 60 epochs to converge). Well-represented batches give
+  smoother curves.</li>
+<li>Batch GD is the ideal but impractical for large data; pure SGD (1 sample) suits
+  <strong>online / real-time learning</strong> but gives a very wavy loss.</li>
+</ul>
+<hr />
+<h3 id="4-momentum">4. Momentum<a class="headerlink" href="#4-momentum" title="Permanent link">&para;</a></h3>
+<h4 id="the-problem-zig-zag">The problem: zig-zag<a class="headerlink" href="#the-problem-zig-zag" title="Permanent link">&para;</a></h4>
+<ul>
+<li>In a <strong>narrow valley</strong> (steep in one direction, shallow in the one we want), the
+  gradient keeps pointing left and right across the walls. The optimiser wastes time
+  correcting direction and converges slowly.</li>
+</ul>
+<h4 id="the-idea-velocity">The idea: velocity<a class="headerlink" href="#the-idea-velocity" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Momentum keeps a <strong>running average of past gradients</strong>, like a ball rolling downhill:
+  it keeps going through a gentle patch because it has accumulated speed.<ul>
+<li>Gradients consistently in one direction → the update <strong>builds speed</strong>.</li>
+<li>Gradients oscillate → momentum <strong>smooths</strong> them out.</li>
+<li>Gradients very small → momentum <strong>carries</strong> the update forward.</li>
+</ul>
+</li>
+</ul>
+<h4 id="update-rule_1">Update rule<a class="headerlink" href="#update-rule_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>v_t = β · v_{t−1} + (1 − β) · ∇L</code></li>
+<li><code>θ_t = θ_{t−1} − η · v_t</code></li>
+<li><code>β</code> = how much of the previous velocity to keep; typical <strong>β = 0.9</strong> (keep 90% of the
+  previous direction). Conceptually: a weighted average of recent gradients.</li>
+</ul>
+<pre class="mermaid-diagram"><code>flowchart LR
+    A["Without momentum&lt;br/&gt;zig-zags across the valley"] --&gt; C["Wasted steps,&lt;br/&gt;slow progress"]
+    B["With momentum&lt;br/&gt;smoother, more direct path"] --&gt; D["Faster progress along&lt;br/&gt;the valley floor"]</code></pre>
+<h4 id="benefits">Benefits<a class="headerlink" href="#benefits" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Accelerates convergence, especially in <strong>long, narrow valleys</strong>.</li>
+<li>Reduces oscillation in steep dimensions.</li>
+<li>Helps escape shallow local minima; gives more stable training.</li>
+<li>Most useful with <strong>noisy mini-batch gradients</strong>, slow training, or narrow valleys.</li>
+<li>A standard addition to SGD; <strong>Adam includes a version of momentum</strong> internally.</li>
+</ul>
+<h4 id="practical-points-from-the-live-class_2">Practical points from the live class<a class="headerlink" href="#practical-points-from-the-live-class_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Reading <code>β</code>:</strong> <code>β = 0.9</code> gives <strong>90% weight to history</strong> and 10% to the current
+  gradient; <code>1 − β</code> is the weight on the current gradient. <code>β</code> lies between 0 and 1.</li>
+<li><strong>Momentum carries across batches:</strong> <code>v_{t−1}</code> for the next batch is the <code>v_t</code> from the
+  previous batch, so the velocity keeps accumulating through training.</li>
+<li>In the update, the <strong>velocity replaces the raw gradient</strong> (<code>θ ← θ − η · v_t</code>).</li>
+<li>Momentum helps most in deep valleys and strongly curved regions, and on flat patches.</li>
+<li><strong>All</strong> gradient descent variants share one <strong>global</strong> learning rate <code>η</code> for every
+  parameter; that is the limitation adaptive optimisers address (next lesson).</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../lesson-01-introduction-to-optimisation-algorithms/" class="btn btn-neutral float-left" title="Lesson 1: Introduction to Optimisation Algorithms"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../lesson-03-adaptive-optimisers/" class="btn btn-neutral float-right" title="Lesson 3: Adaptive Optimisers">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../lesson-01-introduction-to-optimisation-algorithms/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../lesson-03-adaptive-optimisers/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+      <script src="../../../javascripts/mermaid-render.js"></script>
+      <script src="../../../javascripts/breadcrumb-nav.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

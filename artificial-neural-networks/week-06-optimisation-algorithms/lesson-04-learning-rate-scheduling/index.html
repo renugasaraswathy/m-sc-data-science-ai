@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Lesson 4: Learning Rate Scheduling - Learning Notes</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Lesson 4: Learning Rate Scheduling";
+        var mkdocs_page_input_path = "artificial-neural-networks/week-06-optimisation-algorithms/lesson-04-learning-rate-scheduling.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> Learning Notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Learning Notes</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Artificial neural networks</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Notes</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../notes/from-ann-to-llms/">From ANN to LLMs</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../notes/simple-story/">The Simple Story</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to neural networks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-neural-networks/lesson-01-evolution-of-ai-ml-and-deep-learning/">Lesson 1: Evolution of AI, ML and Deep Learning</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-neural-networks/lesson-02-biological-vs-artificial-neurons/">Lesson 2: Biological Neurons vs Artificial Neurons</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-neural-networks/lesson-03-components-and-feed-forward-networks/">Lesson 3: Components and Feed-forward Networks</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 02 mathematical foundations for neural networks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-01-why-mathematical-foundations/">Lesson 1: Why We Need Mathematical Foundations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-02-linear-algebra-for-neural-networks/">Lesson 2: Linear Algebra for Neural Networks</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-03-calculus-for-neural-networks/">Lesson 3: Calculus for Neural Networks</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-04-numerical-stability/">Lesson 4: Numerical Stability in Training</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 03 perceptron and logistic neuron</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-01-introduction-to-perceptron-and-logistic-neuron/">Lesson 1: Introduction to the Perceptron and Logistic Neuron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-02-the-perceptron/">Lesson 2: The Perceptron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-03-linear-separability-and-xor/">Lesson 3: Linear Separability and XOR</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-04-logistic-neuron/">Lesson 4: The Logistic Neuron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 04 multilayer perceptrons and activation functions</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-01-introduction-to-mlps-and-activation-functions/">Lesson 1: Introduction to MLPs and Activation Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-02-multilayer-perceptron/">Lesson 2: The Multilayer Perceptron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-03-activation-functions/">Lesson 3: Activation Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-04-activation-challenges-and-practical-choices/">Lesson 4: Activation Challenges and Practical Choices</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 05 backpropagation and training dynamics</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-01-introduction-to-backpropagation-and-training-dynamics/">Lesson 1: Introduction to Backpropagation and Training Dynamics</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-02-backpropagation/">Lesson 2: Backpropagation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-03-gradient-flow-and-initialisation/">Lesson 3: Gradient Flow and Initialisation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-04-loss-functions/">Lesson 4: Loss Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-05-vanishing-and-exploding-gradients/">Lesson 5: Vanishing and Exploding Gradients</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-06-module-summary/">Lesson 6: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Week 06 optimisation algorithms</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-01-introduction-to-optimisation-algorithms/">Lesson 1: Introduction to Optimisation Algorithms</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-02-gradient-descent-and-momentum/">Lesson 2: Gradient Descent and Momentum</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-03-adaptive-optimisers/">Lesson 3: Adaptive Optimisers</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Lesson 4: Learning Rate Scheduling</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#key-concepts">Key Concepts</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1-why-a-fixed-learning-rate-is-limiting">1. Why a Fixed Learning Rate Is Limiting</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2-popular-learning-rate-schedules">2. Popular Learning Rate Schedules</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#3-adaptive-vs-scheduled-learning-rates">3. Adaptive vs Scheduled Learning Rates</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-05-stability-and-convergence/">Lesson 5: Stability and Convergence</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-06-module-summary/">Lesson 6: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Cloud services and platforms</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cloud-services-and-platforms/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to cloud computing</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../cloud-services-and-platforms/week-01-introduction-to-cloud-computing/lesson-01-cloud-evolution-and-fundamentals/">Lesson 1: Cloud Evolution & Fundamentals</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../cloud-services-and-platforms/week-01-introduction-to-cloud-computing/lesson-02-cloud-service-models/">Lesson 2: Cloud Service Models</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data stores and pipelines</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../data-stores-and-pipelines/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 foundations of data storage paradigms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-01-the-evolution-of-data-storage/">Lesson 1: The Evolution of Data Storage</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-02-oltp-vs-olap/">Lesson 2: OLTP vs OLAP</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-03-rdbms-vs-columnar-databases/">Lesson 3: RDBMS vs Columnar Databases</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-04-acid-vs-base-models/">Lesson 4: ACID vs BASE Models</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Machine learning</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../machine-learning/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to machine learning</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../machine-learning/week-01-introduction-to-machine-learning/lesson-01-machine-learning-paradigms-and-workflow/">Lesson 1: Machine Learning Paradigms and Workflow</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 02 data preprocessing</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../machine-learning/week-02-data-preprocessing/lesson-01-data-fundamentals-and-preprocessing/">Lesson 1: Data Fundamentals and Preprocessing</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">Learning Notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Artificial neural networks</li>
+          <li class="breadcrumb-item">Week 06 optimisation algorithms</li>
+      <li class="breadcrumb-item active">Lesson 4: Learning Rate Scheduling</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><a href="../../../">Artificial Neural Networks</a> → <span class="week-crumb">Week 6: Optimisation Algorithms</span> → Lesson 4: Learning Rate Scheduling</p>
+<hr />
+<h1 id="learning-rate-scheduling">Learning Rate Scheduling<a class="headerlink" href="#learning-rate-scheduling" title="Permanent link">&para;</a></h1>
+<h2 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h2>
+<h3 id="1-why-a-fixed-learning-rate-is-limiting">1. Why a Fixed Learning Rate Is Limiting<a class="headerlink" href="#1-why-a-fixed-learning-rate-is-limiting" title="Permanent link">&para;</a></h3>
+<h4 id="what-the-learning-rate-does">What the learning rate does<a class="headerlink" href="#what-the-learning-rate-does" title="Permanent link">&para;</a></h4>
+<ul>
+<li>It sets how big a step the optimiser takes at every update: how fast the model learns,
+  how stable training is, and whether it converges at all.</li>
+<li>A fixed rate assumes the <strong>same step size suits every stage</strong> of training. It rarely does.</li>
+</ul>
+<h4 id="training-has-phases">Training has phases<a class="headerlink" href="#training-has-phases" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Situation</th>
+<th>Best step size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Early</strong></td>
+<td>Far from the optimum; gradients large</td>
+<td><strong>Large</strong> steps → rapid progress</td>
+</tr>
+<tr>
+<td><strong>Late</strong></td>
+<td>Near a minimum; gradients small</td>
+<td><strong>Small</strong> steps; large ones cause oscillation or prevent convergence</td>
+</tr>
+</tbody>
+</table>
+<h4 id="failure-modes">Failure modes<a class="headerlink" href="#failure-modes" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Learning rate</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Too large</td>
+<td>Overshoots the minimum and bounces back and forth; loss oscillates or rises; may diverge. The loss curve refuses to go down smoothly</td>
+</tr>
+<tr>
+<td>Too small</td>
+<td>Painfully slow; tiny progress; struggles on flat regions; wastes computation (stable but impractical for large models)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>A fixed rate forces a bad compromise: <strong>large</strong> → fast start, poor finish; <strong>small</strong> →
+  stable but extremely slow.</li>
+<li>★ Fix: <strong>learning-rate scheduling</strong> — change the rate over time to match the phase: fast
+  initial learning, smoother convergence later, better final performance.</li>
+</ul>
+<hr />
+<h3 id="2-popular-learning-rate-schedules">2. Popular Learning Rate Schedules<a class="headerlink" href="#2-popular-learning-rate-schedules" title="Permanent link">&para;</a></h3>
+<ul>
+<li>A <strong>schedule</strong> defines how the learning rate changes as training progresses: start
+  relatively large, then gradually reduce.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Schedule</th>
+<th>How it works</th>
+<th>Pros / cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Step decay</strong></td>
+<td>Constant for a while, then drops sharply at set points, e.g. 0.1 for the first 30 epochs → 0.01 → 0.001</td>
+<td>Simple, works well for many CNN models; you must choose <em>when</em> and <em>how much</em> to decay</td>
+</tr>
+<tr>
+<td><strong>Exponential decay</strong></td>
+<td>Multiply the rate by a fixed factor each step or epoch</td>
+<td>Smooth and predictable; if too aggressive, the rate gets too small too early</td>
+</tr>
+<tr>
+<td><strong>Cosine annealing</strong></td>
+<td>Follows a cosine curve: starts high, falls smoothly, very small near the end</td>
+<td>Smooth transitions; popular for large models; often used with <strong>warm restarts</strong></td>
+</tr>
+<tr>
+<td><strong>Warm-up</strong></td>
+<td>Start with a <strong>very small</strong> rate and <strong>increase</strong> it over a few steps/epochs, then switch to a decay schedule</td>
+<td>Prevents unstable early updates; important for <strong>large batch sizes</strong> and <strong>transformers</strong></td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid-diagram"><code>flowchart LR
+    A["Warm-up&lt;br/&gt;rate rises from very small"] --&gt; B["Main decay&lt;br/&gt;cosine annealing or step decay"]
+    B --&gt; C["Fine-tuning&lt;br/&gt;very small rate"]</code></pre>
+<ul>
+<li>In practice schedules are rarely used alone. The common pattern: <strong>short warm-up + main
+  decay</strong> → stability at the start, fast progress in the middle, precise fine-tuning at
+  the end.</li>
+</ul>
+<h4 id="which-schedule">Which schedule?<a class="headerlink" href="#which-schedule" title="Permanent link">&para;</a></h4>
+<ul>
+<li>There is no single best schedule; it depends on the model, data and setup.<ul>
+<li><strong>Step decay</strong> — simple, works well for many CNN-based models.</li>
+<li><strong>Exponential decay</strong> — when smooth reductions are wanted.</li>
+<li><strong>Cosine annealing</strong> — popular in modern, large-scale deep learning.</li>
+<li><strong>Warm-up</strong> — almost mandatory for transformers and large-batch training.</li>
+</ul>
+</li>
+<li>★ Scheduling almost always improves training stability and convergence.</li>
+</ul>
+<h4 id="practical-points-from-the-live-class">Practical points from the live class<a class="headerlink" href="#practical-points-from-the-live-class" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Why decay:</strong> early on the model is far from the optimum, so <strong>large steps</strong> explore the
+  loss landscape quickly; near a minimum, large steps overshoot and oscillate around it, so
+  you want <strong>small, fine-grained steps</strong>.</li>
+<li><strong>Where you set it:</strong> the schedule is configured in code together with the optimiser
+  (e.g. Adam with <code>η = 0.1</code> plus a schedule).</li>
+<li><strong>Step vs smooth schedules:</strong> all of them start high and end low. Step decay has
+  <strong>sudden drops</strong> at chosen epochs (you must decide when and by how much); exponential
+  and cosine follow a <strong>smooth mathematical curve</strong>, which is usually more stable and less
+  jerky. Cosine stays high for longer before falling, and empirically often does better.
+  Exponential decay needs careful tuning of its factor <code>γ</code>, or it can shrink too fast.</li>
+<li><strong>Typical combined pattern:</strong> warm-up → main decay (cosine or step) → fixed very small
+  rate (10⁻³ to 10⁻⁴) near convergence. Warm-up is used when early training is unstable
+  (NaNs), with large batch sizes, and in transformers.</li>
+<li><strong>What an "epoch" means here is flexible:</strong> the schedule can step per full pass over the
+  data, per batch, or per group of 10–20 batches; some setups treat every batch as an
+  "epoch". There is no single right choice. For small datasets (thousands of rows) you can
+  use the whole dataset per update, which is more stable.</li>
+<li><strong>Adam / RMSProp</strong> are adaptive, so they normally use <strong>fewer</strong> schedules; schedules are
+  mostly paired with gradient descent methods. Raising the rate can also help jump out of
+  a sharp minimum.</li>
+</ul>
+<hr />
+<h3 id="3-adaptive-vs-scheduled-learning-rates">3. Adaptive vs Scheduled Learning Rates<a class="headerlink" href="#3-adaptive-vs-scheduled-learning-rates" title="Permanent link">&para;</a></h3>
+<h4 id="two-ways-to-control-the-step-size">Two ways to control the step size<a class="headerlink" href="#two-ways-to-control-the-step-size" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Adaptive</strong>: the optimiser adjusts the step <strong>per parameter</strong> from the gradient history
+  (RMSProp, Adam).</li>
+<li><strong>Scheduled</strong>: you <strong>explicitly</strong> change the learning rate over time by a predefined
+  plan (step decay, cosine annealing, warm-up).</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Adaptive (Adam, RMSProp)</th>
+<th>Scheduled</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Strengths</td>
+<td>Powerful early; handle noisy and sparse gradients; little tuning; converge quickly; robust to gradient scale differences across layers</td>
+<td>Precise control of the step size over time; improves late-stage stability and final generalisation, especially with SGD + momentum</td>
+</tr>
+<tr>
+<td>Limitations</td>
+<td>Can reach <strong>sharp minima</strong> that generalise worse; less explicit control later in training</td>
+<td>Manual design and tuning; not per parameter; sensitive to the initial rate; assumes training is already fairly stable</td>
+</tr>
+<tr>
+<td>Best when</td>
+<td>Training is <strong>difficult, noisy or exploratory</strong></td>
+<td>Training is <strong>stable</strong> and final performance matters</td>
+</tr>
+</tbody>
+</table>
+<h4 id="common-combinations">Common combinations<a class="headerlink" href="#common-combinations" title="Permanent link">&para;</a></h4>
+<pre class="mermaid-diagram"><code>flowchart TD
+    A["Adam + fixed LR&lt;br/&gt;simple, fast baseline"] --&gt; B["Adam + LR schedule&lt;br/&gt;better stability and convergence"]
+    B --&gt; C["Adam first, then SGD + momentum&lt;br/&gt;+ LR schedule for fine-tuning&lt;br/&gt;(most popular)"]</code></pre>
+<ul>
+<li>★ Combining both ideas is common and effective; no universal best choice.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../lesson-03-adaptive-optimisers/" class="btn btn-neutral float-left" title="Lesson 3: Adaptive Optimisers"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../lesson-05-stability-and-convergence/" class="btn btn-neutral float-right" title="Lesson 5: Stability and Convergence">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../lesson-03-adaptive-optimisers/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../lesson-05-stability-and-convergence/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+      <script src="../../../javascripts/mermaid-render.js"></script>
+      <script src="../../../javascripts/breadcrumb-nav.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

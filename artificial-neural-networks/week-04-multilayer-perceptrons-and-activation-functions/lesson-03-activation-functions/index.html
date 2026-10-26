@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Lesson 3: Activation Functions - Learning Notes</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Lesson 3: Activation Functions";
+        var mkdocs_page_input_path = "artificial-neural-networks/week-04-multilayer-perceptrons-and-activation-functions/lesson-03-activation-functions.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> Learning Notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Learning Notes</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Artificial neural networks</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Notes</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../notes/from-ann-to-llms/">From ANN to LLMs</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../notes/simple-story/">The Simple Story</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to neural networks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-neural-networks/lesson-01-evolution-of-ai-ml-and-deep-learning/">Lesson 1: Evolution of AI, ML and Deep Learning</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-neural-networks/lesson-02-biological-vs-artificial-neurons/">Lesson 2: Biological Neurons vs Artificial Neurons</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-neural-networks/lesson-03-components-and-feed-forward-networks/">Lesson 3: Components and Feed-forward Networks</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 02 mathematical foundations for neural networks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-01-why-mathematical-foundations/">Lesson 1: Why We Need Mathematical Foundations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-02-linear-algebra-for-neural-networks/">Lesson 2: Linear Algebra for Neural Networks</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-03-calculus-for-neural-networks/">Lesson 3: Calculus for Neural Networks</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-04-numerical-stability/">Lesson 4: Numerical Stability in Training</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 03 perceptron and logistic neuron</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-01-introduction-to-perceptron-and-logistic-neuron/">Lesson 1: Introduction to the Perceptron and Logistic Neuron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-02-the-perceptron/">Lesson 2: The Perceptron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-03-linear-separability-and-xor/">Lesson 3: Linear Separability and XOR</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-04-logistic-neuron/">Lesson 4: The Logistic Neuron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Week 04 multilayer perceptrons and activation functions</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-01-introduction-to-mlps-and-activation-functions/">Lesson 1: Introduction to MLPs and Activation Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-02-multilayer-perceptron/">Lesson 2: The Multilayer Perceptron</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Lesson 3: Activation Functions</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#key-concepts">Key Concepts</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1-why-we-need-activation-functions">1. Why We Need Activation Functions</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2-sigmoid-and-tanh">2. Sigmoid and Tanh</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#3-the-relu-family">3. The ReLU Family</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#4-softmax-for-multi-class-outputs">4. Softmax for Multi-Class Outputs</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#5-worked-example-same-neuron-three-activations">5. Worked Example: Same Neuron, Three Activations</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-04-activation-challenges-and-practical-choices/">Lesson 4: Activation Challenges and Practical Choices</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 05 backpropagation and training dynamics</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-01-introduction-to-backpropagation-and-training-dynamics/">Lesson 1: Introduction to Backpropagation and Training Dynamics</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-02-backpropagation/">Lesson 2: Backpropagation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-03-gradient-flow-and-initialisation/">Lesson 3: Gradient Flow and Initialisation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-04-loss-functions/">Lesson 4: Loss Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-05-vanishing-and-exploding-gradients/">Lesson 5: Vanishing and Exploding Gradients</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-06-module-summary/">Lesson 6: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 06 optimisation algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-01-introduction-to-optimisation-algorithms/">Lesson 1: Introduction to Optimisation Algorithms</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-02-gradient-descent-and-momentum/">Lesson 2: Gradient Descent and Momentum</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-03-adaptive-optimisers/">Lesson 3: Adaptive Optimisers</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-04-learning-rate-scheduling/">Lesson 4: Learning Rate Scheduling</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-05-stability-and-convergence/">Lesson 5: Stability and Convergence</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-06-module-summary/">Lesson 6: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Cloud services and platforms</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cloud-services-and-platforms/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to cloud computing</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../cloud-services-and-platforms/week-01-introduction-to-cloud-computing/lesson-01-cloud-evolution-and-fundamentals/">Lesson 1: Cloud Evolution & Fundamentals</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../cloud-services-and-platforms/week-01-introduction-to-cloud-computing/lesson-02-cloud-service-models/">Lesson 2: Cloud Service Models</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data stores and pipelines</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../data-stores-and-pipelines/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 foundations of data storage paradigms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-01-the-evolution-of-data-storage/">Lesson 1: The Evolution of Data Storage</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-02-oltp-vs-olap/">Lesson 2: OLTP vs OLAP</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-03-rdbms-vs-columnar-databases/">Lesson 3: RDBMS vs Columnar Databases</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-04-acid-vs-base-models/">Lesson 4: ACID vs BASE Models</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Machine learning</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../machine-learning/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to machine learning</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../machine-learning/week-01-introduction-to-machine-learning/lesson-01-machine-learning-paradigms-and-workflow/">Lesson 1: Machine Learning Paradigms and Workflow</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 02 data preprocessing</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../machine-learning/week-02-data-preprocessing/lesson-01-data-fundamentals-and-preprocessing/">Lesson 1: Data Fundamentals and Preprocessing</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">Learning Notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Artificial neural networks</li>
+          <li class="breadcrumb-item">Week 04 multilayer perceptrons and activation functions</li>
+      <li class="breadcrumb-item active">Lesson 3: Activation Functions</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><a href="../../../">Artificial Neural Networks</a> → <span class="week-crumb">Week 4: Multilayer Perceptrons and Activation Functions</span> → Lesson 3: Activation Functions</p>
+<hr />
+<h1 id="activation-functions">Activation Functions<a class="headerlink" href="#activation-functions" title="Permanent link">&para;</a></h1>
+<h2 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h2>
+<h3 id="1-why-we-need-activation-functions">1. Why We Need Activation Functions<a class="headerlink" href="#1-why-we-need-activation-functions" title="Permanent link">&para;</a></h3>
+<h4 id="stacked-linear-layers-collapse">Stacked linear layers collapse<a class="headerlink" href="#stacked-linear-layers-collapse" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Suppose every layer is only linear: <code>z = Wx + b</code>. Compose two layers:<ul>
+<li><code>z₁ = W₁x + b₁</code>, <code>z₂ = W₂z₁ + b₂</code></li>
+<li><code>z₂ = W₂(W₁x + b₁) + b₂ = (W₂W₁)x + (W₂b₁ + b₂)</code></li>
+</ul>
+</li>
+<li>That is <strong>still one linear transformation</strong> of <code>x</code>.</li>
+<li>★ No matter how many purely linear layers are stacked, the network collapses into a
+  <strong>single linear model</strong>. Depth alone gives no power if all layers are linear.</li>
+</ul>
+<pre class="mermaid-diagram"><code>flowchart LR
+    A["Linear layer&lt;br/&gt;W₁x + b₁"] --&gt; B["Linear layer&lt;br/&gt;W₂z₁ + b₂"]
+    B --&gt; C["= single linear map&lt;br/&gt;(W₂W₁)x + (W₂b₁ + b₂)"]</code></pre>
+<h4 id="consequence">Consequence<a class="headerlink" href="#consequence" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Purely linear models learn only straight-line boundaries / hyperplanes: no XOR-type
+  patterns, no curved boundaries, no complex feature interactions — the same limit as
+  the perceptron.</li>
+</ul>
+<h4 id="the-fix-nonlinearity">The fix: nonlinearity<a class="headerlink" href="#the-fix-nonlinearity" title="Permanent link">&para;</a></h4>
+<ul>
+<li>An activation function applies a <strong>nonlinear transformation to each neuron's
+  output</strong>: <code>a = f(z)</code>. This breaks the linearity, so stacking no longer collapses.</li>
+<li>Layer 1 learns nonlinear features; layer 2 learns nonlinear combinations of those;
+  deeper layers represent nested nonlinear relationships → curved boundaries, feature
+  interactions, hierarchical abstractions.</li>
+<li>A neuron therefore does two things: <strong>(1)</strong> adds up weighted evidence,
+  <code>z = w₁x₁ + w₂x₂ + … + b</code>; <strong>(2)</strong> applies an activation, <code>output = f(z)</code>.</li>
+<li>★ Without activations an MLP is just <strong>linear regression</strong>, however deep. With them,
+  even a single hidden layer can approximate any continuous function on a compact
+  domain (<strong>Universal Approximation Theorem</strong>).</li>
+<li>The activation is applied <strong>on top of</strong> the linear step <code>z = Wa + b</code>, not instead of
+  it. Different layers may use different activations (e.g. tanh in a hidden layer,
+  sigmoid at the output), but once chosen for a layer it stays fixed.</li>
+<li>Why fixed: the activation is part of the <strong>architecture</strong>, and the forward pass and
+  backpropagation formulas use it (its derivative appears in the chain rule), so it can't
+  be swapped between iterations.</li>
+<li>Mandatory in practice: without activations it is a linear model, not a neural network.</li>
+</ul>
+<hr />
+<h3 id="2-sigmoid-and-tanh">2. Sigmoid and Tanh<a class="headerlink" href="#2-sigmoid-and-tanh" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The classical activation functions of the earliest neural networks: smooth, continuous
+  nonlinearity. Their limits motivated ReLU.</li>
+</ul>
+<h4 id="sigmoid">Sigmoid<a class="headerlink" href="#sigmoid" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>σ(z) = 1 / (1 + e⁻ᶻ)</code> — S-shaped, output in <strong>(0, 1)</strong>.</li>
+<li>Large positive <code>z</code> → ≈ 1; large negative <code>z</code> → ≈ 0; changes fastest around <code>z = 0</code>.</li>
+<li>Acts as a <strong>soft yes/no</strong> rather than a hard threshold, so the output reads as a
+  probability. Closely tied to logistic regression.</li>
+<li>Worth memorising the formula: sigmoid is used widely, in classical data analysis as
+  well as neural networks. At <code>z = 0</code> the output is 0.5.</li>
+<li>Binary classification output layer: one neuron gives one probability of belonging to
+  the positive class — <code>sigmoid(w₁a₁ + w₂a₂ + w₃a₃ + b)</code>.</li>
+</ul>
+<h4 id="tanh">Tanh<a class="headerlink" href="#tanh" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>tanh(z) = (eᶻ − e⁻ᶻ) / (eᶻ + e⁻ᶻ)</code> — S-shaped, output in <strong>(−1, +1)</strong>, <strong>zero-centred</strong>.</li>
+<li>A rescaled and shifted version of sigmoid.</li>
+<li>The (−1, +1) range works like normalisation, keeping hidden values from growing too
+  large or too small — the reason it was used in hidden layers.</li>
+<li>Only suitable for <strong>shallow</strong> networks (about 3–4 layers); in deeper ones it saturates.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Sigmoid</th>
+<th>Tanh</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Output range</td>
+<td>(0, 1) — always positive</td>
+<td>(−1, +1) — centred on 0</td>
+</tr>
+<tr>
+<td>Zero-centred</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Training behaviour</td>
+<td>Less balanced</td>
+<td>Zero-centred activations often optimise better</td>
+</tr>
+<tr>
+<td>Classic use</td>
+<td>Output layer, binary classification</td>
+<td>Hidden layers of early networks (preferred over sigmoid there)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="intuition-and-examples">Intuition and examples<a class="headerlink" href="#intuition-and-examples" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Think of it as</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sigmoid</td>
+<td><strong>Probability dial</strong> — "how confident is the yes?"</td>
+<td><code>z = 3</code> → ≈ 0.95 ("95% likely to click"); <code>z = −4</code> → ≈ 0.02</td>
+</tr>
+<tr>
+<td>Tanh</td>
+<td><strong>Centred dial</strong> — against / neutral / for</td>
+<td><code>z = 2</code> → ≈ +0.96; <code>z = −2</code> → ≈ −0.96; <code>z = 0</code> → 0</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Tanh suits hidden layers where <strong>negative signal matters</strong> (e.g. RNNs / LSTMs).</li>
+<li>Sigmoid's outputs never go negative.</li>
+</ul>
+<h4 id="saturation">Saturation<a class="headerlink" href="#saturation" title="Permanent link">&para;</a></h4>
+<ul>
+<li>For very large <code>|z|</code>, the output barely changes even if <code>z</code> changes a lot — the curve
+  flattens.</li>
+<li>Gradients for such neurons become <strong>very small</strong> → a main contributor to the
+  <strong>vanishing gradient problem</strong>.</li>
+<li>Why this hurts: the network should respond when its input changes, but a saturated
+  neuron's output barely moves, so learning stalls. Gradients and the vanishing-gradient
+  problem are covered in the next session (backpropagation).</li>
+<li>Sigmoid <em>can</em> be used in hidden layers, but tanh is better there; in practice sigmoid
+  stays at the output layer.</li>
+<li>★ Today both are used sparingly in hidden layers; sigmoid remains common at the
+  output for binary classification.</li>
+</ul>
+<hr />
+<h3 id="3-the-relu-family">3. The ReLU Family<a class="headerlink" href="#3-the-relu-family" title="Permanent link">&para;</a></h3>
+<h4 id="why-relu-was-needed">Why ReLU was needed<a class="headerlink" href="#why-relu-was-needed" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Sigmoid/tanh saturate → vanishing gradients → very deep networks were hard to train.</li>
+<li>Needed: stays nonlinear, avoids saturation over a large region, trains faster and more
+  stably.</li>
+</ul>
+<h4 id="relu">ReLU<a class="headerlink" href="#relu" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>f(z) = max(0, z)</code>: negative input → 0; positive input → <code>z</code>. Piecewise linear, very
+  cheap to compute.</li>
+<li>It has a kink at 0 but is still usable for training — differentiating it causes no
+  practical problems.</li>
+<li>Applied <strong>on top of</strong> the linear combination <code>Wa + b</code>, to bring in non-linearity.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Why ReLU is the default</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No saturation for positive inputs</td>
+<td>Information flows easily through many layers</td>
+</tr>
+<tr>
+<td>Faster, more stable training</td>
+<td>Compared with sigmoid / tanh</td>
+</tr>
+<tr>
+<td><strong>Sparse activations</strong></td>
+<td>Many neurons output exactly 0 → better generalisation, cheaper compute</td>
+</tr>
+<tr>
+<td>Cheap to evaluate</td>
+<td>Just a <code>max</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="dying-relu">Dying ReLU<a class="headerlink" href="#dying-relu" title="Permanent link">&para;</a></h4>
+<ul>
+<li>If a neuron's parameters drift so its input is <strong>always negative</strong>, it outputs 0 for
+  every input and effectively <strong>stops participating — a dead ReLU</strong>.</li>
+<li>It can happen because of the data or the computation: some neurons keep getting a
+  negative signal and become useless neurons that contribute nothing to learning. ReLU
+  also ignores the whole negative side of its input, which motivated the variants below.</li>
+</ul>
+<h4 id="variants">Variants<a class="headerlink" href="#variants" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>ReLU</th>
+<th>Leaky ReLU</th>
+<th>Parametric ReLU (PReLU)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Negative region</td>
+<td>Exactly 0</td>
+<td><code>αz</code>, α small &amp; <strong>fixed</strong> (e.g. 0.01)</td>
+<td><code>αz</code>, α <strong>learned</strong> during training</td>
+</tr>
+<tr>
+<td>Purpose</td>
+<td>Simple, efficient default</td>
+<td>Reduces dying-ReLU risk</td>
+<td>Flexibility; small gains in some vision models</td>
+</tr>
+<tr>
+<td>Cost</td>
+<td>—</td>
+<td>—</td>
+<td>Slightly more parameters</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>PReLU costs one extra parameter <code>α</code> for every activation layer, learned on top of the
+  weights and biases. Leaky ReLU is therefore the most common variant; PReLU is rarely
+  used unless its gain justifies the added cost.</li>
+<li>Intuition: ReLU is a <strong>bouncer</strong> — blocks negatives, passes positives as is.
+  <code>z = −5</code> → 0 (neuron silent); <code>z = 7</code> → 7 (neuron fires).</li>
+<li>All three keep the key benefits: nonlinearity, efficiency, stable deep training.</li>
+<li><strong>Guideline:</strong> start with ReLU for almost all hidden layers; use Leaky ReLU if many
+  neurons are inactive; PReLU only in specialised models where a small gain justifies
+  extra parameters.</li>
+</ul>
+<hr />
+<h3 id="4-softmax-for-multi-class-outputs">4. Softmax for Multi-Class Outputs<a class="headerlink" href="#4-softmax-for-multi-class-outputs" title="Permanent link">&para;</a></h3>
+<h4 id="why-softmax">Why softmax<a class="headerlink" href="#why-softmax" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Sigmoid suits <strong>two</strong> outcomes. With many classes (10 digits, many news topics,
+  thousands of image categories) we need <strong>one probability per class</strong>, all
+  non-negative and <strong>summing to 1</strong>. Softmax does this.</li>
+<li>The output layer then has <strong>one neuron per class</strong> (e.g. 3 for dog / cat / bird, 10 for
+  handwritten digits 0–9), each giving that class's probability.</li>
+<li>Softmax is only a conversion of logits into probabilities, so it belongs in the
+  <strong>output layer only</strong> — never in hidden layers.</li>
+</ul>
+<h4 id="logits">Logits<a class="headerlink" href="#logits" title="Permanent link">&para;</a></h4>
+<ul>
+<li>The raw outputs of the last linear layer. Can be positive or negative, small or
+  large — <strong>no probabilistic meaning</strong> yet (unnormalised scores).</li>
+</ul>
+<h4 id="definition">Definition<a class="headerlink" href="#definition" title="Permanent link">&para;</a></h4>
+<p><code>softmax(zᵢ) = e^(zᵢ) / Σⱼ e^(zⱼ)</code>, for j = 1..K</p>
+<ul>
+<li>Properties: each output in (0, 1); outputs sum to 1; larger logit → larger probability.</li>
+</ul>
+<pre class="mermaid-diagram"><code>flowchart LR
+    A["Logits z&lt;br/&gt;raw scores"] --&gt; B["Exponentiate&lt;br/&gt;e^z, all positive"]
+    B --&gt; C["Divide by sum&lt;br/&gt;of exponentials"]
+    C --&gt; D["Probability&lt;br/&gt;distribution"]
+    D --&gt; E["Predicted class =&lt;br/&gt;highest probability"]</code></pre>
+<h4 id="worked-example">Worked example<a class="headerlink" href="#worked-example" title="Permanent link">&para;</a></h4>
+<p>Logits <code>z = (2, 1, 0.1)</code></p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th><code>e^z</code></th>
+<th>Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>7.3</td>
+<td>7.3 / 11.2 ≈ <strong>0.66</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>2.7</td>
+<td>2.7 / 11.2 ≈ <strong>0.24</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>1.1</td>
+<td>1.1 / 11.2 ≈ <strong>0.10</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Sum of exponentials ≈ 11.2. Class 1 wins, but every class keeps some probability.</li>
+<li><strong>Close probabilities</strong> (e.g. 0.41 vs 0.40): the model is effectively <em>confused</em>
+  between the two classes. There is no hard rule; options are to pick either, flag the
+  case as uncertain, or only act when the top class beats the runner-up by a chosen
+  margin (a confidence threshold).</li>
+</ul>
+<h4 id="intuition">Intuition<a class="headerlink" href="#intuition" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Exponentiation makes values positive; normalisation forces total mass to 1.</li>
+<li>Preserves <strong>relative dominance</strong>: a much larger logit gets a probability near 1, the
+  rest get small ones — relative confidence becomes normalised probability.</li>
+</ul>
+<h4 id="sigmoid-vs-softmax">Sigmoid vs softmax<a class="headerlink" href="#sigmoid-vs-softmax" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Sigmoid</th>
+<th>Softmax</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Output</td>
+<td>One probability</td>
+<td>A vector, one probability per class</td>
+</tr>
+<tr>
+<td>Interaction</td>
+<td>Models one event in isolation</td>
+<td>Probabilities <strong>compete</strong> (must sum to 1)</td>
+</tr>
+<tr>
+<td>Use</td>
+<td>Binary classification</td>
+<td>Multi-class (mutually exclusive classes)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>★ Softmax generalises sigmoid from the binary to the multi-class case.</li>
+</ul>
+<hr />
+<h3 id="5-worked-example-same-neuron-three-activations">5. Worked Example: Same Neuron, Three Activations<a class="headerlink" href="#5-worked-example-same-neuron-three-activations" title="Permanent link">&para;</a></h3>
+<h4 id="one-score-three-outputs">One score, three outputs<a class="headerlink" href="#one-score-three-outputs" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th><code>z</code></th>
+<th>Sigmoid</th>
+<th>Tanh</th>
+<th>ReLU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>≈ 0.88</td>
+<td>≈ 0.96</td>
+<td>2</td>
+</tr>
+<tr>
+<td>−2</td>
+<td>≈ 0.12</td>
+<td>≈ −0.96</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<h4 id="real-time-example-free-delivery-nudge">Real-time example: "free delivery" nudge<a class="headerlink" href="#real-time-example-free-delivery-nudge" title="Permanent link">&para;</a></h4>
+<p>Score a live website visitor in milliseconds to decide whether to show a free-delivery
+nudge.</p>
+<ul>
+<li><strong>Network:</strong> 3 inputs → 2 hidden neurons (ReLU) → 1 output neuron (sigmoid).</li>
+<li><strong>Inputs:</strong> viewed product before = 1, time on page (scaled) = 0.8, came from email
+  campaign = 0.</li>
+</ul>
+<pre class="mermaid-diagram"><code>flowchart LR
+    A["Inputs&lt;br/&gt;viewed before = 1&lt;br/&gt;time on page = 0.8&lt;br/&gt;from email = 0"] --&gt; H1["H1: returning, engaged shopper&lt;br/&gt;z = 0.9 → ReLU = 0.9&lt;br/&gt;(fires)"]
+    A --&gt; H2["H2: campaign-driven browser&lt;br/&gt;z = −0.34 → ReLU = 0&lt;br/&gt;(silent)"]
+    H1 --&gt; O["Output&lt;br/&gt;z = 0.85 → sigmoid ≈ 0.70"]
+    H2 --&gt; O
+    O --&gt; D{"prob &gt; 0.5 ?"}
+    D --&gt;|"Yes"| Y["Show nudge"]
+    D --&gt;|"No"| N["No nudge"]</code></pre>
+<ul>
+<li>0.70 means a 70% chance the visitor adds to basket → above 0.5, so show the nudge.</li>
+</ul>
+<h4 id="swapping-the-hidden-activation-same-weights">Swapping the hidden activation (same weights)<a class="headerlink" href="#swapping-the-hidden-activation-same-weights" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Hidden activation</th>
+<th>H1</th>
+<th>H2</th>
+<th>Final probability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ReLU</td>
+<td>0.90</td>
+<td>0</td>
+<td>0.70</td>
+</tr>
+<tr>
+<td>Tanh</td>
+<td>0.72</td>
+<td>−0.33</td>
+<td>0.58</td>
+</tr>
+<tr>
+<td>Sigmoid</td>
+<td>0.71</td>
+<td>0.42</td>
+<td>0.71</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>ReLU</strong> silences H2 cleanly.</li>
+<li><strong>Tanh</strong> lets H2 push <em>against</em> the prediction (negative contribution).</li>
+<li><strong>Sigmoid</strong> can't go below 0, so H2 still adds signal even though its evidence was
+  negative — muddier.</li>
+</ul>
+<h4 id="code">Code<a class="headerlink" href="#code" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">relu</span>    <span class="o">=</span> <span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+<span class="n">sigmoid</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">z</span><span class="p">))</span>
+
+<span class="n">x</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">W1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]])</span>
+<span class="n">b1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span>
+<span class="n">W2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span>
+<span class="n">b2</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span>
+
+<span class="n">hidden</span> <span class="o">=</span> <span class="n">relu</span><span class="p">(</span><span class="n">W1</span> <span class="o">@</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b1</span><span class="p">)</span>   <span class="c1"># swap with np.tanh / sigmoid to compare</span>
+<span class="n">prob</span>   <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">W2</span> <span class="o">@</span> <span class="n">hidden</span> <span class="o">+</span> <span class="n">b2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hidden</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># [0.9 0.] 0.7</span>
+</code></pre></div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../lesson-02-multilayer-perceptron/" class="btn btn-neutral float-left" title="Lesson 2: The Multilayer Perceptron"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../lesson-04-activation-challenges-and-practical-choices/" class="btn btn-neutral float-right" title="Lesson 4: Activation Challenges and Practical Choices">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../lesson-02-multilayer-perceptron/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../lesson-04-activation-challenges-and-practical-choices/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+      <script src="../../../javascripts/mermaid-render.js"></script>
+      <script src="../../../javascripts/breadcrumb-nav.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

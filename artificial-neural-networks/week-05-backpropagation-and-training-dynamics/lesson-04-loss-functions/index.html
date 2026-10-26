@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Lesson 4: Loss Functions - Learning Notes</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Lesson 4: Loss Functions";
+        var mkdocs_page_input_path = "artificial-neural-networks/week-05-backpropagation-and-training-dynamics/lesson-04-loss-functions.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> Learning Notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Learning Notes</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Artificial neural networks</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Notes</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../notes/from-ann-to-llms/">From ANN to LLMs</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../notes/simple-story/">The Simple Story</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to neural networks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-neural-networks/lesson-01-evolution-of-ai-ml-and-deep-learning/">Lesson 1: Evolution of AI, ML and Deep Learning</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-neural-networks/lesson-02-biological-vs-artificial-neurons/">Lesson 2: Biological Neurons vs Artificial Neurons</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-neural-networks/lesson-03-components-and-feed-forward-networks/">Lesson 3: Components and Feed-forward Networks</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 02 mathematical foundations for neural networks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-01-why-mathematical-foundations/">Lesson 1: Why We Need Mathematical Foundations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-02-linear-algebra-for-neural-networks/">Lesson 2: Linear Algebra for Neural Networks</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-03-calculus-for-neural-networks/">Lesson 3: Calculus for Neural Networks</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-04-numerical-stability/">Lesson 4: Numerical Stability in Training</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 03 perceptron and logistic neuron</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-01-introduction-to-perceptron-and-logistic-neuron/">Lesson 1: Introduction to the Perceptron and Logistic Neuron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-02-the-perceptron/">Lesson 2: The Perceptron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-03-linear-separability-and-xor/">Lesson 3: Linear Separability and XOR</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-04-logistic-neuron/">Lesson 4: The Logistic Neuron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 04 multilayer perceptrons and activation functions</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-01-introduction-to-mlps-and-activation-functions/">Lesson 1: Introduction to MLPs and Activation Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-02-multilayer-perceptron/">Lesson 2: The Multilayer Perceptron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-03-activation-functions/">Lesson 3: Activation Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-04-activation-challenges-and-practical-choices/">Lesson 4: Activation Challenges and Practical Choices</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Week 05 backpropagation and training dynamics</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-01-introduction-to-backpropagation-and-training-dynamics/">Lesson 1: Introduction to Backpropagation and Training Dynamics</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-02-backpropagation/">Lesson 2: Backpropagation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-03-gradient-flow-and-initialisation/">Lesson 3: Gradient Flow and Initialisation</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Lesson 4: Loss Functions</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#key-concepts">Key Concepts</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1-mean-squared-error-mse-loss">1. Mean Squared Error (MSE) Loss</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2-cross-entropy-and-softmax">2. Cross-Entropy and Softmax</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#3-how-loss-influences-gradient-signals">3. How Loss Influences Gradient Signals</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-05-vanishing-and-exploding-gradients/">Lesson 5: Vanishing and Exploding Gradients</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-06-module-summary/">Lesson 6: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 06 optimisation algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-01-introduction-to-optimisation-algorithms/">Lesson 1: Introduction to Optimisation Algorithms</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-02-gradient-descent-and-momentum/">Lesson 2: Gradient Descent and Momentum</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-03-adaptive-optimisers/">Lesson 3: Adaptive Optimisers</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-04-learning-rate-scheduling/">Lesson 4: Learning Rate Scheduling</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-05-stability-and-convergence/">Lesson 5: Stability and Convergence</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-06-module-summary/">Lesson 6: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Cloud services and platforms</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cloud-services-and-platforms/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to cloud computing</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../cloud-services-and-platforms/week-01-introduction-to-cloud-computing/lesson-01-cloud-evolution-and-fundamentals/">Lesson 1: Cloud Evolution & Fundamentals</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../cloud-services-and-platforms/week-01-introduction-to-cloud-computing/lesson-02-cloud-service-models/">Lesson 2: Cloud Service Models</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data stores and pipelines</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../data-stores-and-pipelines/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 foundations of data storage paradigms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-01-the-evolution-of-data-storage/">Lesson 1: The Evolution of Data Storage</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-02-oltp-vs-olap/">Lesson 2: OLTP vs OLAP</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-03-rdbms-vs-columnar-databases/">Lesson 3: RDBMS vs Columnar Databases</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-04-acid-vs-base-models/">Lesson 4: ACID vs BASE Models</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Machine learning</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../machine-learning/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to machine learning</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../machine-learning/week-01-introduction-to-machine-learning/lesson-01-machine-learning-paradigms-and-workflow/">Lesson 1: Machine Learning Paradigms and Workflow</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 02 data preprocessing</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../machine-learning/week-02-data-preprocessing/lesson-01-data-fundamentals-and-preprocessing/">Lesson 1: Data Fundamentals and Preprocessing</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">Learning Notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Artificial neural networks</li>
+          <li class="breadcrumb-item">Week 05 backpropagation and training dynamics</li>
+      <li class="breadcrumb-item active">Lesson 4: Loss Functions</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><a href="../../../">Artificial Neural Networks</a> → <span class="week-crumb">Week 5: Backpropagation and Training Dynamics</span> → Lesson 4: Loss Functions</p>
+<hr />
+<h1 id="loss-functions">Loss Functions<a class="headerlink" href="#loss-functions" title="Permanent link">&para;</a></h1>
+<h2 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h2>
+<h3 id="1-mean-squared-error-mse-loss">1. Mean Squared Error (MSE) Loss<a class="headerlink" href="#1-mean-squared-error-mse-loss" title="Permanent link">&para;</a></h3>
+<h4 id="why-a-loss-function">Why a loss function<a class="headerlink" href="#why-a-loss-function" title="Permanent link">&para;</a></h4>
+<ul>
+<li>A <strong>loss function</strong> turns "how wrong is this prediction?" into a single number.
+  Backpropagation uses that number to compute gradients and update weights.</li>
+<li>Different tasks need different losses.</li>
+<li>★ The loss supplies the <strong>starting gradient</strong> <code>∂E/∂ŷ</code> for backpropagation, so its
+  formula decides what flows backward.</li>
+</ul>
+<h4 id="mse">MSE<a class="headerlink" href="#mse" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>MSE = (1/n) Σ (y − ŷ)²</code> — take the error, <strong>square</strong> it, <strong>average</strong> it.</li>
+<li>A smooth, always non-negative measure of distance; geometrically, the <strong>squared
+  distance</strong> between the true and predicted point.</li>
+</ul>
+<h4 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h4>
+<ul>
+<li>True <code>y = 5</code>, predictions 4 and 2:<ul>
+<li><code>(5 − 4)² = 1</code>, <code>(5 − 2)² = 9</code> → average = <strong>5</strong>.</li>
+</ul>
+</li>
+<li>★ Squaring punishes <strong>large errors much more strongly</strong> than small ones.</li>
+<li>Order of operations: find the error, square it, then average over the batch (e.g. add
+  up 32 squared errors and divide by 32).</li>
+<li>Error 1 → 1, but error 4 → 16: the error grew 4×, the penalty 16×. Negative errors
+  count the same, since squares are non-negative.</li>
+<li>MSE is <strong>convex</strong> and differentiable, so it is easy to optimise. For one point,
+  <code>∂E/∂ŷ = 2(ŷ − y)</code> is the gradient that starts backpropagation.</li>
+</ul>
+<h4 id="when-to-use-it">When to use it<a class="headerlink" href="#when-to-use-it" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Default loss for <strong>regression</strong> (continuous outputs): house prices, temperature
+  forecasts, sensor readings, energy consumption, autoencoders (reconstructing inputs).</li>
+<li>Poor for classification (next video).</li>
+</ul>
+<hr />
+<h3 id="2-cross-entropy-and-softmax">2. Cross-Entropy and Softmax<a class="headerlink" href="#2-cross-entropy-and-softmax" title="Permanent link">&para;</a></h3>
+<h4 id="why-mse-fails-for-classification">Why MSE fails for classification<a class="headerlink" href="#why-mse-fails-for-classification" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wrong geometry</td>
+<td>Treats class labels as numbers on a line (0, 1, 2), but class 2 is not "twice" class 1: there is no natural numeric distance between classes → poor decision boundaries</td>
+</tr>
+<tr>
+<td>Weak penalty for confident mistakes</td>
+<td>True class = 1: predicting 0.9 gives MSE 0.01; predicting 0.1 gives 0.81 — both small, so the feedback is weak</td>
+</tr>
+<tr>
+<td>Tiny gradients with sigmoid/softmax</td>
+<td>These saturate near 0 and 1, so their derivatives are tiny. With <code>y = 1</code> and <code>ŷ = 0.99</code> the loss is only 0.0001, and a confidently wrong model gets almost no corrective signal</td>
+</tr>
+</tbody>
+</table>
+<h4 id="softmax-recap">Softmax recap<a class="headerlink" href="#softmax-recap" title="Permanent link">&para;</a></h4>
+<ul>
+<li>A network outputs raw scores called <strong>logits</strong> (any sign, don't sum to 1). Softmax turns
+  them into a probability distribution:
+  <code>pᵢ = e^(zᵢ) / Σⱼ e^(zⱼ)</code>.</li>
+<li>Every output is positive and all outputs sum to 1; a larger logit gets a higher
+  probability. (The numerically stable version was covered in the maths module.)</li>
+</ul>
+<h4 id="cross-entropy">Cross-entropy<a class="headerlink" href="#cross-entropy" title="Permanent link">&para;</a></h4>
+<ul>
+<li>For true class <code>y</code>: <code>CE = −log(p_y)</code> — how <strong>surprised</strong> the model is that the true
+  class occurred.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Probability given to the true class (cat)</th>
+<th>Loss</th>
+<th>Reading</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.90</td>
+<td>≈ 0.1</td>
+<td>Almost perfect</td>
+</tr>
+<tr>
+<td>0.50</td>
+<td>≈ 0.69</td>
+<td>Unsure</td>
+</tr>
+<tr>
+<td>0.01</td>
+<td>≈ 4.6</td>
+<td>Confidently wrong: loss shoots up</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Message to the model: <em>if you are confidently wrong, correct aggressively.</em></li>
+<li>Side-by-side, true label 1: <strong>MSE</strong> goes from 0.01 (prediction 0.9) to only 0.81
+  (prediction 0.1); <strong>cross-entropy</strong> goes from ≈ 0.1 to ≈ <strong>2.3</strong>. The much larger loss
+  gives a usable signal when it propagates backward.</li>
+<li>Cross-entropy is just <code>−log</code> of the probability the model gave the true class. It is
+  <em>not</em> the sigmoid (<code>1 / (1 + e⁻ᶻ)</code>), though the two are related: the log-odds
+  <code>log(p / (1 − p))</code> is the inverse of sigmoid.</li>
+</ul>
+<h4 id="softmax-cross-entropy-together">Softmax + cross-entropy together<a class="headerlink" href="#softmax-cross-entropy-together" title="Permanent link">&para;</a></h4>
+<ul>
+<li>In practice they are computed as <strong>one expression</strong>:
+  <code>loss = −z_y + log Σⱼ e^(zⱼ)</code>. This avoids extra computation and is numerically stable.</li>
+<li>PyTorch and TensorFlow implement this internally: calling <code>CrossEntropyLoss</code> already
+  <strong>includes the softmax</strong>.</li>
+<li>★ Softmax + cross-entropy is the <strong>default for classification</strong>: strong, well-shaped
+  gradients; pushes probability toward the correct class; heavily penalises confident
+  mistakes; scales to many classes; trains faster and more reliably than MSE. Used in
+  CNNs, RNNs, transformers and almost every modern classifier.</li>
+</ul>
+<hr />
+<h3 id="3-how-loss-influences-gradient-signals">3. How Loss Influences Gradient Signals<a class="headerlink" href="#3-how-loss-influences-gradient-signals" title="Permanent link">&para;</a></h3>
+<h4 id="the-loss-shapes-the-gradients">The loss shapes the gradients<a class="headerlink" href="#the-loss-shapes-the-gradients" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Pipeline: forward pass → loss → backpropagation → weight update.</li>
+<li>The loss is not just a measure of error: different losses give different gradient
+  <strong>magnitudes and directions</strong>, which changes how fast and how well a model learns.</li>
+</ul>
+<h4 id="mse-vs-cross-entropy-gradients">MSE vs cross-entropy gradients<a class="headerlink" href="#mse-vs-cross-entropy-gradients" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>MSE (classifier)</th>
+<th>Cross-entropy + softmax</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gradient</td>
+<td>≈ error × <strong>activation derivative</strong></td>
+<td>≈ <strong><code>p − y</code></strong> (predicted probability − target)</td>
+</tr>
+<tr>
+<td>Problem / benefit</td>
+<td>The activation derivative is tiny when outputs sit near 0 or 1 → dampens the signal</td>
+<td>No extra tiny multiplier; direct and larger corrections</td>
+</tr>
+</tbody>
+</table>
+<h4 id="cases">Cases<a class="headerlink" href="#cases" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>MSE gradient</th>
+<th>Cross-entropy gradient</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Unsure</strong> (p ≈ 0.5 for the true class)</td>
+<td>error 0.5 × derivative 0.25 = <strong>0.125</strong> (moderate)</td>
+<td><code>p − y</code> = <strong>−0.5</strong> (stronger push)</td>
+</tr>
+<tr>
+<td><strong>Confidently wrong</strong> (p ≈ 0.01)</td>
+<td>error 0.99 × tiny derivative (≈ 0.01 at that saturation point) ≈ <strong>~0</strong></td>
+<td><strong>−0.99</strong> (very large correction)</td>
+</tr>
+<tr>
+<td><strong>Confident and correct</strong></td>
+<td>Small</td>
+<td>Small (appropriate: only fine-tuning needed)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>★ The key difference: cross-entropy <strong>aggressively punishes confident wrong answers</strong>;
+  MSE often does not, because the saturated activation derivative cancels the large
+  error. MSE can leave a confidently wrong classifier <strong>stuck</strong>.</li>
+</ul>
+<pre class="mermaid-diagram"><code>flowchart LR
+    A["Model confidently wrong"] --&gt; B["MSE: large error x&lt;br/&gt;tiny activation derivative"]
+    A --&gt; C["Cross-entropy: gradient = p − y"]
+    B --&gt; D["Almost no corrective signal&lt;br/&gt;slow or stuck learning"]
+    C --&gt; E["Large corrective signal&lt;br/&gt;fast correction"]</code></pre>
+<ul>
+<li>Conceptual plot (gradient magnitude vs predicted probability <code>p</code>): cross-entropy
+  starts high when <code>p</code> is small and declines smoothly toward 0 as <code>p</code> rises; MSE peaks
+  near the middle and is very small at the edges.</li>
+<li>Empirically, classifiers trained with softmax + cross-entropy converge faster and reach
+  better performance than the same models trained with MSE.</li>
+<li>★ Choosing the loss is a <strong>design decision</strong> that directly affects learning dynamics.</li>
+</ul>
+<h4 id="choosing-a-loss">Choosing a loss<a class="headerlink" href="#choosing-a-loss" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Regression</td>
+<td>MSE</td>
+</tr>
+<tr>
+<td>Classification (binary or multi-class)</td>
+<td>Softmax + cross-entropy</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../lesson-03-gradient-flow-and-initialisation/" class="btn btn-neutral float-left" title="Lesson 3: Gradient Flow and Initialisation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../lesson-05-vanishing-and-exploding-gradients/" class="btn btn-neutral float-right" title="Lesson 5: Vanishing and Exploding Gradients">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../lesson-03-gradient-flow-and-initialisation/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../lesson-05-vanishing-and-exploding-gradients/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+      <script src="../../../javascripts/mermaid-render.js"></script>
+      <script src="../../../javascripts/breadcrumb-nav.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

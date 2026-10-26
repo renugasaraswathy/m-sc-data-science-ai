@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Lesson 2: The Perceptron - Learning Notes</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Lesson 2: The Perceptron";
+        var mkdocs_page_input_path = "artificial-neural-networks/week-03-perceptron-and-logistic-neuron/lesson-02-the-perceptron.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> Learning Notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Learning Notes</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Artificial neural networks</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Notes</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../notes/from-ann-to-llms/">From ANN to LLMs</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../notes/simple-story/">The Simple Story</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to neural networks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-neural-networks/lesson-01-evolution-of-ai-ml-and-deep-learning/">Lesson 1: Evolution of AI, ML and Deep Learning</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-neural-networks/lesson-02-biological-vs-artificial-neurons/">Lesson 2: Biological Neurons vs Artificial Neurons</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-neural-networks/lesson-03-components-and-feed-forward-networks/">Lesson 3: Components and Feed-forward Networks</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 02 mathematical foundations for neural networks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-01-why-mathematical-foundations/">Lesson 1: Why We Need Mathematical Foundations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-02-linear-algebra-for-neural-networks/">Lesson 2: Linear Algebra for Neural Networks</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-03-calculus-for-neural-networks/">Lesson 3: Calculus for Neural Networks</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-04-numerical-stability/">Lesson 4: Numerical Stability in Training</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Week 03 perceptron and logistic neuron</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-01-introduction-to-perceptron-and-logistic-neuron/">Lesson 1: Introduction to the Perceptron and Logistic Neuron</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Lesson 2: The Perceptron</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#key-concepts">Key Concepts</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1-perceptron-as-a-simple-linear-classifier">1. Perceptron as a Simple Linear Classifier</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2-geometric-interpretation-in-2d">2. Geometric Interpretation in 2D</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#3-perceptron-learning-rule">3. Perceptron Learning Rule</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-03-linear-separability-and-xor/">Lesson 3: Linear Separability and XOR</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-04-logistic-neuron/">Lesson 4: The Logistic Neuron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 04 multilayer perceptrons and activation functions</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-01-introduction-to-mlps-and-activation-functions/">Lesson 1: Introduction to MLPs and Activation Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-02-multilayer-perceptron/">Lesson 2: The Multilayer Perceptron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-03-activation-functions/">Lesson 3: Activation Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-04-activation-challenges-and-practical-choices/">Lesson 4: Activation Challenges and Practical Choices</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 05 backpropagation and training dynamics</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-01-introduction-to-backpropagation-and-training-dynamics/">Lesson 1: Introduction to Backpropagation and Training Dynamics</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-02-backpropagation/">Lesson 2: Backpropagation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-03-gradient-flow-and-initialisation/">Lesson 3: Gradient Flow and Initialisation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-04-loss-functions/">Lesson 4: Loss Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-05-vanishing-and-exploding-gradients/">Lesson 5: Vanishing and Exploding Gradients</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-06-module-summary/">Lesson 6: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 06 optimisation algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-01-introduction-to-optimisation-algorithms/">Lesson 1: Introduction to Optimisation Algorithms</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-02-gradient-descent-and-momentum/">Lesson 2: Gradient Descent and Momentum</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-03-adaptive-optimisers/">Lesson 3: Adaptive Optimisers</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-04-learning-rate-scheduling/">Lesson 4: Learning Rate Scheduling</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-05-stability-and-convergence/">Lesson 5: Stability and Convergence</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-06-module-summary/">Lesson 6: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Cloud services and platforms</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cloud-services-and-platforms/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to cloud computing</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../cloud-services-and-platforms/week-01-introduction-to-cloud-computing/lesson-01-cloud-evolution-and-fundamentals/">Lesson 1: Cloud Evolution & Fundamentals</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../cloud-services-and-platforms/week-01-introduction-to-cloud-computing/lesson-02-cloud-service-models/">Lesson 2: Cloud Service Models</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data stores and pipelines</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../data-stores-and-pipelines/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 foundations of data storage paradigms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-01-the-evolution-of-data-storage/">Lesson 1: The Evolution of Data Storage</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-02-oltp-vs-olap/">Lesson 2: OLTP vs OLAP</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-03-rdbms-vs-columnar-databases/">Lesson 3: RDBMS vs Columnar Databases</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-04-acid-vs-base-models/">Lesson 4: ACID vs BASE Models</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Machine learning</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../machine-learning/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to machine learning</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../machine-learning/week-01-introduction-to-machine-learning/lesson-01-machine-learning-paradigms-and-workflow/">Lesson 1: Machine Learning Paradigms and Workflow</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 02 data preprocessing</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../machine-learning/week-02-data-preprocessing/lesson-01-data-fundamentals-and-preprocessing/">Lesson 1: Data Fundamentals and Preprocessing</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">Learning Notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Artificial neural networks</li>
+          <li class="breadcrumb-item">Week 03 perceptron and logistic neuron</li>
+      <li class="breadcrumb-item active">Lesson 2: The Perceptron</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><a href="../../../">Artificial Neural Networks</a> → <span class="week-crumb">Week 3: Perceptron and Logistic Neuron</span> → Lesson 2: The Perceptron</p>
+<hr />
+<h1 id="the-perceptron">The Perceptron<a class="headerlink" href="#the-perceptron" title="Permanent link">&para;</a></h1>
+<h2 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h2>
+<h3 id="1-perceptron-as-a-simple-linear-classifier">1. Perceptron as a Simple Linear Classifier<a class="headerlink" href="#1-perceptron-as-a-simple-linear-classifier" title="Permanent link">&para;</a></h3>
+<h4 id="definition">Definition<a class="headerlink" href="#definition" title="Permanent link">&para;</a></h4>
+<ul>
+<li>The simplest computational model of a neuron and the first true neural network model
+  (Frank Rosenblatt, late 1950s). Purpose: <strong>binary classification</strong>.</li>
+<li>Computation:<ul>
+<li><code>z = wᵀx + b</code> — weighted sum of inputs plus bias</li>
+<li><code>ŷ = sign(z)</code> — <code>+1</code> if <code>z &gt; 0</code>, <code>−1</code> if <code>z &lt; 0</code></li>
+</ul>
+</li>
+</ul>
+<pre class="mermaid-diagram"><code>flowchart LR
+    A["Inputs x"] --&gt; B["z = wᵀx + b"]
+    B --&gt; C["sign(z)"]
+    C --&gt; D["+1 or −1"]</code></pre>
+<h4 id="linear-classifier">Linear classifier<a class="headerlink" href="#linear-classifier" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>wᵀx + b = 0</code> is a <strong>line</strong> in 2-D, a <strong>plane</strong> in 3-D, a <strong>hyperplane</strong> beyond that.</li>
+<li>It splits the input space into two <strong>half-spaces</strong>: one side is <code>+1</code>, the other <code>−1</code>.</li>
+<li>A single perceptron is exactly <strong>one</strong> line (or one plane / hyperplane) — never more.</li>
+<li>★ So it can only classify <strong>linearly separable</strong> data — where one straight line or
+  hyperplane separates the classes. If not (e.g. one class ringed by the other), no
+  choice of weights and bias works.</li>
+</ul>
+<hr />
+<h3 id="2-geometric-interpretation-in-2d">2. Geometric Interpretation in 2D<a class="headerlink" href="#2-geometric-interpretation-in-2d" title="Permanent link">&para;</a></h3>
+<h4 id="the-decision-boundary">The decision boundary<a class="headerlink" href="#the-decision-boundary" title="Permanent link">&para;</a></h4>
+<ul>
+<li>In 2-D: <code>w₁x₁ + w₂x₂ + b = 0</code>, a straight line in the <code>x₁x₂</code> plane.</li>
+<li>Classification is a <strong>sign test</strong> — which side of the line the point is on. No
+  distance, probability or confidence yet.</li>
+<li>Via the dot product: <code>wᵀx</code> measures alignment between input and weight vector;
+  positive and large enough → <code>+1</code>.</li>
+</ul>
+<h4 id="many-boundaries-can-work">Many boundaries can work<a class="headerlink" href="#many-boundaries-can-work" title="Permanent link">&para;</a></h4>
+<ul>
+<li>If the classes are well separated, <strong>infinitely many</strong> lines separate them; there is no
+  single "correct" one. Training just converges on one of them.</li>
+<li>Real data is never this clean: points sit near the boundary and classes overlap, so
+  the goal becomes the best <strong>accuracy</strong> (e.g. 2 wrong out of 8 points → 6/8 = 75%),
+  not a perfect split.</li>
+</ul>
+<h4 id="dot-product-intuition">Dot product intuition<a class="headerlink" href="#dot-product-intuition" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>wᵀx</code> is the projection of one vector on the other (<code>|x|·cos θ</code>): it measures
+  <strong>alignment</strong>.</li>
+<li>Small angle θ → vectors point the same way → large <strong>positive</strong> value (<code>+1</code>).
+  Large angle (opposite directions) → <strong>negative</strong> value (<code>−1</code>).</li>
+<li><code>wᵀ</code> is used instead of <code>w</code> only so dimensions line up: <code>w</code> is 2×1, <code>wᵀ</code> is 1×2,
+  and 1×2 times 2×1 works (inner dimensions match).</li>
+</ul>
+<h4 id="roles-of-weights-and-bias">Roles of weights and bias<a class="headerlink" href="#roles-of-weights-and-bias" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Weights <code>w</code></th>
+<th>Bias <code>b</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Controls</td>
+<td><strong>Orientation</strong> of the boundary</td>
+<td><strong>Position</strong> of the boundary</td>
+</tr>
+<tr>
+<td>Change it</td>
+<td>Boundary <strong>rotates</strong></td>
+<td>Boundary <strong>shifts parallel</strong> to itself</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>w</code> is the <strong>normal vector</strong> (perpendicular) to the boundary and points toward the
+  <code>+1</code> region.</li>
+</ul>
+<h4 id="worked-example">Worked example<a class="headerlink" href="#worked-example" title="Permanent link">&para;</a></h4>
+<p><code>w = (1, 1)</code>, <code>b = 0</code> → boundary <code>x₁ + x₂ = 0</code>.
+- <code>x = (2, 1)</code>: <code>2 + 1 = 3 &gt; 0</code> → class <code>+1</code>
+- <code>x = (−2, −1)</code>: <code>−2 − 1 = −3 &lt; 0</code> → class <code>−1</code></p>
+<h4 id="geometric-failure">Geometric failure<a class="headerlink" href="#geometric-failure" title="Permanent link">&para;</a></h4>
+<ul>
+<li>For some point layouts no line, however rotated or shifted, separates the classes.
+  The perceptron fails there because of the <strong>geometry of the problem</strong>, not bad
+  training.</li>
+</ul>
+<hr />
+<h3 id="3-perceptron-learning-rule">3. Perceptron Learning Rule<a class="headerlink" href="#3-perceptron-learning-rule" title="Permanent link">&para;</a></h3>
+<h4 id="why-a-rule-is-needed">Why a rule is needed<a class="headerlink" href="#why-a-rule-is-needed" title="Permanent link">&para;</a></h4>
+<ul>
+<li>The weights and bias aren't known in advance; the rule learns them from labelled
+  examples <code>(xᵢ, yᵢ)</code>, with <code>yᵢ ∈ {+1, −1}</code>.</li>
+</ul>
+<h4 id="mistake-condition">Mistake condition<a class="headerlink" href="#mistake-condition" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Correct if <code>yᵢ(wᵀxᵢ + b) &gt; 0</code>; misclassified if <code>yᵢ(wᵀxᵢ + b) ≤ 0</code> (the lecture's
+  "= 0" is the boundary case of this).</li>
+<li>★ The rule is <strong>mistake-driven</strong>: it only updates on misclassified examples.</li>
+</ul>
+<h4 id="update-equations">Update equations<a class="headerlink" href="#update-equations" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>w ← w + η · y · x</code></li>
+<li><code>b ← b + η · y</code></li>
+<li><code>η</code> = learning rate (positive), controls update size.</li>
+</ul>
+<pre class="mermaid-diagram"><code>flowchart TD
+    A["Start with random w, b"] --&gt; B["Take a training example"]
+    B --&gt; C{"y(wᵀx + b) &gt; 0 ?"}
+    C --&gt;|"Yes: correct"| E["No update"]
+    C --&gt;|"No: mistake"| D["w ← w + η·y·x&lt;br/&gt;b ← b + η·y"]
+    D --&gt; E
+    E --&gt; F{"Any mistakes left&lt;br/&gt;in training set?"}
+    F --&gt;|"Yes"| B
+    F --&gt;|"No"| G["Stop: converged"]</code></pre>
+<h4 id="why-the-update-works">Why the update works<a class="headerlink" href="#why-the-update-works" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Mistake</th>
+<th>Update</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Positive example (<code>y = +1</code>) predicted negative</td>
+<td><strong>Adds</strong> a multiple of <code>x</code> to <code>w</code></td>
+<td>More alignment between <code>x</code> and <code>w</code> → more likely <code>+1</code> next time</td>
+</tr>
+<tr>
+<td>Negative example (<code>y = −1</code>) predicted positive</td>
+<td><strong>Subtracts</strong> a multiple of <code>x</code> from <code>w</code></td>
+<td>Less alignment → pushed toward <code>−1</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Each update slightly rotates/shifts the boundary until it fits the data.</li>
+</ul>
+<h4 id="how-the-update-behaves-in-practice">How the update behaves in practice<a class="headerlink" href="#how-the-update-behaves-in-practice" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Notation:</strong> <code>←</code> means "replace the old value with the new one" (common in Andrew Ng's
+  courses); <code>w_new = w_old + η·y·x</code> says the same thing.</li>
+<li><strong>Learning rate <code>η</code> is a fixed step size</strong>, chosen up front. It does <em>not</em> scale with
+  how big a mistake was — the perceptron only sees the sign, not the size of the error.
+  Larger <code>η</code> = bigger correction per mistake; smaller <code>η</code> = gentler.</li>
+<li><strong><code>y</code> is a scalar (<code>+1</code>/<code>−1</code>), <code>x</code> is a vector</strong>, so <code>y·x</code> flips the direction of the
+  update: that is how a boundary pushed the wrong way gets pulled back later.</li>
+<li><strong>The whole <code>w</code> vector is updated</strong> (all weights together). A wrong prediction can't
+  be blamed on a single feature, so <code>w₁</code> and <code>w₂</code> both change.</li>
+<li><strong>Bias update has no <code>x</code></strong>: bias only shifts the boundary in parallel and never
+  rotates it, so the input isn't needed. <code>w</code> depends on <code>x</code> because rotating the
+  boundary depends on how <code>w</code> and <code>x</code> are aligned. Bias is a plain scalar (the score
+  when all inputs are 0).</li>
+<li><strong>The mistake check uses the full <code>wᵀx + b</code></strong>, but the update uses only <code>y·x</code> / <code>y</code>.</li>
+<li><strong>Example features:</strong> for a housing dataset, <code>x₁</code> = number of rooms, <code>x₂</code> = size;
+  data point 1 = (3, 1200), data point 2 = (4, 2000), …</li>
+</ul>
+<pre class="mermaid-diagram"><code>flowchart TD
+    A["Point 1: correct → no update"] --&gt; B["Point 2: mistake → update w, b"]
+    B --&gt; C["Point 3: checked with the&lt;br/&gt;already-updated w, b"]
+    C --&gt; D["...continue to point N"]
+    D --&gt; E["Start next pass at point 1&lt;br/&gt;with current w, b"]
+    E --&gt; F{"Little change in w, b&lt;br/&gt;over recent steps?"}
+    F --&gt;|"No"| A
+    F --&gt;|"Yes"| G["Converged: stop"]</code></pre>
+<ul>
+<li>Points are processed <strong>one at a time, in order</strong>, with no restart after an update;
+  one full sweep is followed by another.</li>
+<li>★ An update fixing point 3 can make an earlier point (e.g. point 1) wrong again; a
+  later pass corrects it, which is why several passes are needed.</li>
+<li><strong>Stopping:</strong> either a fixed number of iterations (hard to guess in advance) or
+  "converged" — <code>w</code>/<code>b</code> barely change (e.g. under 1%) over the next N steps.</li>
+<li><strong>Noisy data:</strong> start with a larger <code>η</code>, then reduce it in later iterations.</li>
+</ul>
+<h4 id="the-perceptron-as-code">The perceptron as code<a class="headerlink" href="#the-perceptron-as-code" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Not a package or a special file: it is an idea (weighted sum + sign) that takes about
+  10 lines of Python. <code>sklearn.linear_model.Perceptron</code> is just one ready-made
+  implementation of the same idea.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>          <span class="c1"># ŷ = sign(wᵀx + b)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">max_passes</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">w</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="mf">0.0</span>                   <span class="c1"># start with zeros (or random)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_passes</span><span class="p">):</span>                        <span class="c1"># one pass = one sweep of all points</span>
+        <span class="n">mistakes</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">xi</span><span class="p">,</span> <span class="n">yi</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">yi</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">xi</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>          <span class="c1"># mistake condition</span>
+                <span class="n">w</span> <span class="o">+=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">yi</span> <span class="o">*</span> <span class="n">xi</span>                      <span class="c1"># w ← w + η·y·x</span>
+                <span class="n">b</span> <span class="o">+=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">yi</span>                           <span class="c1"># b ← b + η·y</span>
+                <span class="n">mistakes</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">mistakes</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>                              <span class="c1"># converged: no mistakes in a full pass</span>
+            <span class="k">break</span>
+    <span class="k">return</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span>
+
+<span class="c1"># tiny linearly separable example: label +1 if x₁ + x₂ is large</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">]])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">w</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="p">[</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">])</span>             <span class="c1"># predictions match y</span>
+</code></pre></div>
+<ul>
+<li>The code mirrors the flowchart above: loop over points, check <code>y(wᵀx + b) ≤ 0</code>, update
+  <code>w</code> and <code>b</code> only on a mistake, stop when a full pass has no mistakes.</li>
+</ul>
+<h4 id="convergence-and-limitations">Convergence and limitations<a class="headerlink" href="#convergence-and-limitations" title="Permanent link">&para;</a></h4>
+<ul>
+<li>★ If the data is <strong>linearly separable</strong>, the rule is <strong>guaranteed to converge</strong> in a
+  finite number of updates.</li>
+<li>If not separable, it <strong>never converges</strong> — weights keep updating forever.</li>
+<li>It does <strong>not</strong>: minimise a smooth loss, use gradients, or give probabilistic outputs.
+  These gaps motivate the logistic neuron.</li>
+<li>Even after convergence, accuracy is rarely 100% — it depends on the data.</li>
+<li>In practice the perceptron is <strong>not used</strong> directly; it is studied as the foundation
+  (perceptron → logistic neuron → multilayer networks). It is just an algorithm / tiny
+  model and can be coded in Python (see the lab).</li>
+<li>Exam focus: intuition for how it works and being able to follow the code, not
+  numerical derivations.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../lesson-01-introduction-to-perceptron-and-logistic-neuron/" class="btn btn-neutral float-left" title="Lesson 1: Introduction to the Perceptron and Logistic Neuron"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../lesson-03-linear-separability-and-xor/" class="btn btn-neutral float-right" title="Lesson 3: Linear Separability and XOR">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../lesson-01-introduction-to-perceptron-and-logistic-neuron/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../lesson-03-linear-separability-and-xor/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+      <script src="../../../javascripts/mermaid-render.js"></script>
+      <script src="../../../javascripts/breadcrumb-nav.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

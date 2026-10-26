@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Lesson 1: The Evolution of Data Storage - Learning Notes</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Lesson 1: The Evolution of Data Storage";
+        var mkdocs_page_input_path = "data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-01-the-evolution-of-data-storage.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> Learning Notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Learning Notes</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Artificial neural networks</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../artificial-neural-networks/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Notes</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/notes/from-ann-to-llms/">From ANN to LLMs</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/notes/simple-story/">The Simple Story</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to neural networks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-01-introduction-to-neural-networks/lesson-01-evolution-of-ai-ml-and-deep-learning/">Lesson 1: Evolution of AI, ML and Deep Learning</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-01-introduction-to-neural-networks/lesson-02-biological-vs-artificial-neurons/">Lesson 2: Biological Neurons vs Artificial Neurons</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-01-introduction-to-neural-networks/lesson-03-components-and-feed-forward-networks/">Lesson 3: Components and Feed-forward Networks</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 02 mathematical foundations for neural networks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-02-mathematical-foundations-for-neural-networks/lesson-01-why-mathematical-foundations/">Lesson 1: Why We Need Mathematical Foundations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-02-mathematical-foundations-for-neural-networks/lesson-02-linear-algebra-for-neural-networks/">Lesson 2: Linear Algebra for Neural Networks</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-02-mathematical-foundations-for-neural-networks/lesson-03-calculus-for-neural-networks/">Lesson 3: Calculus for Neural Networks</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-02-mathematical-foundations-for-neural-networks/lesson-04-numerical-stability/">Lesson 4: Numerical Stability in Training</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-02-mathematical-foundations-for-neural-networks/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 03 perceptron and logistic neuron</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-03-perceptron-and-logistic-neuron/lesson-01-introduction-to-perceptron-and-logistic-neuron/">Lesson 1: Introduction to the Perceptron and Logistic Neuron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-03-perceptron-and-logistic-neuron/lesson-02-the-perceptron/">Lesson 2: The Perceptron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-03-perceptron-and-logistic-neuron/lesson-03-linear-separability-and-xor/">Lesson 3: Linear Separability and XOR</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-03-perceptron-and-logistic-neuron/lesson-04-logistic-neuron/">Lesson 4: The Logistic Neuron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-03-perceptron-and-logistic-neuron/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 04 multilayer perceptrons and activation functions</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-04-multilayer-perceptrons-and-activation-functions/lesson-01-introduction-to-mlps-and-activation-functions/">Lesson 1: Introduction to MLPs and Activation Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-04-multilayer-perceptrons-and-activation-functions/lesson-02-multilayer-perceptron/">Lesson 2: The Multilayer Perceptron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-04-multilayer-perceptrons-and-activation-functions/lesson-03-activation-functions/">Lesson 3: Activation Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-04-multilayer-perceptrons-and-activation-functions/lesson-04-activation-challenges-and-practical-choices/">Lesson 4: Activation Challenges and Practical Choices</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-04-multilayer-perceptrons-and-activation-functions/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 05 backpropagation and training dynamics</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-05-backpropagation-and-training-dynamics/lesson-01-introduction-to-backpropagation-and-training-dynamics/">Lesson 1: Introduction to Backpropagation and Training Dynamics</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-05-backpropagation-and-training-dynamics/lesson-02-backpropagation/">Lesson 2: Backpropagation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-05-backpropagation-and-training-dynamics/lesson-03-gradient-flow-and-initialisation/">Lesson 3: Gradient Flow and Initialisation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-05-backpropagation-and-training-dynamics/lesson-04-loss-functions/">Lesson 4: Loss Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-05-backpropagation-and-training-dynamics/lesson-05-vanishing-and-exploding-gradients/">Lesson 5: Vanishing and Exploding Gradients</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-05-backpropagation-and-training-dynamics/lesson-06-module-summary/">Lesson 6: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 06 optimisation algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-06-optimisation-algorithms/lesson-01-introduction-to-optimisation-algorithms/">Lesson 1: Introduction to Optimisation Algorithms</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-06-optimisation-algorithms/lesson-02-gradient-descent-and-momentum/">Lesson 2: Gradient Descent and Momentum</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-06-optimisation-algorithms/lesson-03-adaptive-optimisers/">Lesson 3: Adaptive Optimisers</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-06-optimisation-algorithms/lesson-04-learning-rate-scheduling/">Lesson 4: Learning Rate Scheduling</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-06-optimisation-algorithms/lesson-05-stability-and-convergence/">Lesson 5: Stability and Convergence</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../artificial-neural-networks/week-06-optimisation-algorithms/lesson-06-module-summary/">Lesson 6: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Cloud services and platforms</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cloud-services-and-platforms/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to cloud computing</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../cloud-services-and-platforms/week-01-introduction-to-cloud-computing/lesson-01-cloud-evolution-and-fundamentals/">Lesson 1: Cloud Evolution & Fundamentals</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../cloud-services-and-platforms/week-01-introduction-to-cloud-computing/lesson-02-cloud-service-models/">Lesson 2: Cloud Service Models</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data stores and pipelines</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../">Overview</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Week 01 foundations of data storage paradigms</a>
+    <ul class="current">
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Lesson 1: The Evolution of Data Storage</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#key-concepts">Key Concepts</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1-from-file-systems-to-rdbms">1. From File Systems to RDBMS</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2-data-warehouse-bi">2. Data Warehouse &amp; BI</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#3-data-lake-to-lakehouse">3. Data Lake to Lakehouse</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-02-oltp-vs-olap/">Lesson 2: OLTP vs OLAP</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-03-rdbms-vs-columnar-databases/">Lesson 3: RDBMS vs Columnar Databases</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-04-acid-vs-base-models/">Lesson 4: ACID vs BASE Models</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Machine learning</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../machine-learning/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to machine learning</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../machine-learning/week-01-introduction-to-machine-learning/lesson-01-machine-learning-paradigms-and-workflow/">Lesson 1: Machine Learning Paradigms and Workflow</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 02 data preprocessing</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../machine-learning/week-02-data-preprocessing/lesson-01-data-fundamentals-and-preprocessing/">Lesson 1: Data Fundamentals and Preprocessing</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">Learning Notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Data stores and pipelines</li>
+          <li class="breadcrumb-item">Week 01 foundations of data storage paradigms</li>
+      <li class="breadcrumb-item active">Lesson 1: The Evolution of Data Storage</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><a href="../../../">Data Stores &amp; Pipelines</a> → <span class="week-crumb">Week 1: Foundations of Data Storage Paradigms</span> → Lesson 1: The Evolution of Data Storage</p>
+<hr />
+<h1 id="the-evolution-of-data-storage">The Evolution of Data Storage<a class="headerlink" href="#the-evolution-of-data-storage" title="Permanent link">&para;</a></h1>
+<h2 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h2>
+<h3 id="1-from-file-systems-to-rdbms">1. From File Systems to RDBMS<a class="headerlink" href="#1-from-file-systems-to-rdbms" title="Permanent link">&para;</a></h3>
+<h4 id="why-we-store-data">Why We Store Data<a class="headerlink" href="#why-we-store-data" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Operational records — e.g. transaction data</li>
+<li>Audit &amp; legal requirements</li>
+<li>Machine learning for personalisation</li>
+<li>Historical analysis — trends over time</li>
+</ul>
+<h4 id="from-flat-files-to-rdbms">From Flat Files to RDBMS<a class="headerlink" href="#from-flat-files-to-rdbms" title="Permanent link">&para;</a></h4>
+<pre class="mermaid-diagram"><code>flowchart LR
+    A["Flat Files (CSV)"] --&gt; B["RDBMS"]
+    B --&gt; C["Data Warehouse"]</code></pre>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Flat Files (CSV)</th>
+<th>RDBMS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Structure</td>
+<td>Plain rows in a file, no enforced structure</td>
+<td>Data organised into tables</td>
+</tr>
+<tr>
+<td>Querying</td>
+<td>No standard query language</td>
+<td>SQL</td>
+</tr>
+<tr>
+<td>Data integrity</td>
+<td>Not enforced</td>
+<td>ACID properties, foreign keys, constraints</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Examples: MySQL, PostgreSQL, Oracle, Microsoft SQL Server</li>
+</ul>
+<h4 id="data-warehouses">Data Warehouses<a class="headerlink" href="#data-warehouses" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Come into the picture when you need to analyse historic data or very large volumes of data — something RDBMS (built for day-to-day transactional operations) isn't optimised for</li>
+</ul>
+<hr />
+<h3 id="2-data-warehouse-bi">2. Data Warehouse &amp; BI<a class="headerlink" href="#2-data-warehouse-bi" title="Permanent link">&para;</a></h3>
+<h4 id="data-warehouses-consolidating-historic-data">Data Warehouses — Consolidating Historic Data<a class="headerlink" href="#data-warehouses-consolidating-historic-data" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Bring together data from various departments, focused on historic data rather than day-to-day transactions</li>
+<li>Examples: Snowflake, Redshift, BigQuery</li>
+</ul>
+<h4 id="business-intelligence-bi">Business Intelligence (BI)<a class="headerlink" href="#business-intelligence-bi" title="Permanent link">&para;</a></h4>
+<ul>
+<li>A data visualization layer on top of the warehouse, used to make business decisions</li>
+<li>Examples: Power BI, Tableau, Looker Studio, Google Data Studio</li>
+<li>Fantastic for structured data</li>
+</ul>
+<h4 id="the-need-for-a-data-lake">The Need for a Data Lake<a class="headerlink" href="#the-need-for-a-data-lake" title="Permanent link">&para;</a></h4>
+<pre class="mermaid-diagram"><code>flowchart LR
+    D["Departmental Data&lt;br/&gt;(Historic)"] --&gt; DW["Data Warehouse&lt;br/&gt;(Snowflake, Redshift, BigQuery)"]
+    DW --&gt; BI["BI Tools&lt;br/&gt;(Power BI, Tableau,&lt;br/&gt;Looker Studio, Google Data Studio)"]
+    BI --&gt; DEC["Business Decisions"]
+
+    U["Unstructured Data&lt;br/&gt;(Text, Images, Video, Audio)"] -.-&gt;|"needs"| DL["Data Lake"]</code></pre>
+<ul>
+<li>Data warehouses and BI tools are fantastic for structured data</li>
+<li>But organisations also generate unstructured data — unstructured text, images, videos, audio — which warehouses aren't built to hold</li>
+<li>This gap is what creates the need for a Data Lake</li>
+</ul>
+<hr />
+<h3 id="3-data-lake-to-lakehouse">3. Data Lake to Lakehouse<a class="headerlink" href="#3-data-lake-to-lakehouse" title="Permanent link">&para;</a></h3>
+<h4 id="data-lake-a-central-repository">Data Lake — A Central Repository<a class="headerlink" href="#data-lake-a-central-repository" title="Permanent link">&para;</a></h4>
+<ul>
+<li>A single central repository that stores all kinds of data: structured, semi-structured, and unstructured</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Data Warehouse</th>
+<th>Data Lake</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Analogy</td>
+<td>A library — well-organised</td>
+<td>A massive digital hard drive</td>
+</tr>
+<tr>
+<td>Organisation</td>
+<td>Data is organised upfront</td>
+<td>Stores data as-is, unorganised upfront</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Traditional Databases</th>
+<th>Data Lakes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Step 1</td>
+<td>Define schema first</td>
+<td>Store data as-is</td>
+</tr>
+<tr>
+<td>Step 2</td>
+<td>Write data</td>
+<td>Apply schema-on-read</td>
+</tr>
+</tbody>
+</table>
+<h4 id="problems-with-data-lakes-the-data-swamp">Problems with Data Lakes — the "Data Swamp"<a class="headerlink" href="#problems-with-data-lakes-the-data-swamp" title="Permanent link">&para;</a></h4>
+<pre class="mermaid-diagram"><code>flowchart LR
+    A["No ACID Guarantees"] --&gt; D["Data Swamp"]
+    B["No Versioning"] --&gt; D
+    C["No Consistency"] --&gt; D</code></pre>
+<ul>
+<li>Without these guarantees, a data lake tends to degrade into a "data swamp" — data that's technically stored but too unreliable or disorganised to trust or use</li>
+</ul>
+<h4 id="from-data-swamp-to-lakehouse">From Data Swamp to Lakehouse<a class="headerlink" href="#from-data-swamp-to-lakehouse" title="Permanent link">&para;</a></h4>
+<pre class="mermaid-diagram"><code>flowchart LR
+    S1["1. Implement ACID Transactions"] --&gt; S2["2. Enable Time Travel&lt;br/&gt;(query old versions)"] --&gt; S3["3. Improve Performance&lt;br/&gt;(indexing &amp; caching)"] --&gt; S4["4. Support Schema Evolution"] --&gt; L["Lakehouse"]</code></pre>
+<ul>
+<li>Solving the data swamp problem — by adding ACID transactions, time travel, indexing/caching, and schema evolution on top of a data lake — is what leads to the Lakehouse architecture</li>
+<li>A Lakehouse blends the strengths of both: the Data Lake's ability to store all data types cheaply and at scale, with the Data Warehouse's reliability, structure, and query performance</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../" class="btn btn-neutral float-left" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../lesson-02-oltp-vs-olap/" class="btn btn-neutral float-right" title="Lesson 2: OLTP vs OLAP">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../lesson-02-oltp-vs-olap/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+      <script src="../../../javascripts/mermaid-render.js"></script>
+      <script src="../../../javascripts/breadcrumb-nav.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

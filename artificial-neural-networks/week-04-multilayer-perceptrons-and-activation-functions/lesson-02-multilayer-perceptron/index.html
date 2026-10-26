@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Lesson 2: The Multilayer Perceptron - Learning Notes</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Lesson 2: The Multilayer Perceptron";
+        var mkdocs_page_input_path = "artificial-neural-networks/week-04-multilayer-perceptrons-and-activation-functions/lesson-02-multilayer-perceptron.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> Learning Notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Learning Notes</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Artificial neural networks</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Notes</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../notes/from-ann-to-llms/">From ANN to LLMs</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../notes/simple-story/">The Simple Story</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to neural networks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-neural-networks/lesson-01-evolution-of-ai-ml-and-deep-learning/">Lesson 1: Evolution of AI, ML and Deep Learning</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-neural-networks/lesson-02-biological-vs-artificial-neurons/">Lesson 2: Biological Neurons vs Artificial Neurons</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-neural-networks/lesson-03-components-and-feed-forward-networks/">Lesson 3: Components and Feed-forward Networks</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 02 mathematical foundations for neural networks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-01-why-mathematical-foundations/">Lesson 1: Why We Need Mathematical Foundations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-02-linear-algebra-for-neural-networks/">Lesson 2: Linear Algebra for Neural Networks</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-03-calculus-for-neural-networks/">Lesson 3: Calculus for Neural Networks</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-04-numerical-stability/">Lesson 4: Numerical Stability in Training</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 03 perceptron and logistic neuron</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-01-introduction-to-perceptron-and-logistic-neuron/">Lesson 1: Introduction to the Perceptron and Logistic Neuron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-02-the-perceptron/">Lesson 2: The Perceptron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-03-linear-separability-and-xor/">Lesson 3: Linear Separability and XOR</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-04-logistic-neuron/">Lesson 4: The Logistic Neuron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Week 04 multilayer perceptrons and activation functions</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-01-introduction-to-mlps-and-activation-functions/">Lesson 1: Introduction to MLPs and Activation Functions</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Lesson 2: The Multilayer Perceptron</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#key-concepts">Key Concepts</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1-what-is-a-multilayer-perceptron-mlp">1. What is a Multilayer Perceptron (MLP)</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2-role-of-hidden-layers-in-representation">2. Role of Hidden Layers in Representation</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#3-forward-pass-in-an-mlp">3. Forward Pass in an MLP</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#4-expressive-power-of-mlps">4. Expressive Power of MLPs</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-03-activation-functions/">Lesson 3: Activation Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-04-activation-challenges-and-practical-choices/">Lesson 4: Activation Challenges and Practical Choices</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 05 backpropagation and training dynamics</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-01-introduction-to-backpropagation-and-training-dynamics/">Lesson 1: Introduction to Backpropagation and Training Dynamics</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-02-backpropagation/">Lesson 2: Backpropagation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-03-gradient-flow-and-initialisation/">Lesson 3: Gradient Flow and Initialisation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-04-loss-functions/">Lesson 4: Loss Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-05-vanishing-and-exploding-gradients/">Lesson 5: Vanishing and Exploding Gradients</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-06-module-summary/">Lesson 6: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 06 optimisation algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-01-introduction-to-optimisation-algorithms/">Lesson 1: Introduction to Optimisation Algorithms</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-02-gradient-descent-and-momentum/">Lesson 2: Gradient Descent and Momentum</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-03-adaptive-optimisers/">Lesson 3: Adaptive Optimisers</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-04-learning-rate-scheduling/">Lesson 4: Learning Rate Scheduling</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-05-stability-and-convergence/">Lesson 5: Stability and Convergence</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-06-module-summary/">Lesson 6: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Cloud services and platforms</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cloud-services-and-platforms/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to cloud computing</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../cloud-services-and-platforms/week-01-introduction-to-cloud-computing/lesson-01-cloud-evolution-and-fundamentals/">Lesson 1: Cloud Evolution & Fundamentals</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../cloud-services-and-platforms/week-01-introduction-to-cloud-computing/lesson-02-cloud-service-models/">Lesson 2: Cloud Service Models</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data stores and pipelines</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../data-stores-and-pipelines/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 foundations of data storage paradigms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-01-the-evolution-of-data-storage/">Lesson 1: The Evolution of Data Storage</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-02-oltp-vs-olap/">Lesson 2: OLTP vs OLAP</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-03-rdbms-vs-columnar-databases/">Lesson 3: RDBMS vs Columnar Databases</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-04-acid-vs-base-models/">Lesson 4: ACID vs BASE Models</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Machine learning</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../machine-learning/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to machine learning</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../machine-learning/week-01-introduction-to-machine-learning/lesson-01-machine-learning-paradigms-and-workflow/">Lesson 1: Machine Learning Paradigms and Workflow</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 02 data preprocessing</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../machine-learning/week-02-data-preprocessing/lesson-01-data-fundamentals-and-preprocessing/">Lesson 1: Data Fundamentals and Preprocessing</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">Learning Notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Artificial neural networks</li>
+          <li class="breadcrumb-item">Week 04 multilayer perceptrons and activation functions</li>
+      <li class="breadcrumb-item active">Lesson 2: The Multilayer Perceptron</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><a href="../../../">Artificial Neural Networks</a> → <span class="week-crumb">Week 4: Multilayer Perceptrons and Activation Functions</span> → Lesson 2: The Multilayer Perceptron</p>
+<hr />
+<h1 id="the-multilayer-perceptron">The Multilayer Perceptron<a class="headerlink" href="#the-multilayer-perceptron" title="Permanent link">&para;</a></h1>
+<h2 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h2>
+<h3 id="1-what-is-a-multilayer-perceptron-mlp">1. What is a Multilayer Perceptron (MLP)<a class="headerlink" href="#1-what-is-a-multilayer-perceptron-mlp" title="Permanent link">&para;</a></h3>
+<h4 id="definition">Definition<a class="headerlink" href="#definition" title="Permanent link">&para;</a></h4>
+<ul>
+<li>An MLP is a <strong>feed-forward neural network</strong> made of three kinds of layers: an <strong>input
+  layer</strong>, one or more <strong>hidden layers</strong>, and an <strong>output layer</strong>.</li>
+<li>Information flows strictly <strong>one way</strong>: input → hidden → output. No cycles, no
+  feedback connections — that is what "feed-forward" means.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Input</td>
+<td>Holds the raw feature vector. <strong>No computation</strong> — just a container</td>
+</tr>
+<tr>
+<td>Hidden</td>
+<td>Where the transformations happen; takes the previous layer's output and produces a new representation</td>
+</tr>
+<tr>
+<td>Output</td>
+<td>Takes the last hidden representation and produces the final prediction</td>
+</tr>
+</tbody>
+</table>
+<h4 id="fully-connected-architecture">Fully connected architecture<a class="headerlink" href="#fully-connected-architecture" title="Permanent link">&para;</a></h4>
+<ul>
+<li>In a standard MLP every neuron in one layer sends its output to <strong>every</strong> neuron in
+  the next layer.</li>
+<li>Example: 2 inputs (<code>x₁</code>, <code>x₂</code>) → hidden layer of 3 → hidden layer of 3 → 1 output <code>y</code>.</li>
+</ul>
+<pre class="mermaid-diagram"><code>flowchart LR
+    x1["x₁"] --&gt; h1["h₁"] &amp; h2["h₂"] &amp; h3["h₃"]
+    x2["x₂"] --&gt; h1 &amp; h2 &amp; h3
+    h1 &amp; h2 &amp; h3 --&gt; g1["g₁"] &amp; g2["g₂"] &amp; g3["g₃"]
+    g1 &amp; g2 &amp; g3 --&gt; y["y"]</code></pre>
+<h4 id="parameter-count-in-a-dense-network">Parameter count in a dense network<a class="headerlink" href="#parameter-count-in-a-dense-network" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Parameters = <strong>weights</strong> (one per connection) + <strong>biases</strong> (one per neuron, <em>not</em> per
+  connection).</li>
+<li>Example: 3 neurons → 2 neurons = 6 weights + 2 biases = 8 parameters; 3 → 3 = 9
+  weights + 3 biases = 12 parameters. (The lecturer first counted a bias per connection,
+  then corrected it: a neuron has one bias, <code>z = w₁x₁ + w₂x₂ + w₃x₃ + b</code>.)</li>
+<li>Every added neuron or layer multiplies the count → dense networks have a <strong>very high
+  parameter count</strong>. The upside is the capacity to model <strong>complex relationships</strong>.</li>
+<li>Each neuron emits <strong>one value</strong> as output. The weights belong to the <em>connections</em>; the
+  input-layer "neurons" do nothing — they just hold the feature values.</li>
+</ul>
+<h4 id="what-a-layer-computes">What a layer computes<a class="headerlink" href="#what-a-layer-computes" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Every layer has a <strong>weight matrix <code>W</code></strong> and a <strong>bias vector <code>b</code></strong> — these parameters
+  define the function the network computes.</li>
+<li>Each layer does two things:<ol>
+<li><strong>Linear transformation:</strong> <code>z⁽ˡ⁾ = W⁽ˡ⁾ a⁽ˡ⁻¹⁾ + b⁽ˡ⁾</code></li>
+<li><strong>Nonlinear activation:</strong> <code>a⁽ˡ⁾ = f(z⁽ˡ⁾)</code></li>
+</ol>
+</li>
+<li><code>a⁽ˡ⁻¹⁾</code> is the previous layer's output; <code>a⁽ˡ⁾</code> is a <strong>new representation</strong> of the
+  data and becomes the input to the next layer.</li>
+<li><strong>Notation:</strong> the superscript <code>⁽ˡ⁾</code> only says <em>which layer</em> a quantity belongs to — it is
+  not a power. Everything is a vector or matrix: <code>z⁽ˡ⁾</code> is the vector <code>(z₁, z₂, z₃)</code> of
+  the layer's neurons, <code>W⁽ˡ⁾</code> is a matrix (one row per neuron in layer <code>l</code>).</li>
+<li><code>a⁽ˡ⁻¹⁾</code> is the <strong>post-activation</strong> output of the previous layer, so what flows into
+  layer <code>l+1</code> is <code>a⁽ˡ⁾</code>, not <code>z⁽ˡ⁾</code>.</li>
+<li><strong>Where weights and biases come from:</strong> they start as random values and are <strong>learned
+  during training</strong>. Hidden layers never see the target output; the flow is: forward
+  pass with current weights → compare the prediction with the actual value → go back
+  through the network (chain rule, <strong>backpropagation</strong> — next class) → update all
+  weights and biases, including the hidden ones. Training even a small network is
+  computationally heavy (hence GPUs).</li>
+</ul>
+<pre class="mermaid-diagram"><code>flowchart LR
+    A["a⁽ˡ⁻¹⁾&lt;br/&gt;previous layer output"] --&gt; B["z = W·a + b&lt;br/&gt;linear"]
+    B --&gt; C["a = f(z)&lt;br/&gt;activation"]
+    C --&gt; D["a⁽ˡ⁾&lt;br/&gt;input to next layer"]</code></pre>
+<h4 id="shapes-in-a-small-example">Shapes in a small example<a class="headerlink" href="#shapes-in-a-small-example" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Input has 2 features, hidden layer has 3 neurons, output layer has 1 neuron.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Shape</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Input <code>x</code></td>
+<td>2 × 1</td>
+</tr>
+<tr>
+<td><code>W₁</code> (hidden)</td>
+<td>3 × 2</td>
+</tr>
+<tr>
+<td><code>b₁</code></td>
+<td>3 × 1</td>
+</tr>
+<tr>
+<td><code>W₁x + b₁</code> → <code>a₁</code></td>
+<td>3 × 1</td>
+</tr>
+<tr>
+<td><code>W₂</code> (output)</td>
+<td>1 × 3</td>
+</tr>
+<tr>
+<td><code>W₂a₁ + b₂</code> → output</td>
+<td>1 × 1</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Inner dimensions must match (<code>3×2</code> times <code>2×1</code> ✓; <code>1×3</code> times <code>3×1</code> ✓).</li>
+<li>★ The representation's <strong>dimension changes</strong> layer by layer — the network isn't just
+  classifying, it is <strong>reshaping the feature space</strong> at each layer.</li>
+</ul>
+<h4 id="an-mlp-is-a-composition-of-functions">An MLP is a composition of functions<a class="headerlink" href="#an-mlp-is-a-composition-of-functions" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Not one big formula but many simple transformations stacked:
+  <code>a⁽ᴸ⁾ = f_L( f_{L−1}( … f₁(x) … ) )</code></li>
+<li>Each layer refines the representation a little further; this repeated transformation
+  is the source of the power of multilayer networks, and why MLPs are the core
+  template for deep networks.</li>
+</ul>
+<hr />
+<h3 id="2-role-of-hidden-layers-in-representation">2. Role of Hidden Layers in Representation<a class="headerlink" href="#2-role-of-hidden-layers-in-representation" title="Permanent link">&para;</a></h3>
+<h4 id="why-hidden-layers">Why hidden layers<a class="headerlink" href="#why-hidden-layers" title="Permanent link">&para;</a></h4>
+<ul>
+<li>A single layer can only learn <strong>linear</strong> transformations, however many neurons it has
+  — so only linear decision boundaries.</li>
+<li>Real-world relationships (images, speech, medical, financial data) are highly
+  nonlinear. Hidden layers <strong>re-encode the data</strong> into internal representations in which
+  complex patterns are easier to separate.</li>
+</ul>
+<h4 id="representation-learning">Representation learning<a class="headerlink" href="#representation-learning" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>Representation</em> = how the data is encoded inside the network. The raw input (pixels,
+  table values) is the first representation; each hidden layer gives a new one.</li>
+<li>Example (house price): inputs <em>bedrooms</em> and <em>size</em> together imply <strong>spaciousness</strong>.
+  Spaciousness is not an input feature — it is abstract information learned in a hidden
+  layer.</li>
+<li>★ Learning isn't only about learning a classifier — it is also about learning <strong>better
+  internal representations</strong>.</li>
+</ul>
+<h4 id="hidden-neuron-as-a-feature-detector">Hidden neuron as a feature detector<a class="headerlink" href="#hidden-neuron-as-a-feature-detector" title="Permanent link">&para;</a></h4>
+<ul>
+<li>A hidden neuron computes <code>a = f(wᵀx + b)</code> and responds strongly when a specific pattern
+  appears in the input.</li>
+<li>Different neurons detect different patterns; together they form a <strong>bank of feature
+  detectors</strong>.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Raw features</th>
+<th>Derived features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What</td>
+<td>Direct measurements (e.g. pixel intensities)</td>
+<td>Created by hidden layers</td>
+</tr>
+<tr>
+<td>Captures</td>
+<td>Little on their own</td>
+<td>Combinations, interactions between inputs, structural patterns</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Each new layer works on features from the previous layer, not on the original input.
+  No extra input enters the hidden layers — the original features are fed only once, at
+  the input layer.</li>
+<li>Each hidden neuron is one more combination <code>f(w₁x₁ + w₂x₂ + b)</code> of the same inputs, so
+  more neurons = more <strong>latent representations</strong> of the input (similar in spirit to the
+  components PCA extracts).</li>
+</ul>
+<h4 id="hierarchical-representation-learning">Hierarchical representation learning<a class="headerlink" href="#hierarchical-representation-learning" title="Permanent link">&para;</a></h4>
+<pre class="mermaid-diagram"><code>flowchart LR
+    A["Input&lt;br/&gt;raw pixels"] --&gt; B["Hidden layer 1&lt;br/&gt;edges"]
+    B --&gt; C["Hidden layer 2&lt;br/&gt;corners, contours"]
+    C --&gt; D["Deeper layers&lt;br/&gt;shapes, objects"]
+    D --&gt; E["Output&lt;br/&gt;dog / cat / bird"]</code></pre>
+<ul>
+<li>Early layers learn simple patterns (edges, basic numeric trends); deeper layers combine
+  them into shapes, objects, abstract concepts.</li>
+<li>★ One central reason deep networks beat shallow ones.</li>
+</ul>
+<h4 id="the-trade-off">The trade-off<a class="headerlink" href="#the-trade-off" title="Permanent link">&para;</a></h4>
+<ul>
+<li>More hidden neurons → more feature detectors. More hidden layers → more levels of
+  abstraction. Together: a much larger set of representable functions.</li>
+<li>But also: more <strong>parameters</strong>, more <strong>computational cost</strong>, higher <strong>risk of
+  overfitting</strong>. Managed later via training and regularisation.</li>
+<li><strong>Overfitting</strong> = the model starts learning noise or random patterns in the data
+  instead of the real ones.</li>
+<li><strong>How many layers / neurons?</strong> There is no right answer; it depends mainly on how much
+  data you have (more data supports more complex networks). In practice it is
+  <strong>trial and error</strong>: start small and simple, then grow while watching the training and
+  validation curves for overfitting.</li>
+</ul>
+<h4 id="xor-revisited">XOR revisited<a class="headerlink" href="#xor-revisited" title="Permanent link">&para;</a></h4>
+<ul>
+<li>XOR fails for a perceptron because no single line separates it.</li>
+<li>Hidden neurons create <strong>multiple intermediate splits</strong> of the input space; with the
+  changed representation the two classes become separable.</li>
+<li>★ Changing the representation in a hidden layer turns a linearly impossible problem
+  into a solvable one. XOR is the smallest example of what all deep networks do.</li>
+</ul>
+<hr />
+<h3 id="3-forward-pass-in-an-mlp">3. Forward Pass in an MLP<a class="headerlink" href="#3-forward-pass-in-an-mlp" title="Permanent link">&para;</a></h3>
+<h4 id="definition_1">Definition<a class="headerlink" href="#definition_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>A <strong>forward pass</strong> = executing the stored computations of a (trained) network on a
+  <strong>single input</strong> to produce a prediction. Every prediction comes from a forward pass.</li>
+</ul>
+<h4 id="inside-one-neuron-4-steps">Inside one neuron (4 steps)<a class="headerlink" href="#inside-one-neuron-4-steps" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Multiply each input by its weight.</li>
+<li>Sum the weighted inputs.</li>
+<li>Add the bias.</li>
+<li>
+<p>Apply the activation function: <code>z = Σ wᵢxᵢ + b</code>, <code>a = f(z)</code>.</p>
+</li>
+<li>
+<p>Pure numerical computation at run time — <strong>no learning happens</strong>.</p>
+</li>
+</ol>
+<h4 id="layer-by-layer">Layer by layer<a class="headerlink" href="#layer-by-layer" title="Permanent link">&para;</a></h4>
+<pre class="mermaid-diagram"><code>flowchart LR
+    X["Input x"] --&gt; L1["Hidden layer 1&lt;br/&gt;a₁ = f(W₁x + b₁)"]
+    L1 --&gt; L2["Hidden layer 2&lt;br/&gt;a₂ = f(W₂a₁ + b₂)"]
+    L2 --&gt; O["Output layer&lt;br/&gt;task-specific prediction"]</code></pre>
+<ul>
+<li>★ The original input is <strong>never used again directly</strong>; each layer only sees the
+  transformed representation from the previous one.</li>
+<li>All neurons within a layer compute <strong>in parallel</strong>.</li>
+</ul>
+<h4 id="what-a-neuron-is-in-memory-and-in-llm-training">What a neuron is in memory (and in LLM training)<a class="headerlink" href="#what-a-neuron-is-in-memory-and-in-llm-training" title="Permanent link">&para;</a></h4>
+<ul>
+<li>A "neuron" is <strong>not a thread, process or object</strong>. It is <strong>one row of the layer's
+  weight matrix <code>W</code> plus one entry of the bias vector <code>b</code></strong>: just numbers stored in an
+  array (on a GPU). Its activation is one entry of the result array.</li>
+<li>A whole layer is computed by <strong>one matrix operation</strong>, not a loop over neurons:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">z</span> <span class="o">=</span> <span class="n">W</span> <span class="o">@</span> <span class="n">a_prev</span> <span class="o">+</span> <span class="n">b</span>    <span class="c1"># all neurons in the layer at once</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">relu</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>           <span class="c1"># activation applied to all of them</span>
+</code></pre></div>
+<ul>
+<li>The GPU splits that multiplication into many small tiles of multiply-add work, so
+  the parallelism is in the <em>arithmetic</em>, not "one thread per neuron". This is why GPUs
+  suit neural networks.</li>
+<li>A saved model (e.g. an LLM's 70 GB file) is just these weight and bias arrays.</li>
+<li><strong>Training step</strong> = forward pass (matrix operations) → one loss number → backward pass
+  (more matrix operations, giving a gradient array shaped like each <code>W</code>) → the optimizer
+  adjusts every number in <code>W</code> slightly (<code>W ← W − lr · gradient</code>) → repeat.</li>
+<li>Huge models don't fit on one GPU, so the arrays are split: <strong>data parallelism</strong> (each
+  GPU holds a full copy and sees different data), <strong>tensor parallelism</strong> (one matrix cut
+  across GPUs), <strong>pipeline parallelism</strong> (different layers on different GPUs).</li>
+<li>"Neuron" is a way of <strong>thinking</strong> about one row of the table (take inputs, weigh them,
+  fire); the code never loops over neurons one at a time.</li>
+</ul>
+<h4 id="what-the-output-layer-produces">What the output layer produces<a class="headerlink" href="#what-the-output-layer-produces" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Binary classification</td>
+<td>A probability</td>
+</tr>
+<tr>
+<td>Multi-class classification</td>
+<td>Class scores / probabilities</td>
+</tr>
+<tr>
+<td>Regression</td>
+<td>A real-valued number</td>
+</tr>
+</tbody>
+</table>
+<h4 id="why-it-matters">Why it matters<a class="headerlink" href="#why-it-matters" title="Permanent link">&para;</a></h4>
+<ul>
+<li>The forward pass is the core computation of a network (image recognition,
+  recommenders, medical diagnosis…).</li>
+<li>Training repeats the same forward computation, then adjusts weights using the errors
+  observed; backpropagation (later module) changes parameters and affects the next
+  forward pass.</li>
+<li>★ <strong>Prediction (inference) is one-directional only</strong> (feed-forward). Going backwards
+  through the network happens only during <em>training</em>, to update the weights.</li>
+</ul>
+<hr />
+<h3 id="4-expressive-power-of-mlps">4. Expressive Power of MLPs<a class="headerlink" href="#4-expressive-power-of-mlps" title="Permanent link">&para;</a></h3>
+<h4 id="definition_2">Definition<a class="headerlink" href="#definition_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Expressive power</strong> = the set of functions a model <em>can represent</em> (its capacity) —
+  not yet about training or performance.</li>
+<li>Controlled by two structural choices: <strong>depth</strong> (number of layers) and <strong>width</strong>
+  (neurons per layer).</li>
+</ul>
+<h4 id="shallow-vs-deep">Shallow vs deep<a class="headerlink" href="#shallow-vs-deep" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>Shallow</em>: one hidden layer or none. <em>Deep</em>: multiple stacked hidden layers.</li>
+<li>Both can in principle approximate complex functions; they differ greatly in
+  <strong>efficiency</strong>.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Width (more neurons, one layer)</th>
+<th>Depth (more layers)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Effect</td>
+<td>More feature detectors at <strong>one</strong> level of abstraction → finer partitions of input space</td>
+<td>Hierarchical composition: simple features first, combined into complex ones</td>
+</tr>
+<tr>
+<td>Cost</td>
+<td>Neurons needed may grow <strong>exponentially</strong></td>
+<td>Many functions need <strong>far fewer parameters</strong></td>
+</tr>
+</tbody>
+</table>
+<h4 id="universal-approximation-theorem">Universal approximation theorem<a class="headerlink" href="#universal-approximation-theorem" title="Permanent link">&para;</a></h4>
+<ul>
+<li>A network with <strong>even one hidden layer</strong> can approximate any continuous function,
+  given <strong>enough neurons</strong>.</li>
+<li>★ Catch: the number of neurons required may be exponentially large — impractical.</li>
+</ul>
+<h4 id="why-depth-wins-in-practice">Why depth wins in practice<a class="headerlink" href="#why-depth-wins-in-practice" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Deep, narrower networks are far more <strong>parameter-efficient</strong> — same class of functions
+  with fewer neurons and parameters.</li>
+<li>Real problems are <strong>hierarchical</strong>: vision (edges → shapes → objects); language
+  (characters → words → phrases → meaning). Deep networks match this composition, which
+  is why they're so effective for vision, speech and language.</li>
+<li>Modern design favours <strong>depth over extreme width</strong>.</li>
+<li>Example: one hidden layer of 100 neurons can do the same job as a few small stacked
+  layers, but needs far more parameters. That depth is more efficient is shown
+  <strong>empirically</strong> (experiments), not proven.</li>
+<li>Analogy: it mirrors how people learn — basic concepts first, then build on them —
+  rather than learning everything in one step. Each layer re-composes the previous
+  layer's output instead of trying to fit everything with one huge set of weights.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../lesson-01-introduction-to-mlps-and-activation-functions/" class="btn btn-neutral float-left" title="Lesson 1: Introduction to MLPs and Activation Functions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../lesson-03-activation-functions/" class="btn btn-neutral float-right" title="Lesson 3: Activation Functions">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../lesson-01-introduction-to-mlps-and-activation-functions/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../lesson-03-activation-functions/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+      <script src="../../../javascripts/mermaid-render.js"></script>
+      <script src="../../../javascripts/breadcrumb-nav.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

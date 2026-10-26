@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>The Simple Story - Learning Notes</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "The Simple Story";
+        var mkdocs_page_input_path = "artificial-neural-networks/notes/simple-story.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> Learning Notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Learning Notes</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Artificial neural networks</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../">Overview</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Notes</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../from-ann-to-llms/">From ANN to LLMs</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">The Simple Story</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#key-concepts">Key Concepts</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#the-whole-course-in-one-loop">The whole course in one loop</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1-build-the-guesser">1. Build the guesser</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2-measure-how-wrong-it-is">2. Measure how wrong it is</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#3-find-who-to-blame">3. Find who to blame</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#4-fix-the-weights-smartly">4. Fix the weights smartly</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#glossary">Glossary</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to neural networks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-neural-networks/lesson-01-evolution-of-ai-ml-and-deep-learning/">Lesson 1: Evolution of AI, ML and Deep Learning</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-neural-networks/lesson-02-biological-vs-artificial-neurons/">Lesson 2: Biological Neurons vs Artificial Neurons</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-01-introduction-to-neural-networks/lesson-03-components-and-feed-forward-networks/">Lesson 3: Components and Feed-forward Networks</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 02 mathematical foundations for neural networks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-01-why-mathematical-foundations/">Lesson 1: Why We Need Mathematical Foundations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-02-linear-algebra-for-neural-networks/">Lesson 2: Linear Algebra for Neural Networks</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-03-calculus-for-neural-networks/">Lesson 3: Calculus for Neural Networks</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-04-numerical-stability/">Lesson 4: Numerical Stability in Training</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-02-mathematical-foundations-for-neural-networks/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 03 perceptron and logistic neuron</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-01-introduction-to-perceptron-and-logistic-neuron/">Lesson 1: Introduction to the Perceptron and Logistic Neuron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-02-the-perceptron/">Lesson 2: The Perceptron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-03-linear-separability-and-xor/">Lesson 3: Linear Separability and XOR</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-04-logistic-neuron/">Lesson 4: The Logistic Neuron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-03-perceptron-and-logistic-neuron/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 04 multilayer perceptrons and activation functions</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-01-introduction-to-mlps-and-activation-functions/">Lesson 1: Introduction to MLPs and Activation Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-02-multilayer-perceptron/">Lesson 2: The Multilayer Perceptron</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-03-activation-functions/">Lesson 3: Activation Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-04-activation-challenges-and-practical-choices/">Lesson 4: Activation Challenges and Practical Choices</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-04-multilayer-perceptrons-and-activation-functions/lesson-05-module-summary/">Lesson 5: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 05 backpropagation and training dynamics</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-01-introduction-to-backpropagation-and-training-dynamics/">Lesson 1: Introduction to Backpropagation and Training Dynamics</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-02-backpropagation/">Lesson 2: Backpropagation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-03-gradient-flow-and-initialisation/">Lesson 3: Gradient Flow and Initialisation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-04-loss-functions/">Lesson 4: Loss Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-05-vanishing-and-exploding-gradients/">Lesson 5: Vanishing and Exploding Gradients</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-05-backpropagation-and-training-dynamics/lesson-06-module-summary/">Lesson 6: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 06 optimisation algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-01-introduction-to-optimisation-algorithms/">Lesson 1: Introduction to Optimisation Algorithms</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-02-gradient-descent-and-momentum/">Lesson 2: Gradient Descent and Momentum</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-03-adaptive-optimisers/">Lesson 3: Adaptive Optimisers</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-04-learning-rate-scheduling/">Lesson 4: Learning Rate Scheduling</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-05-stability-and-convergence/">Lesson 5: Stability and Convergence</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../week-06-optimisation-algorithms/lesson-06-module-summary/">Lesson 6: Module Summary</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Cloud services and platforms</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cloud-services-and-platforms/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to cloud computing</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../cloud-services-and-platforms/week-01-introduction-to-cloud-computing/lesson-01-cloud-evolution-and-fundamentals/">Lesson 1: Cloud Evolution & Fundamentals</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../cloud-services-and-platforms/week-01-introduction-to-cloud-computing/lesson-02-cloud-service-models/">Lesson 2: Cloud Service Models</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data stores and pipelines</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../data-stores-and-pipelines/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 foundations of data storage paradigms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-01-the-evolution-of-data-storage/">Lesson 1: The Evolution of Data Storage</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-02-oltp-vs-olap/">Lesson 2: OLTP vs OLAP</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-03-rdbms-vs-columnar-databases/">Lesson 3: RDBMS vs Columnar Databases</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../data-stores-and-pipelines/week-01-foundations-of-data-storage-paradigms/lesson-04-acid-vs-base-models/">Lesson 4: ACID vs BASE Models</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Machine learning</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../machine-learning/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 01 introduction to machine learning</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../machine-learning/week-01-introduction-to-machine-learning/lesson-01-machine-learning-paradigms-and-workflow/">Lesson 1: Machine Learning Paradigms and Workflow</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Week 02 data preprocessing</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../machine-learning/week-02-data-preprocessing/lesson-01-data-fundamentals-and-preprocessing/">Lesson 1: Data Fundamentals and Preprocessing</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">Learning Notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Artificial neural networks</li>
+          <li class="breadcrumb-item">Notes</li>
+      <li class="breadcrumb-item active">The Simple Story</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><a href="../../">Artificial Neural Networks</a> → Notes → The Simple Story</p>
+<hr />
+<h1 id="the-simple-story">The Simple Story<a class="headerlink" href="#the-simple-story" title="Permanent link">&para;</a></h1>
+<h2 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h2>
+<h3 id="the-whole-course-in-one-loop">The whole course in one loop<a class="headerlink" href="#the-whole-course-in-one-loop" title="Permanent link">&para;</a></h3>
+<p>Training a neural network is one loop, repeated millions of times.</p>
+<pre class="mermaid-diagram"><code>flowchart LR
+    A["Guess"] --&gt; B["How wrong?"]
+    B --&gt; C["Who is to blame?"]
+    C --&gt; D["Fix the weights"]
+    D --&gt; A</code></pre>
+<ul>
+<li>The running example: <strong>teaching a robot to guess house prices</strong> from size, rooms and location.</li>
+</ul>
+<hr />
+<h3 id="1-build-the-guesser">1. Build the guesser<a class="headerlink" href="#1-build-the-guesser" title="Permanent link">&para;</a></h3>
+<pre class="mermaid-diagram"><code>flowchart LR
+    A["Neuron&lt;br/&gt;weighs each input"] --&gt; B["One neuron&lt;br/&gt;= one straight line"]
+    B --&gt;|"too simple"| C["Layers of neurons&lt;br/&gt;many small guessers"]
+    C --&gt; D["Activation function&lt;br/&gt;lets the network bend"]</code></pre>
+<ul>
+<li>A <strong>neuron</strong> takes numbers (size, rooms, location) and decides how much each one matters. Those importance values are the <strong>weights</strong>. The <strong>bias</strong> is a baseline nudge added on top (it shifts the line).</li>
+<li>Inside the neuron: multiply each input by its weight, add them up (a <strong>dot product</strong>), add the bias, then pass the result through an activation.</li>
+<li>The <strong>perceptron</strong> is the simplest neuron: weighted sum, then a yes/no <strong>step</strong> decision. It draws one <strong>straight line</strong>, so it only works when the data is <strong>linearly separable</strong>. It fails on <strong>XOR</strong>.</li>
+<li>The <strong>logistic neuron</strong> is the same, but uses the <strong>sigmoid</strong> to output a smooth probability between 0 and 1, which makes it learnable with gradients.</li>
+<li><strong>Layers</strong> of neurons pass their answers on to the next layer. Together they form a <strong>multilayer perceptron (MLP)</strong>, also called a <strong>feed-forward network</strong>: <strong>input layer</strong> (the raw numbers), <strong>hidden layers</strong> (the middle guessers), <strong>output layer</strong> (the final answer).</li>
+<li>Sending data through the layers to get a prediction is the <strong>forward pass</strong>.</li>
+<li>An <strong>activation function</strong> sits between layers. Without it, many layers would still collapse into one straight line. The common ones:<ul>
+<li><strong>ReLU</strong>: <code>max(0, z)</code>. Cheap, and the usual choice for hidden layers.</li>
+<li><strong>Sigmoid</strong>: squashes to 0-1. Used for yes/no probabilities.</li>
+<li><strong>Tanh</strong>: squashes to -1 to 1.</li>
+<li><strong>Softmax</strong>: turns scores into probabilities that add up to 1. Used for choosing among categories.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="2-measure-how-wrong-it-is">2. Measure how wrong it is<a class="headerlink" href="#2-measure-how-wrong-it-is" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The first guesses are bad, because the weights start random.</li>
+<li>The <strong>loss</strong> is one number for "how wrong". Lower is better.</li>
+<li>Common losses: <strong>MSE</strong> for predicting numbers (prices), <strong>cross-entropy</strong> for choosing categories.</li>
+</ul>
+<hr />
+<h3 id="3-find-who-to-blame">3. Find who to blame<a class="headerlink" href="#3-find-who-to-blame" title="Permanent link">&para;</a></h3>
+<pre class="mermaid-diagram"><code>flowchart RL
+    A["Error at the output"] --&gt; B["Last layer:&lt;br/&gt;your share of the blame"]
+    B --&gt; C["Earlier layers:&lt;br/&gt;your share"]
+    C --&gt; D["Every weight gets&lt;br/&gt;a blame number = gradient"]</code></pre>
+<ul>
+<li><strong>Backpropagation</strong> works backwards from the error and tells every weight "you pushed the answer too high, so go down a bit".</li>
+<li>A <strong>derivative</strong> is the slope: how much the output changes if one input moves a little. The <strong>gradient</strong> is the slopes of all the weights together, the blame number telling you which way is downhill.</li>
+<li>The <strong>chain rule</strong> makes backprop possible: to get a weight's blame, multiply the slopes of each step between that weight and the error.</li>
+<li>A <strong>computational graph</strong> is the calculation drawn as boxes and arrows. The forward pass goes along the arrows, backprop goes back along them.</li>
+<li>Two things can go wrong: the blame fades to nothing (<strong>vanishing gradient</strong>) or blows up (<strong>exploding gradient</strong>).</li>
+<li>Good <strong>starting weights</strong> (Xavier / He initialisation) and ReLU help prevent both.</li>
+</ul>
+<hr />
+<h3 id="4-fix-the-weights-smartly">4. Fix the weights smartly<a class="headerlink" href="#4-fix-the-weights-smartly" title="Permanent link">&para;</a></h3>
+<p>An <strong>optimiser</strong> is the rule that turns each weight's gradient into a weight update. <strong>Helpers</strong> make any optimiser work better or more safely.</p>
+<pre class="mermaid-diagram"><code>flowchart LR
+    G["Gradient&lt;br/&gt;from backprop"] --&gt; O["Optimiser&lt;br/&gt;SGD, momentum, RMSProp, Adam"]
+    O --&gt; W["Weight update"]
+    H["Helpers&lt;br/&gt;learning rate, mini-batch,&lt;br/&gt;schedule, clipping"] -.-&gt; O</code></pre>
+<h4 id="the-optimisers">The optimisers<a class="headerlink" href="#the-optimisers" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Gradient descent</strong>: step downhill by <code>slope × step size</code>. The basic one. It comes in three flavours, depending on how much data you use per step:<ul>
+<li><strong>Batch</strong>: all the data. Accurate but slow.</li>
+<li><strong>SGD</strong> (stochastic): one example. Fast but erratic.</li>
+<li><strong>Mini-batch</strong>: a small group, about 32. The default.</li>
+</ul>
+</li>
+<li><strong>SGD + momentum</strong>: keep rolling in the same direction, so the <strong>zig-zag</strong> across narrow valleys cancels out.</li>
+<li><strong>RMSProp</strong>: shrink the step for weights whose gradients are big, grow it for weights whose gradients are small.</li>
+<li><strong>Adam</strong>: momentum + RMSProp, so each weight gets its own direction and step size. It uses <strong>bias correction</strong> to fix its slow start. Use it as your default. A popular recipe is Adam first, then SGD + momentum to fine-tune.</li>
+</ul>
+<h4 id="terrain-words">Terrain words<a class="headerlink" href="#terrain-words" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Loss landscape</strong>: the hilly field of loss values you are walking over.</li>
+<li><strong>Local / global minimum</strong>: a valley bottom / the lowest valley of all.</li>
+<li><strong>Saddle point</strong>: flat but not a valley, like a horse saddle. You can get stuck there.</li>
+<li><strong>Plateau</strong>: a very flat stretch where progress crawls.</li>
+<li><strong>Sharp vs flat minimum</strong>: flat valleys tend to work better on new data.</li>
+<li><strong>Noisy vs smooth convergence</strong>: mini-batches make the loss curve wobble. That is normal, so watch the overall trend.</li>
+<li><strong>Epoch</strong>: one full pass over all the training data.</li>
+</ul>
+<h4 id="the-helpers">The helpers<a class="headerlink" href="#the-helpers" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Learning rate</strong>: the step size every optimiser uses. Too small is slow, too big overshoots.</li>
+<li><strong>Batch size</strong>: how many examples per step. Small is noisy but explores well, large is smooth but may settle in sharp minima. 32-256 is typical.</li>
+<li><strong>Schedules</strong>: big steps early, small steps late. The common types:<ul>
+<li><strong>Step decay</strong>: keep the step size fixed, then drop it sharply at set points (0.1 → 0.01 → 0.001).</li>
+<li><strong>Exponential decay</strong>: shrink it by a fixed factor every epoch, so it falls smoothly.</li>
+<li><strong>Cosine annealing</strong>: start high and fall along a smooth curve to nearly zero at the end.</li>
+<li><strong>Warm-up</strong>: start very small and rise for the first few steps, then decay. Important for transformers.</li>
+</ul>
+</li>
+<li><strong>Gradient clipping</strong>: stops one huge step from wrecking training. By <strong>value</strong> it caps each number, by <strong>norm</strong> it scales the whole gradient down and keeps its direction (more common).</li>
+</ul>
+<hr />
+<h3 id="glossary">Glossary<a class="headerlink" href="#glossary" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Weight</td>
+<td>How much an input matters</td>
+</tr>
+<tr>
+<td>Layer</td>
+<td>A group of neurons that pass answers forward together</td>
+</tr>
+<tr>
+<td>Activation</td>
+<td>The bend between layers</td>
+</tr>
+<tr>
+<td>Loss</td>
+<td>One number for "how wrong"</td>
+</tr>
+<tr>
+<td>Gradient</td>
+<td>The slope; which way is downhill</td>
+</tr>
+<tr>
+<td>Backpropagation</td>
+<td>Working backwards to give every weight its gradient</td>
+</tr>
+<tr>
+<td>Learning rate</td>
+<td>How big each step is</td>
+</tr>
+<tr>
+<td>Optimiser</td>
+<td>The rule for taking the step (SGD, momentum, Adam)</td>
+</tr>
+<tr>
+<td>Bias</td>
+<td>A baseline nudge added to the weighted sum</td>
+</tr>
+<tr>
+<td>Forward pass</td>
+<td>Sending data through the layers to get a prediction</td>
+</tr>
+<tr>
+<td>Derivative</td>
+<td>The slope for one input</td>
+</tr>
+<tr>
+<td>Chain rule</td>
+<td>Multiply the slopes along the path to get a weight's blame</td>
+</tr>
+<tr>
+<td>Initialisation</td>
+<td>How the weights are set before training (Xavier, He)</td>
+</tr>
+<tr>
+<td>Epoch</td>
+<td>One full pass over the training data</td>
+</tr>
+<tr>
+<td>Minimum / saddle / plateau</td>
+<td>Valley bottom / flat but not a valley / very flat stretch</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../from-ann-to-llms/" class="btn btn-neutral float-left" title="From ANN to LLMs"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../week-01-introduction-to-neural-networks/lesson-01-evolution-of-ai-ml-and-deep-learning/" class="btn btn-neutral float-right" title="Lesson 1: Evolution of AI, ML and Deep Learning">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../from-ann-to-llms/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../week-01-introduction-to-neural-networks/lesson-01-evolution-of-ai-ml-and-deep-learning/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+      <script src="../../../javascripts/mermaid-render.js"></script>
+      <script src="../../../javascripts/breadcrumb-nav.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
