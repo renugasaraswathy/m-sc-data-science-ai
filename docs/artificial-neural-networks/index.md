@@ -45,6 +45,16 @@ title: Overview
 - [Lesson 5: Vanishing and Exploding Gradients](week-05-backpropagation-and-training-dynamics/lesson-05-vanishing-and-exploding-gradients.md)
 - [Lesson 6: Module Summary](week-05-backpropagation-and-training-dynamics/lesson-06-module-summary.md)
 
+**Week 6: Optimisation Algorithms**
+
+- [Lesson 1: Introduction to Optimisation Algorithms](week-06-optimisation-algorithms/lesson-01-introduction-to-optimisation-algorithms.md)
+- [Lesson 2: Gradient Descent and Momentum](week-06-optimisation-algorithms/lesson-02-gradient-descent-and-momentum.md)
+- [Lesson 3: Adaptive Optimisers](week-06-optimisation-algorithms/lesson-03-adaptive-optimisers.md)
+- [Lesson 4: Learning Rate Scheduling](week-06-optimisation-algorithms/lesson-04-learning-rate-scheduling.md)
+- [Lesson 5: Stability and Convergence](week-06-optimisation-algorithms/lesson-05-stability-and-convergence.md)
+- [Lesson 6: Module Summary](week-06-optimisation-algorithms/lesson-06-module-summary.md)
+
 **Notes**
 
 - [From ANN to LLMs: Parameters, Layers, Activations and Training](notes/from-ann-to-llms.md)
+- [The Simple Story](notes/simple-story.md)
